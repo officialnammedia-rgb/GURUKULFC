@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gurukul Football Academy | Elite Football Training & Youth Development</title>
+  <meta name="description"
+    content="India's premier football academy. Nurturing grassroots talent to elite professional players through licensed UEFA & AFC coaching, high-performance facilities, and Division A league pathways." />
+  <!-- Google Fonts: Bebas Neue (Sports Display), Outfit, Space Grotesk & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=Syne:wght@700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body>
+  <!-- Neural Noise WebGL Canvas Background -->
+  <canvas id="neuro"></canvas>
+
+  <!-- Main Wrapper -->
+  <div class="app-container">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+
+      <!-- Sky & Grid Background Layer -->
+      <div class="sky-background">
+        <div class="grid-overlay" id="gridOverlay"></div>
+        <div class="light-spotlight" id="spotlight"></div>
+      </div>
+
+      <!-- Header / Navigation -->
+      <header class="navbar">
+        <!-- Left: Academy Crest Logo -->
+        <div class="nav-left">
+          <a href="#home" class="logo-link-img" title="Gurukul Football Academy">
+            <img src="/assets/gurukul-logo.png" alt="Gurukul Football Academy Logo" class="header-logo-img" />
+          </a>
+        </div>
+
+        <!-- Center: Navigation Glass Capsule Links -->
+        <div class="nav-center">
+          <nav class="nav-glass-capsule">
+            <a href="#home" class="nav-link active">Home</a>
+            <a href="#services" class="nav-link">Programs</a>
+            <a href="#discover" class="nav-link">Facilities</a>
+            <a href="#milestone" class="nav-link">Milestones</a>
+            <a href="#testimonials" class="nav-link">Reviews</a>
+            <a href="https://wa.me/919625573511" class="nav-link">Contact</a>
+          </nav>
+        </div>
+
+        <!-- Right: Actions (Instagram & Enrol Now) -->
+        <div class="nav-right">
+          <!-- Instagram Social Button -->
+          <a href="https://www.instagram.com/gurukulfootball?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==&igsi=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="instagram-btn" title="Follow Gurukul FC on Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+
+          <!-- Enrol Now Sky Blue Glass Pill Button at End of Header -->
+          <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I%20want%20to%20enroll%20in%20the%20football%20academy.%20Please%20share%20program%20details." target="_blank" rel="noopener noreferrer" class="enrol-btn-sky" title="Enrol Now on WhatsApp">
+            <span>Enrol Now</span>
+            <svg class="tilted-arrow-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </a>
+        </div>
+      </header>
+
+      <!-- Hero Main Content Grid -->
+      <div class="hero-content">
+
+        <!-- Left Column: Typography & CTAs -->
+        <div class="hero-left">
+          <div class="hero-top-badge">
+            <span class="pulse-dot"></span>
+            <span>GURUKUL FOOTBALL ACADEMY • TRAIN. DEVELOP. EXCEL.</span>
+          </div>
+
+          <h1 class="hero-title">
+            <span class="title-line title-line-1">BUILT FOR PASSION.</span>
+            <span class="title-line title-line-2">
+              <span id="typewriterText"></span><span class="typing-cursor">|</span>
+            </span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Nurturing grassroots talent to elite professional athletes through licensed UEFA & AFC coaching and
+            competitive Division A pathways.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#programs" class="btn-primary btn-primary-red-dent hero-primary-btn" id="getStartedBtn">
+              <span>OUR PROGRAMS</span>
+              <svg class="tilted-arrow-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/reel/DTXFJADkaql/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" class="btn-primary btn-secondary-glass" id="watchVideoBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
+                style="margin-right: 0.55rem; display: inline-block;">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              WATCH VIDEO
+            </a>
+          </div>
+
+          <div class="hero-stats-row">
+            <div class="hero-stat-item">
+              <span class="hero-stat-num">15+</span>
+              <span class="hero-stat-label">Licensed Coaches</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat-item">
+              <span class="hero-stat-num">500+</span>
+              <span class="hero-stat-label">Active Scholars</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat-item">
+              <span class="hero-stat-num">DIV A</span>
+              <span class="hero-stat-label">League Champions</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Glassmorphism Floating Live Activity & Trials Cards -->
+        <div class="hero-right">
+          <!-- Glass Float Card 1: Upcoming Scouting & Trials -->
+          <div class="hero-glass-card card-match reveal-on-scroll">
+            <div class="glass-card-header">
+              <span class="live-tag"><span class="pulse-dot"></span> ACADEMY TRIALS</span>
+              <span class="glass-card-time">U-13 to U-19</span>
+            </div>
+            <div class="glass-card-body">
+              <div class="team-score">
+                <span class="team-name">Scouting Camp</span>
+                <span class="score">SAT 8 AM</span>
+              </div>
+              <p class="pitch-name">🏟️ Gurukul Arenas • UEFA 'A' Head Coaches</p>
+            </div>
+          </div>
+
+          <!-- Glass Float Card 2: Division A Achievement -->
+          <div class="hero-glass-card card-booking reveal-on-scroll reveal-delay-1">
+            <div class="glass-card-header">
+              <span class="booking-title">🏆 Division A Squad</span>
+              <span class="badge-mini">Match Result</span>
+            </div>
+            <div class="glass-card-body">
+              <div class="slot-info">
+                <span>Gurukul FC U-19 (3) - (0) City XI</span>
+                <span class="price-tag">Promoted</span>
+              </div>
+              <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I%20want%20to%20register%20for%20the%20upcoming%20Academy%20Trials." target="_blank" rel="noopener noreferrer" class="btn-glass-sm" id="heroQuickBookBtn" style="text-decoration: none; display: inline-block;">Register For Trial →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- GLOBAL WEBGL CLOUDSCAPE BACKGROUND (Appears behind all sections except Hero) -->
+    <div id="cloudscape-bg-mount"></div>
+
+    <!-- ACADEMY TRAINING BATCHES & PROGRAMS SECTION -->
+    <section class="programs-section" id="programs">
+      <div class="programs-container">
+        
+        <!-- Section Header -->
+        <div class="programs-badge-wrapper reveal-on-scroll">
+          <span class="programs-badge">TRAINING PROGRAMS</span>
+        </div>
+        <h2 class="programs-title reveal-on-scroll reveal-delay-1">
+          GATEWAY TO FOOTBALL GLORY
+        </h2>
+        <p class="programs-subtitle reveal-on-scroll reveal-delay-2">
+          Select your training batch. Exceptional players are fast-tracked & promoted regardless of age!
+        </p>
+
+        <!-- 3 Minimalist Program Batch Cards Grid with Player Cutouts -->
+        <div class="programs-grid reveal-on-scroll reveal-delay-3">
+
+          <!-- BATCH 1: JUNIOR BATCH -->
+          <div class="program-card batch-card-junior">
+            <div class="card-left-content">
+              <div class="card-top-bar">
+                <span class="batch-num-badge">01</span>
+              </div>
+
+              <div class="batch-category-tag">GRASSROOTS BATCH</div>
+              <h3 class="program-name">Junior Batch</h3>
+              
+              <p class="program-desc">
+                Fundamental ball mastery, 1v1 skill building & fun mini-matches.
+              </p>
+
+              <div class="promotion-note-line">
+                <span class="promo-star">⭐</span>
+                <span>Standout players are fast-tracked & promoted!</span>
+              </div>
+
+              <div class="card-footer-action">
+                <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I%20want%20to%20enrol%20in%20Batch%201%20(Junior%20Batch)." target="_blank" rel="noopener noreferrer" class="btn-program-enroll">
+                  <span>Enrol Now</span>
+                  <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Right Column: Player Character Image Pop-Out -->
+            <div class="card-right-player">
+              <div class="player-pedestal-glow"></div>
+              <img src="/assets/indian-junior-kid.png" alt="Gurukul FC Junior Batch Indian Player" class="player-popout-img junior-popout" />
+            </div>
+          </div>
+
+          <!-- BATCH 2: SENIOR BATCH -->
+          <div class="program-card batch-card-senior">
+            <div class="card-left-content">
+              <div class="card-top-bar">
+                <span class="batch-num-badge">02</span>
+              </div>
+
+              <div class="batch-category-tag">DEVELOPMENT BATCH</div>
+              <h3 class="program-name">Senior Batch</h3>
+              
+              <p class="program-desc">
+                Tactical positioning, high-intensity passing & match scrimmages.
+              </p>
+
+              <div class="promotion-note-line">
+                <span class="promo-star">⚡</span>
+                <span>High performers scouted for Elite Squad!</span>
+              </div>
+
+              <div class="card-footer-action">
+                <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I%20want%20to%20enrol%20in%20Batch%202%20(Senior%20Batch)." target="_blank" rel="noopener noreferrer" class="btn-program-enroll">
+                  <span>Enrol Now</span>
+                  <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Right Column: Player Character Image Pop-Out -->
+            <div class="card-right-player">
+              <div class="player-pedestal-glow"></div>
+              <img src="/assets/indian-senior-kid.png" alt="Gurukul FC Senior Batch Indian Player" class="player-popout-img senior-popout" />
+            </div>
+          </div>
+
+          <!-- BATCH 3: ELITE BATCH -->
+          <div class="program-card batch-card-elite">
+            <div class="card-left-content">
+              <div class="card-top-bar">
+                <span class="batch-num-badge">03</span>
+              </div>
+
+              <div class="batch-category-tag">PRO PERFORMANCE BATCH</div>
+              <h3 class="program-name">Elite Batch</h3>
+              
+              <p class="program-desc">
+                Advanced pro tactics, Division A league & scout exposure.
+              </p>
+
+              <div class="promotion-note-line">
+                <span class="promo-star">🏆</span>
+                <span>Open merit entry for exceptional talent!</span>
+              </div>
+
+              <div class="card-footer-action">
+                <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I%20want%20to%20apply%20for%20Batch%203%20(Elite%20Batch)." target="_blank" rel="noopener noreferrer" class="btn-program-enroll btn-enroll-gold">
+                  <span>Enrol Now</span>
+                  <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Right Column: Player Character Image Pop-Out -->
+            <div class="card-right-player">
+              <div class="player-pedestal-glow"></div>
+              <img src="/assets/indian-elite-player.png" alt="Gurukul FC Elite Batch Indian Player" class="player-popout-img elite-popout" />
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ACADEMY PLAYER PATHWAY SECTION (Interactive SVG Dotted Line Scroll Journey with Sticky Lock & 3D Glass Layering) -->
+    <div class="pathway-sticky-wrapper" id="pathwayStickyWrapper">
+      <section class="services-section pathway-section" id="services">
+        <!-- AI-Tech Animated Background Graphics -->
+        <div class="bg-animated-orb orb-sky"></div>
+        <div class="bg-tactical-grid"></div>
+
+        <div class="services-container pathway-container">
+          
+          <!-- Section Header -->
+          <div class="services-badge-wrapper reveal-on-scroll">
+            <span class="services-badge">01 / PLAYER PATHWAY & PRO JOURNEY</span>
+          </div>
+          <h2 class="services-title reveal-on-scroll reveal-delay-1">
+            A Simple, Proven Pathway To Professional Football
+          </h2>
+          <p class="services-subtitle reveal-on-scroll reveal-delay-2">
+            Discover how Gurukul FCC nurtures young players step-by-step—from grassroots mastery to in-house senior clubs and elite global scouting networks.
+          </p>
+
+          <!-- Trust Highlights Banner -->
+          <div class="pathway-trust-bar reveal-on-scroll reveal-delay-2">
+            <div class="trust-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>In-House Clubs (Div A & Div B)</span>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span>Global Pro Network & Scout Sourcing</span>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              <span>UEFA & AFC Licensed Coaches</span>
+            </div>
+          </div>
+
+          <!-- SVG Dotted Line Overlay Canvas (3D Weaving behind cards & over node dots) -->
+          <div class="pathway-wrapper reveal-on-scroll reveal-delay-3">
+            <svg class="pathway-svg-canvas" id="pathwaySvgCanvas">
+              <defs>
+                <filter id="pathwayGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="4" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+              <!-- Inactive track background -->
+              <path class="pathway-line-bg" id="pathwayLineBg" d="" />
+              <!-- Animated active stroke line -->
+              <path class="pathway-line-active" id="pathwayDottedLine" d="" />
+              <!-- Animated glowing traveler bead -->
+              <g class="pathway-glow-bead-group" id="pathwayBeadGroup">
+                <circle class="pathway-glow-ring" id="pathwayBeadRing" cx="-100" cy="-100" r="14" />
+                <circle class="pathway-glow-core" id="pathwayBeadCore" cx="-100" cy="-100" r="7" />
+              </g>
+            </svg>
+
+            <!-- 4 Pathway Step Cards Grid (De-cluttered Minimal Layout with High Visibility Buttons) -->
+            <div class="pathway-grid">
+
+              <!-- STEP 1 -->
+              <div class="service-card pathway-card" data-step="1">
+                <div class="step-node-header">
+                  <div class="step-node-dot" id="nodeDot1">
+                    <span class="step-number">01</span>
+                  </div>
+                  <span class="step-badge">ACADEMY ENTRY</span>
+                </div>
+
+                <div class="step-icon-wrap">
+                  <svg class="step-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                </div>
+
+                <h3 class="service-name">Grassroots Mastery</h3>
+                <div class="step-level-tag">Ages 6 – 11 • Foundations</div>
+                
+                <p class="service-desc">
+                  Join Gurukul Academy to build fundamental ball mastery, spatial awareness, and 1v1 skill under licensed UEFA/AFC coaches.
+                </p>
+
+                <div class="step-meta-pill">Ball Mastery • UEFA Coaches • 1v1 Drills</div>
+
+                <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I'm%20interested%20in%20enrolling%20in%20the%20Grassroots%20Academy%20(Ages%206-11)." target="_blank" rel="noopener noreferrer" class="service-link-btn">
+                  <span>Join Academy</span>
+                  <svg class="tilted-arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                </a>
+              </div>
+
+              <!-- STEP 2 -->
+              <div class="service-card pathway-card" data-step="2">
+                <div class="step-node-header">
+                  <div class="step-node-dot" id="nodeDot2">
+                    <span class="step-number">02</span>
+                  </div>
+                  <span class="step-badge">INTERMEDIATE</span>
+                </div>
+
+                <div class="step-icon-wrap icon-cyan">
+                  <svg class="step-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                  </svg>
+                </div>
+
+                <h3 class="service-name">Youth Elite</h3>
+                <div class="step-level-tag">Ages 12 – 16 • Advanced</div>
+
+                <p class="service-desc">
+                  High-intensity tactical conditioning, match intelligence, video analytics breakdown, and competitive youth league play.
+                </p>
+
+                <div class="step-meta-pill">Tactical IQ • Bio-Tracking • Match Time</div>
+
+                <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20Please%20share%20the%20Youth%20Elite%20(Ages%2012-16)%20training%20schedule." target="_blank" rel="noopener noreferrer" class="service-link-btn">
+                  <span>View Schedule</span>
+                  <svg class="tilted-arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                </a>
+              </div>
+
+              <!-- STEP 3 -->
+              <div class="service-card pathway-card" data-step="3">
+                <div class="step-node-header">
+                  <div class="step-node-dot" id="nodeDot3">
+                    <span class="step-number">03</span>
+                  </div>
+                  <span class="step-badge">IN-HOUSE CLUBS</span>
+                </div>
+
+                <div class="step-icon-wrap icon-gold">
+                  <svg class="step-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                    <path d="M4 22h16"/>
+                    <path d="M10 14.66V17c0 .55-.45 1-1 1H7v4h10v-4h-2c-.55 0-1-.45-1-1v-2.34"/>
+                    <path d="M6 4h12v6a6 6 0 0 1-12 0V4z"/>
+                  </svg>
+                </div>
+
+                <h3 class="service-name">Gurukul FCC Div B & Div A</h3>
+                <div class="step-level-tag">Senior League Integration</div>
+
+                <p class="service-desc">
+                  Direct integration into our in-house senior teams: competing in Division B and advancing to our premier Division A squad.
+                </p>
+
+                <div class="step-meta-pill">Division B Squad • Division A Pro • League</div>
+
+                <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I'm%20interested%20in%20the%20Senior%20Division%20A%20%26%20B%20Squad%20Integrations." target="_blank" rel="noopener noreferrer" class="service-link-btn">
+                  <span>Squad Highlights</span>
+                  <svg class="tilted-arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                </a>
+              </div>
+
+              <!-- STEP 4 -->
+              <div class="service-card pathway-card" data-step="4">
+                <div class="step-node-header">
+                  <div class="step-node-dot" id="nodeDot4">
+                    <span class="step-number">04</span>
+                  </div>
+                  <span class="step-badge">PRO SCOUTING</span>
+                </div>
+
+                <div class="step-icon-wrap icon-purple">
+                  <svg class="step-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                  </svg>
+                </div>
+
+                <h3 class="service-name">Global Sourcing</h3>
+                <div class="step-level-tag">Global Pro Scout Sourcing</div>
+
+                <p class="service-desc">
+                  Direct player sourcing to top pro clubs through active scouting connections and global pro networks.
+                </p>
+
+                <div class="step-meta-pill">Global Network • Indian Academies • Pro Trials</div>
+
+                <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I'm%20interested%20in%20Global%20Pro%20Scouting%20%26%20Sourcing." target="_blank" rel="noopener noreferrer" class="service-link-btn">
+                  <span>Explore Pathways</span>
+                  <svg class="tilted-arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+
+    <!-- ACADEMY CENTERS & INFRASTRUCTURE SECTION (Interactive World-Class Centers Showcase) -->
+    <section class="ancillary-section centers-hub-section" id="discover">
+      <!-- AI-Tech Animated Background Orbs & Tactical Sonar -->
+      <div class="bg-animated-orb orb-gold"></div>
+      <div class="bg-tactical-grid grid-dense"></div>
+
+      <div class="ancillary-container">
+        
+        <!-- Top Centered Pill Badge -->
+        <div class="ancillary-badge-wrapper reveal-on-scroll">
+          <span class="ancillary-badge">02 / ACADEMY CENTERS & INFRASTRUCTURE</span>
+        </div>
+
+        <!-- Centered Section Headline & Subtitle -->
+        <h2 class="ancillary-title reveal-on-scroll reveal-delay-1">Our Official Training Centers</h2>
+        <p class="ancillary-subtitle reveal-on-scroll reveal-delay-2">
+          Explore Gurukul Football Academy's 5 official training centers across Dwarka, equipped with floodlit synthetic turfs, licensed coaches, and pro athlete facilities.
+        </p>
+
+        <!-- Interactive 5 Centers Selection Tabs -->
+        <div class="centers-tabs-wrapper reveal-on-scroll reveal-delay-2">
+          <button class="center-tab-btn active" data-center="0">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>NK Bagrodia School (Sec-4)</span>
+          </button>
+          <button class="center-tab-btn" data-center="1">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>Play Yard Sports (Sec-7)</span>
+          </button>
+          <button class="center-tab-btn" data-center="2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span>R.D Rajpal School (Sec-9)</span>
+          </button>
+          <button class="center-tab-btn" data-center="3">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/></svg>
+            <span>Bal Bharati School (Sec-12)</span>
+          </button>
+          <button class="center-tab-btn" data-center="4">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>OPG World School (Sec-19B)</span>
+          </button>
+        </div>
+
+        <!-- Interactive Center Spotlight Viewport -->
+        <div class="center-spotlight-card reveal-on-scroll reveal-delay-3" id="centerSpotlightCard">
+          
+          <!-- Left Spotlight Visual Gallery -->
+          <div class="center-visual-col">
+            <div class="center-main-img-box">
+              <img src="/assets/centers/nk-bagrodia-sec4.png" alt="NK Bagrodia Public School (Sec-4)" id="centerMainImg" class="center-main-img" />
+              <span class="center-live-badge" id="centerBadge">DWARKA SEC-4 • FIFA PRO TURF</span>
+            </div>
+          </div>
+
+          <!-- Right Spotlight Details & Live Specs Grid -->
+          <div class="center-info-col">
+            <div class="center-header-row">
+              <div>
+                <span class="center-tag" id="centerTag">SECTOR 4 ACADEMY HUB</span>
+                <h3 class="center-title" id="centerTitle">NK Bagrodia Public School (Sec-4)</h3>
+              </div>
+              <!-- Rating & Reviews Pill -->
+              <div class="center-rating-pill" id="centerRating">
+                <span class="rating-stars">★★★★★</span>
+                <span class="rating-num">5.0 ★</span>
+                <span class="rating-count">(65+ Reviews)</span>
+              </div>
+            </div>
+
+            <!-- Center Training Timings Capsule -->
+            <div class="center-timings-box" id="centerTimingsBox">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span class="timings-label">Session Timings:</span>
+              <span class="timings-value" id="centerTimings">Mon - Sun: 4:30 PM - 7:30 PM (Evening) | Sat - Sun: 6:30 AM - 9:30 AM (Morning)</span>
+            </div>
+
+            <p class="center-desc" id="centerDesc">
+              Our high-performance training ground at NK Bagrodia Public School featuring FIFA Quality Pro synthetic turf, LED floodlighting, 1v1 tactical cages, and licensed UEFA/AFC head coaches.
+            </p>
+
+            <!-- 4 Live Pitch Specs Grid -->
+            <div class="center-specs-grid" id="centerSpecsGrid">
+              <div class="center-spec-item">
+                <span class="spec-label">Turf Quality</span>
+                <span class="spec-value" id="specTurf">FIFA Quality Pro Turf</span>
+              </div>
+              <div class="center-spec-item">
+                <span class="spec-label">Lighting System</span>
+                <span class="spec-value" id="specLighting">1200-Lux Broadcast LEDs</span>
+              </div>
+              <div class="center-spec-item">
+                <span class="spec-label">Analytics Suite</span>
+                <span class="spec-value" id="specAnalytics">4K AI Video Cameras</span>
+              </div>
+              <div class="center-spec-item">
+                <span class="spec-label">Coaching Staff</span>
+                <span class="spec-value" id="specPhysio">Licensed UEFA & AFC Coaches</span>
+              </div>
+            </div>
+
+            <!-- Actions & Location Footer -->
+            <div class="center-footer-row">
+              <div class="center-location-tag" id="centerLocation">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>NK Bagrodia School, Sec-4, Dwarka</span>
+              </div>
+
+              <div class="center-actions-group">
+                <!-- Google Directions Button -->
+                <a href="https://share.google/TklWcLGjkioVBcITb" target="_blank" rel="noopener noreferrer" class="btn-directions-sm" id="centerDirectionsBtn" title="Get Directions on Google Maps">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <span>Directions</span>
+                </a>
+
+                <!-- Small Compact "Book Free Trial" WhatsApp Button -->
+                <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I%20would%20like%20to%20book%20a%20Free%20Trial%20at%20NK%20Bagrodia%20Public%20School%20(Sec-4)." target="_blank" rel="noopener noreferrer" class="btn-free-trial-sm" id="centerBookTrialBtn" title="Book Free Trial on WhatsApp">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                  <span>Book Free Trial</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- A DIVISION PROMOTION MILESTONE SECTION (Inspired by User Reference Photo) -->
+    <section class="promotion-milestone-section" id="milestone">
+      <!-- AI-Tech Animated Background Orbs & Tactical Sonar Shapes -->
+      <div class="bg-animated-orb orb-red"></div>
+      <div class="bg-tactical-grid grid-dots"></div>
+
+      <div class="promotion-container">
+
+        <!-- Left Column: Typography & Victory Highlights -->
+        <div class="promotion-left">
+          <div class="promotion-badge-wrapper reveal-on-scroll">
+            <span class="promotion-badge">03 / PROMOTION MILESTONE</span>
+          </div>
+
+          <h2 class="promotion-title reveal-on-scroll reveal-delay-1">
+            Promoted to <bold>A</bold> Division A Victory Earned
+          </h2>
+
+          <p class="promotion-desc reveal-on-scroll reveal-delay-2">
+            Securing a hard-fought 3rd place finish in the league, GAmOn Gurukul FC has officially clinched promotion to
+            the elite Division A. Through high-altitude endurance training, tactical discipline, and unyielding squad
+            unity, our team earns its place at the highest level.
+          </p>
+
+          <div class="promotion-stats-grid reveal-on-scroll reveal-delay-3">
+            <div class="stat-card">
+              <div class="stat-val">3rd</div>
+              <div class="stat-lbl">League Finish</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">48</div>
+              <div class="stat-lbl">Goals Scored</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">DIV A</div>
+              <div class="stat-lbl">Promoted & Qualified</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Dual Overlapping Image Cards with Smooth Inertia Parallax Scroll Effect -->
+        <div class="promotion-right" id="parallaxContainer">
+
+          <!-- Back Image Card -->
+          <div class="parallax-card back-card" id="parallaxBack">
+            <span class="card-corner-badge">3RD PLACE • DIV A PROMOTED</span>
+            <img src="/assets/adivision1.png" alt="Gurukul FC Division A Promotion Team" class="parallax-img" />
+          </div>
+
+          <!-- Front Overlapping Image Card -->
+          <div class="parallax-card front-card" id="parallaxFront">
+            <img src="/assets/adivision2.png" alt="Gurukul FC Division A Celebration" class="parallax-img" />
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3D VICTORIES & MEMORIES OF OUR ACADEMY GALLERY SECTION -->
+    <div id="victories-gallery-mount"></div>
+
+    <!-- TESTIMONIALS & PLAYER REVIEWS SECTION (Glassmorphism 3-Column Infinite Marquee with Red Touch & Top/Bottom Fade Mask) -->
+    <section class="ancillary-section testimonials-section" id="testimonials">
+      <!-- AI-Tech Animated Background Orbs & Tactical Grid -->
+      <div class="bg-animated-orb orb-red" style="top: 20%; right: 10%; opacity: 0.35;"></div>
+      <div class="bg-animated-orb orb-sky" style="bottom: 10%; left: 5%; opacity: 0.25;"></div>
+      <div class="bg-tactical-grid"></div>
+
+      <div class="testimonials-container">
+
+        <!-- Top Centered Pill Badge -->
+        <div class="ancillary-badge-wrapper reveal-on-scroll">
+          <span class="ancillary-badge">04 / TESTIMONIALS & REVIEWS</span>
+        </div>
+
+        <!-- Section Headline & Subtitle -->
+        <h2 class="ancillary-title reveal-on-scroll reveal-delay-1">What our players & parents say</h2>
+        <p class="ancillary-subtitle reveal-on-scroll reveal-delay-2">
+          Real 5-star Google reviews from parents, young athletes, and pro players trained at Gurukul Football Academy.
+        </p>
+
+        <!-- Google Business Rating Header Capsule -->
+        <div class="google-reviews-capsule reveal-on-scroll reveal-delay-2">
+          <a href="https://share.google/I0R5xjFrkdY0M1ld4" target="_blank" rel="noopener noreferrer" class="g-rating-card" title="View Gurukul Football Academy on Google Business">
+            <div class="g-logo-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.62z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+              </svg>
+            </div>
+            <div class="g-info">
+              <div class="g-stars-row">
+                <span class="stars">★★★★★</span>
+                <span class="rating-num">4.9 / 5.0 Rating</span>
+              </div>
+              <span class="g-sub">Verified Google Business Profile • Gurukul Football Academy</span>
+            </div>
+            <div class="g-arrow-btn">
+              <span>View Profile</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </div>
+          </a>
+        </div>
+
+        <!-- 3-Column Vertical Infinite Marquee Viewport with Top & Bottom Fade Mask -->
+        <div class="testimonials-marquee-viewport reveal-on-scroll reveal-delay-3">
+          
+          <!-- Fade Mask Top & Bottom Layers -->
+          <div class="marquee-fade-overlay fade-top"></div>
+          <div class="marquee-fade-overlay fade-bottom"></div>
+
+          <div class="testimonials-grid-3col">
+
+            <!-- COLUMN 1: LEFT (Faster speed) -->
+            <div class="marquee-column col-left">
+              <div class="marquee-track track-fast">
+                
+                <!-- Card 1 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "The support team is exceptional, guiding us through setup and providing ongoing assistance, ensuring our satisfaction."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-red">
+                      <span>SM</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Saman Malik</h4>
+                      <p class="author-role">Customer Support Lead & U-13 Parent</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "This ERP revolutionized our operations, streamlining finance and inventory. The cloud-based platform keeps us productive, even remotely."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-sky">
+                      <span>BP</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Briana Patton</h4>
+                      <p class="author-role">Operations Manager & Academy Parent</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "Gurukul Football Academy provides genuine pro pathways. Competing in Division B and earning promotion to Division A was the defining moment of my career!"
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-gold">
+                      <span>GS</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Gurpreet Singh</h4>
+                      <p class="author-role">Division A Squad Captain</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "Certified UEFA and AFC coaches who truly care about holistic player development. Ball mastery, discipline, and match fitness are top tier."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-purple">
+                      <span>RS</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Rajesh Sharma</h4>
+                      <p class="author-role">Parent of Grassroots Scholar</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Duplicate track for seamless infinite scroll loop -->
+              <div class="marquee-track track-fast" aria-hidden="true">
+                
+                <!-- Card 1 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "The support team is exceptional, guiding us through setup and providing ongoing assistance, ensuring our satisfaction."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-red">
+                      <span>SM</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Saman Malik</h4>
+                      <p class="author-role">Customer Support Lead & U-13 Parent</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "This ERP revolutionized our operations, streamlining finance and inventory. The cloud-based platform keeps us productive, even remotely."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-sky">
+                      <span>BP</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Briana Patton</h4>
+                      <p class="author-role">Operations Manager & Academy Parent</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "Gurukul Football Academy provides genuine pro pathways. Competing in Division B and earning promotion to Division A was the defining moment of my career!"
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-gold">
+                      <span>GS</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Gurpreet Singh</h4>
+                      <p class="author-role">Division A Squad Captain</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "Certified UEFA and AFC coaches who truly care about holistic player development. Ball mastery, discipline, and match fitness are top tier."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-purple">
+                      <span>RS</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Rajesh Sharma</h4>
+                      <p class="author-role">Parent of Grassroots Scholar</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+            <!-- COLUMN 2: CENTER (Medium speed - faster than right, slower than left) -->
+            <div class="marquee-column col-center">
+              <div class="marquee-track track-mid">
+                
+                <!-- Card 1 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "Its robust features and quick support have transformed our workflow, making us significantly more efficient."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-pink">
+                      <span>ZH</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Zainab Hussain</h4>
+                      <p class="author-role">Project Manager & Youth Elite Player</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "The smooth implementation exceeded expectations. It streamlined processes, improving overall business performance."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-teal">
+                      <span>AK</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Aliza Khan</h4>
+                      <p class="author-role">Business Analyst & Trainee</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "High altitude conditioning and tactical video analysis suites give Gurukul players a massive competitive edge against rival teams."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-orange">
+                      <span>RM</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Rohan Mehta</h4>
+                      <p class="author-role">Youth Elite Forward</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "My son started at age 8 in Grassroots and is now in the U-15 Elite squad. The progression structure here is the best in North India."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-green">
+                      <span>PN</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Priya Nair</h4>
+                      <p class="author-role">Parent of Youth Scholar</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Duplicate track for seamless infinite scroll loop -->
+              <div class="marquee-track track-mid" aria-hidden="true">
+                
+                <!-- Card 1 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "Its robust features and quick support have transformed our workflow, making us significantly more efficient."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-pink">
+                      <span>ZH</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Zainab Hussain</h4>
+                      <p class="author-role">Project Manager & Youth Elite Player</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "The smooth implementation exceeded expectations. It streamlined processes, improving overall business performance."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-teal">
+                      <span>AK</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Aliza Khan</h4>
+                      <p class="author-role">Business Analyst & Trainee</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "High altitude conditioning and tactical video analysis suites give Gurukul players a massive competitive edge against rival teams."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-orange">
+                      <span>RM</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Rohan Mehta</h4>
+                      <p class="author-role">Youth Elite Forward</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "My son started at age 8 in Grassroots and is now in the U-15 Elite squad. The progression structure here is the best in North India."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-green">
+                      <span>PN</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Priya Nair</h4>
+                      <p class="author-role">Parent of Youth Scholar</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+            <!-- COLUMN 3: RIGHT (Slowest speed) -->
+            <div class="marquee-column col-right">
+              <div class="marquee-track track-slow">
+                
+                <!-- Card 1 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "They delivered a solution that exceeded expectations, understanding our needs and enhancing our operations."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-yellow">
+                      <span>SS</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Sana Sheikh</h4>
+                      <p class="author-role">Sales Manager & Academy Parent</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "Using this ERP, our online presence and conversions significantly improved, boosting business performance."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-blue">
+                      <span>HA</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Hassan Ali</h4>
+                      <p class="author-role">E-commerce Manager & Pro Player</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "Our business functions improved with a user-friendly design and positive customer feedback."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-red">
+                      <span>VM</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Vikram Malhotra</h4>
+                      <p class="author-role">Division B Midfielder</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "From trial booking to biometrics tracking, everything is smooth. Gurukul FC sets the benchmark for youth football training!"
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-sky">
+                      <span>KS</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Karan Singh</h4>
+                      <p class="author-role">U-17 Academy Goalkeeper</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Duplicate track for seamless infinite scroll loop -->
+              <div class="marquee-track track-slow" aria-hidden="true">
+                
+                <!-- Card 1 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "They delivered a solution that exceeded expectations, understanding our needs and enhancing our operations."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-yellow">
+                      <span>SS</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Sana Sheikh</h4>
+                      <p class="author-role">Sales Manager & Academy Parent</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "Using this ERP, our online presence and conversions significantly improved, boosting business performance."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-blue">
+                      <span>HA</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Hassan Ali</h4>
+                      <p class="author-role">E-commerce Manager & Pro Player</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "Our business functions improved with a user-friendly design and positive customer feedback."
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-red">
+                      <span>VM</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Vikram Malhotra</h4>
+                      <p class="author-role">Division B Midfielder</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="testimonial-card glass-card-r">
+                  <div class="card-stars-row">
+                    <span class="card-stars">★★★★★</span>
+                    <span class="verified-pill"><span class="g-dot"></span> Google Review</span>
+                  </div>
+                  <p class="testimonial-text">
+                    "From trial booking to biometrics tracking, everything is smooth. Gurukul FC sets the benchmark for youth football training!"
+                  </p>
+                  <div class="testimonial-author">
+                    <div class="author-avatar avatar-sky">
+                      <span>KS</span>
+                    </div>
+                    <div class="author-meta">
+                      <h4 class="author-name">Karan Singh</h4>
+                      <p class="author-role">U-17 Academy Goalkeeper</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INSTAGRAM REELS & HIGHLIGHTS GALLERY SECTION -->
+    <section class="reels-section" id="reels">
+      <div class="reels-container">
+        
+        <!-- Section Header -->
+        <div class="reels-header-row">
+          <div class="reels-header-left">
+            <div class="reels-badge-wrapper reveal-on-scroll">
+              <span class="reels-badge">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                INSTAGRAM REELS & HIGHLIGHTS
+              </span>
+            </div>
+            <h2 class="reels-title reveal-on-scroll reveal-delay-1">
+              INSIDE GURUKUL FC IN MOTION
+            </h2>
+            <p class="reels-subtitle reveal-on-scroll reveal-delay-2">
+              Watch our academy stars in action, match highlights, training drills, and behind-the-scenes moments directly from Instagram!
+            </p>
+          </div>
+
+          <!-- Carousel Navigation Controls -->
+          <div class="reels-nav-controls reveal-on-scroll reveal-delay-2">
+            <button class="reel-nav-btn prev-btn" id="reelPrevBtn" aria-label="Previous Reels">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="reel-nav-btn next-btn" id="reelNextBtn" aria-label="Next Reels">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 6 Instagram Reels Carousel Container -->
+        <div class="reels-carousel-wrapper reveal-on-scroll reveal-delay-3">
+          <div class="reels-carousel-track" id="reelsTrack">
+
+            <!-- REEL 1 -->
+            <div class="reel-card-item" data-reel-id="DbA57kXIed5">
+              <div class="reel-card-inner">
+                <img src="/assets/reel-thumb-1.png?v=3" alt="Explosive Match Scrimmages" class="reel-poster-img" />
+                <div class="reel-overlay-content">
+                  <div class="reel-gradient-overlay"></div>
+                  <div class="reel-top-bar">
+                    <a href="https://www.instagram.com/reel/DbA57kXIed5/" target="_blank" rel="noopener noreferrer" class="instagram-icon-badge" title="View on Instagram" onclick="event.stopPropagation();">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                      @gurukulfootball
+                    </a>
+                    <span class="reel-status-badge">READY</span>
+                  </div>
+
+                  <div class="reel-play-button-overlay">
+                    <div class="play-btn-circle">
+                      <svg class="icon-play" width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    </div>
+                    <span class="click-to-play-label">Click to Play / Stop</span>
+                  </div>
+
+                  <div class="reel-bottom-info">
+                    <p class="reel-caption">🔥 Explosive Match Scrimmages & Ball Control Drills</p>
+                  </div>
+                </div>
+                <div class="reel-iframe-container" id="reelContainer-DbA57kXIed5"></div>
+              </div>
+            </div>
+
+            <!-- REEL 2 -->
+            <div class="reel-card-item" data-reel-id="DX6vHBroaPP">
+              <div class="reel-card-inner">
+                <img src="/assets/reel-thumb-2.png?v=3" alt="Tactical Positioning" class="reel-poster-img" />
+                <div class="reel-overlay-content">
+                  <div class="reel-gradient-overlay"></div>
+                  <div class="reel-top-bar">
+                    <a href="https://www.instagram.com/reel/DX6vHBroaPP/" target="_blank" rel="noopener noreferrer" class="instagram-icon-badge" title="View on Instagram" onclick="event.stopPropagation();">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                      @gurukulfootball
+                    </a>
+                    <span class="reel-status-badge">READY</span>
+                  </div>
+
+                  <div class="reel-play-button-overlay">
+                    <div class="play-btn-circle">
+                      <svg class="icon-play" width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    </div>
+                    <span class="click-to-play-label">Click to Play / Stop</span>
+                  </div>
+
+                  <div class="reel-bottom-info">
+                    <p class="reel-caption">⚡ Tactical Positioning & 1v1 Passing Masterclass</p>
+                  </div>
+                </div>
+                <div class="reel-iframe-container" id="reelContainer-DX6vHBroaPP"></div>
+              </div>
+            </div>
+
+            <!-- REEL 3 -->
+            <div class="reel-card-item" data-reel-id="DTz-1STkqpj">
+              <div class="reel-card-inner">
+                <img src="/assets/reel-thumb-3.png?v=3" alt="Junior Grassroots Goal Highlights" class="reel-poster-img" />
+                <div class="reel-overlay-content">
+                  <div class="reel-gradient-overlay"></div>
+                  <div class="reel-top-bar">
+                    <a href="https://www.instagram.com/reel/DTz-1STkqpj/" target="_blank" rel="noopener noreferrer" class="instagram-icon-badge" title="View on Instagram" onclick="event.stopPropagation();">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                      @gurukulfootball
+                    </a>
+                    <span class="reel-status-badge">READY</span>
+                  </div>
+
+                  <div class="reel-play-button-overlay">
+                    <div class="play-btn-circle">
+                      <svg class="icon-play" width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    </div>
+                    <span class="click-to-play-label">Click to Play / Stop</span>
+                  </div>
+
+                  <div class="reel-bottom-info">
+                    <p class="reel-caption">🏆 Junior Grassroots Goal Highlights & Celebration</p>
+                  </div>
+                </div>
+                <div class="reel-iframe-container" id="reelContainer-DTz-1STkqpj"></div>
+              </div>
+            </div>
+
+            <!-- REEL 4 -->
+            <div class="reel-card-item" data-reel-id="DTXFJADkaql">
+              <div class="reel-card-inner">
+                <img src="/assets/reel-thumb-4.png?v=3" alt="Elite Squad Agility" class="reel-poster-img" />
+                <div class="reel-overlay-content">
+                  <div class="reel-gradient-overlay"></div>
+                  <div class="reel-top-bar">
+                    <a href="https://www.instagram.com/reel/DTXFJADkaql/" target="_blank" rel="noopener noreferrer" class="instagram-icon-badge" title="View on Instagram" onclick="event.stopPropagation();">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                      @gurukulfootball
+                    </a>
+                    <span class="reel-status-badge">READY</span>
+                  </div>
+
+                  <div class="reel-play-button-overlay">
+                    <div class="play-btn-circle">
+                      <svg class="icon-play" width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    </div>
+                    <span class="click-to-play-label">Click to Play / Stop</span>
+                  </div>
+
+                  <div class="reel-bottom-info">
+                    <p class="reel-caption">⭐ Elite Squad Agility & Speed Training Sessions</p>
+                  </div>
+                </div>
+                <div class="reel-iframe-container" id="reelContainer-DTXFJADkaql"></div>
+              </div>
+            </div>
+
+            <!-- REEL 5 -->
+            <div class="reel-card-item" data-reel-id="DTDOYBWEpJt">
+              <div class="reel-card-inner">
+                <img src="/assets/reel-thumb-5.png?v=3" alt="Goalkeeper Reaction Saves" class="reel-poster-img" />
+                <div class="reel-overlay-content">
+                  <div class="reel-gradient-overlay"></div>
+                  <div class="reel-top-bar">
+                    <a href="https://www.instagram.com/reel/DTDOYBWEpJt/" target="_blank" rel="noopener noreferrer" class="instagram-icon-badge" title="View on Instagram" onclick="event.stopPropagation();">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                      @gurukulfootball
+                    </a>
+                    <span class="reel-status-badge">READY</span>
+                  </div>
+
+                  <div class="reel-play-button-overlay">
+                    <div class="play-btn-circle">
+                      <svg class="icon-play" width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    </div>
+                    <span class="click-to-play-label">Click to Play / Stop</span>
+                  </div>
+
+                  <div class="reel-bottom-info">
+                    <p class="reel-caption">🔥 Goalkeeper Reaction Saves & Tactical Coaching</p>
+                  </div>
+                </div>
+                <div class="reel-iframe-container" id="reelContainer-DTDOYBWEpJt"></div>
+              </div>
+            </div>
+
+            <!-- REEL 6 -->
+            <div class="reel-card-item" data-reel-id="DF22Tdwym_2">
+              <div class="reel-card-inner">
+                <img src="/assets/reel-thumb-6.png?v=3" alt="Match Finishes & Team Spirit" class="reel-poster-img" />
+                <div class="reel-overlay-content">
+                  <div class="reel-gradient-overlay"></div>
+                  <div class="reel-top-bar">
+                    <a href="https://www.instagram.com/reel/DF22Tdwym_2/" target="_blank" rel="noopener noreferrer" class="instagram-icon-badge" title="View on Instagram" onclick="event.stopPropagation();">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                      @gurukulfootball
+                    </a>
+                    <span class="reel-status-badge">READY</span>
+                  </div>
+
+                  <div class="reel-play-button-overlay">
+                    <div class="play-btn-circle">
+                      <svg class="icon-play" width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    </div>
+                    <span class="click-to-play-label">Click to Play / Stop</span>
+                  </div>
+
+                  <div class="reel-bottom-info">
+                    <p class="reel-caption">🎯 High-Intensity Match Finishes & Team Spirit</p>
+                  </div>
+                </div>
+                <div class="reel-iframe-container" id="reelContainer-DF22Tdwym_2"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CREATIVE FEATURE: Interactive Academy Program & Trial Finder Modal -->
+    <div class="search-modal-overlay" id="searchModal">
+      <div class="search-modal-content">
+        <div class="search-modal-header">
+          <h3>Find Academy Programs & Trials</h3>
+          <button class="modal-close-btn" id="closeSearchModal">&times;</button>
+        </div>
+        <div class="search-input-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchInput"
+            placeholder="Search by age group, program, or campus (e.g. U-15 Elite, Grassroots, Summer Camp)..." />
+        </div>
+
+        <div class="quick-tags">
+          <span class="tag">⚡ Trial Registration</span>
+          <span class="tag">🏆 Division A Squad</span>
+          <span class="tag">🌱 Grassroots (U-6 to U-11)</span>
+          <span class="tag">📊 Biometric Lab</span>
+        </div>
+
+        <div class="search-results-list" id="searchResults">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- CREATIVE FEATURE: Floating WhatsApp Quick Chat Action Widget -->
+    <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I%20want%20to%20inquire%20about%20football%20coaching%20and%20trials." target="_blank" rel="noopener noreferrer" class="whatsapp-float-widget" title="Chat with Gurukul FC on WhatsApp">
+      <div class="wa-float-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+      </div>
+      <div class="wa-float-label">
+        <span class="wa-title">Need Help?</span>
+        <span class="wa-sub">Chat on WhatsApp</span>
+      </div>
+    </a>
+
+    <!-- GLASSMORPHISM FOOTER SECTION -->
+    <footer class="site-footer" id="contact">
+      <div class="footer-glass-container">
+        
+        <!-- Top Section: Logo, Navigation & Contact -->
+        <div class="footer-main-grid">
+          
+          <!-- Column 1: Logo & About -->
+          <div class="footer-col footer-col-logo">
+            <a href="#home" class="footer-logo-link" title="Gurukul Football Academy">
+              <img src="/assets/gurukul-logo.png" alt="Gurukul Football Academy Logo" class="footer-logo-img" />
+            </a>
+            <p class="footer-about-text">
+              India's premier football academy nurturing grassroots talent to elite professional players through licensed UEFA & AFC coaching.
+            </p>
+            <div class="footer-social-links">
+              <a href="https://www.instagram.com/gurukulfootball?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="footer-social-icon" title="Follow us on Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+              <a href="https://wa.me/919625573511" target="_blank" rel="noopener noreferrer" class="footer-social-icon wa-icon" title="Chat on WhatsApp">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Column 2: Quick Links -->
+          <div class="footer-col">
+            <h4 class="footer-heading">Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#services">Programs</a></li>
+              <li><a href="#discover">Facilities</a></li>
+              <li><a href="#milestone">Milestones</a></li>
+              <li><a href="#testimonials">Reviews</a></li>
+              <li><a href="https://wa.me/919625573511">Contact</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Programs -->
+          <div class="footer-col">
+            <h4 class="footer-heading">Programs</h4>
+            <ul class="footer-links">
+              <li><a href="#programs">Junior Batch (U-6 to U-11)</a></li>
+              <li><a href="#programs">Senior Batch (U-12 to U-16)</a></li>
+              <li><a href="#programs">Elite Batch (U-13 to U-19)</a></li>
+              <li><a href="#programs">Academy Trials</a></li>
+              <li><a href="#programs">Summer Camps</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 4: Contact Info -->
+          <div class="footer-col">
+            <h4 class="footer-heading">Contact Us</h4>
+            <ul class="footer-contact-info">
+              <li>
+                <a href="https://wa.me/919625573511" target="_blank" rel="noopener noreferrer">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  <span>+91 96255 73511</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I%20want%20to%20send%20an%20email%20inquiry." target="_blank" rel="noopener noreferrer">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <span>info@gurukulfootball.com</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I%20want%20to%20know%20the%20location%20of%20your%20training%20centers." target="_blank" rel="noopener noreferrer">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span>Dwarka, New Delhi, India</span>
+                </a>
+              </li>
+            </ul>
+            <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I%20want%20to%20enroll%20in%20the%20football%20academy." target="_blank" rel="noopener noreferrer" class="footer-cta-btn">
+              <span>Enrol Now</span>
+              <svg class="tilted-arrow-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Bottom Section: Copyright -->
+        <div class="footer-bottom">
+          <p class="footer-copyright">
+            © 2026 Gurukul Football Academy. All rights reserved.
+          </p>
+        </div>
+
+      </div>
+    </footer>
+
+    <!-- Custom Interactive Football Cursor Elements -->
+    <div class="football-cursor-ball" id="footballCursorBall">⚽</div>
+    <div class="football-cursor-ring" id="footballCursorRing"></div>
+
+    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/mountVictories.jsx"></script>
+</body>
+
+</html>
