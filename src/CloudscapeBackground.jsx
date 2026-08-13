@@ -1,5 +1,5 @@
 import React from 'react';
-import Cloudscape from '../components/ui/cloudscape';
+import Cloudscape from '../components/ui/cloudscape.tsx';
 
 export default function CloudscapeBackground() {
   return (

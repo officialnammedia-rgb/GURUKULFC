@@ -1,5 +1,5 @@
 import React from 'react';
-import InfiniteGallery from '../components/ui/3d-gallery-photography';
+import InfiniteGallery from '../components/ui/3d-gallery-photography.tsx';
 
 export default function VictoriesGallery() {
   const victoryImages = [
