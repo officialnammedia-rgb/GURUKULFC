@@ -5220,7 +5220,7 @@ body {
 
 /* Prevent horizontal overflow on mobile body */
 html, body {
-  overflow-x: hidden !important;
+  overflow-x: clip !important;
   max-width: 100vw !important;
 }
 
@@ -5237,120 +5237,117 @@ html, body {
 }
 
 /* ==========================================================================
-   MOBILE PERFORMANCE OPTIMIZATIONS
-   Targets the three biggest causes of mobile lag:
-   1. backdrop-filter blur (forces compositing on every paint)
-   2. Continuous CSS animations (eat GPU cycles during scroll)
-   3. Missing hardware acceleration hints (forces CPU layout)
+   MOBILE PERFORMANCE OPTIMIZATIONS — BUTTERY SMOOTH SCROLL
    ========================================================================== */
 
 @media (max-width: 768px), (hover: none) {
 
-  /* --- 1. Reduce/eliminate backdrop-filter on mobile --- */
-  /* Replace expensive real-time blur with cheaper semi-opaque backgrounds */
-  .nav-glass-capsule,
-  .hero-top-badge,
-  .hero-badge,
-  .enrol-btn-sky,
-  .stat-card,
-  .ancillary-card,
-  .pathway-card,
-  .center-tab-btn,
-  .centers-info-panel,
-  .reel-card-item,
-  .parallax-card,
-  .search-modal-inner,
-  .discover-tab,
-  .facility-item,
-  .testimonial-card,
-  .instagram-btn,
-  .whatsapp-float-widget,
-  .victories-3d-wrapper {
+  /* --- 1. Kill the WebGL canvas on mobile entirely --- */
+  /* It's the single biggest GPU hog; the dark background looks great without it */
+  canvas#neuro {
+    display: none !important;
+  }
+
+  /* --- 2. Nuke ALL backdrop-filter on mobile — broadest possible selector --- */
+  * {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
 
-  /* --- 2. Hardware acceleration for scrolled elements --- */
-  .app-container,
-  .hero-section,
-  .pathway-wrapper,
-  .centers-showcase-section,
-  .reels-carousel-track {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
+  /* --- 3. Kill all decorative filter: blur() elements --- */
+  /* These are huge blurred orbs/clouds that eat GPU during compositing */
+  .bg-animated-orb,
+  .cloud,
+  .cloud-1,
+  .cloud-2,
+  .cloud-3 {
+    display: none !important;
+  }
+
+  /* --- 4. Remove decorative overlays that don't contribute on small screens --- */
+  .light-spotlight,
+  .grid-overlay,
+  .bg-tactical-grid {
+    display: none !important;
+  }
+
+  /* --- 5. GPU-accelerate the main scroll container --- */
+  /* This promotes the entire scrolling layer to its own compositor layer */
+  .app-container {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
   }
 
-  /* --- 3. Reduce canvas overdraw on mobile --- */
-  canvas#neuro {
-    opacity: 0.6 !important;
+  /* --- 6. Eliminate transition: all on mobile — only transition what matters --- */
+  .nav-link,
+  .ancillary-card,
+  .stat-card,
+  .facility-item,
+  .discover-tab,
+  .center-tab-btn,
+  .reel-card-item,
+  .parallax-card,
+  .pathway-card,
+  .testimonial-card,
+  .enrol-btn-sky,
+  .instagram-btn,
+  .book-slot-btn,
+  .whatsapp-float-widget {
+    transition: opacity 0.15s ease, transform 0.15s ease !important;
   }
 
-  /* --- 4. Reduce heavy box-shadow on mobile --- */
+  /* --- 7. Eliminate the 300ms tap delay everywhere --- */
+  * {
+    touch-action: manipulation;
+  }
+
+  /* --- 8. Reduce heavy box-shadows --- */
   .parallax-card,
   .stat-card,
   .ancillary-card,
   .centers-info-panel,
-  .victories-3d-wrapper {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+  .victories-3d-wrapper,
+  .center-spotlight-card,
+  .reel-card-item {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25) !important;
   }
 
-  /* --- 5. Use content-visibility for off-screen sections --- */
-  /* This tells the browser to skip rendering for far-off sections */
-  .facilities-section,
-  .centers-showcase-section,
-  .reels-section-wrapper,
-  .testimonials-section,
-  .footer-section {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 800px;
-  }
-
-  /* --- 6. Disable CSS animations that burn GPU while scrolling --- */
+  /* --- 9. Stop CSS animations that burn GPU while scrolling --- */
   .bg-animated-orb {
     animation: none !important;
-    opacity: 0.2 !important;
   }
 
   .pulse-dot {
     animation-duration: 3s !important;
   }
 
-  /* --- 7. Eliminate transition: all on mobile (causes reflow) --- */
-  .nav-link,
-  .ancillary-card,
-  .stat-card,
-  .facility-item,
-  .discover-tab,
-  .center-tab-btn,
-  .reel-card-item {
-    transition: opacity 0.2s ease, transform 0.2s ease !important;
+  /* --- 10. Remove filter: blur and drop-shadow on decorative elements --- */
+  .pathway-bead-ring,
+  .pathway-bead-core {
+    filter: none !important;
   }
 
-  /* --- 8. Ensure touch targets have correct touch-action --- */
-  .nav-link,
-  .enrol-btn-sky,
-  .instagram-btn,
-  .center-tab-btn,
-  .reel-nav-btn,
-  .carousel-dots .dot,
-  .book-slot-btn,
-  .whatsapp-float-widget,
-  button {
-    touch-action: manipulation;
-  }
-
-  /* --- 9. Remove spotlight/grid overlays on mobile --- */
-  .light-spotlight,
-  .grid-overlay {
-    display: none !important;
+  /* --- 11. Simplify will-change — too many will-change hurts perf --- */
+  .bg-animated-orb,
+  .cloud {
+    will-change: auto !important;
   }
 }
 
-/* Smooth scroll for all browsers including iOS Safari */
-@supports (scroll-behavior: smooth) {
-  html {
-    scroll-behavior: smooth;
-  }
+/* --- Fix overflow: hidden causing scroll jank on mobile --- */
+/* Use clip instead — doesn't create a scroll container that fights the main scroll */
+html, body {
+  overflow-x: clip !important;
+  max-width: 100vw !important;
 }
+
+/* Smooth scroll for all browsers */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+

@@ -77,6 +77,8 @@ export function initNeuralNoise() {
   if (!canvasEl) return;
 
   const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
+  // Skip WebGL entirely on mobile — canvas is hidden via CSS, no GPU waste
+  if (isMobile) return;
   // Cap DPR at 1 on mobile for massive GPU savings
   const devicePixelRatio = isMobile ? 1 : Math.min(window.devicePixelRatio, 2);
   const pointer = {

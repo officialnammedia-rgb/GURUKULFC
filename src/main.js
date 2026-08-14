@@ -6,6 +6,9 @@ const isMobileDevice = () => window.innerWidth <= 768 || 'ontouchstart' in windo
    Scroll Driven Holographic Blur Reveal for Division A 2nd Card
    -------------------------------------------------------------------------- */
 function initScrollDrivenBlur() {
+  // filter:blur() on every scroll frame murders mobile GPU perf
+  if (isMobileDevice()) return;
+
   const frontCard = document.getElementById('parallaxFront');
   if (!frontCard) return;
 
