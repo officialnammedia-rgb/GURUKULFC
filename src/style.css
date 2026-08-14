@@ -4570,6 +4570,11 @@ body {
     width: 100% !important;
   }
 
+  /* Reserve height for the longest typewriter phrase to prevent layout shift */
+  .title-line-2 {
+    min-height: 2.6em !important;
+  }
+
   #typewriterText {
     display: inline !important;
     min-width: 0 !important;
@@ -4824,6 +4829,14 @@ body {
     gap: 0.5rem !important;
     width: 100% !important;
     overflow: visible !important;
+    border-radius: 20px !important;
+    padding: 0.85rem !important;
+  }
+
+  .center-tab-btn:last-child {
+    grid-column: 1 / -1;
+    max-width: 60%;
+    margin: 0 auto;
   }
 
   .center-tab-btn {
@@ -5220,5 +5233,124 @@ html, body {
   .app-container {
     overflow-x: clip !important;
     overflow-y: visible !important;
+  }
+}
+
+/* ==========================================================================
+   MOBILE PERFORMANCE OPTIMIZATIONS
+   Targets the three biggest causes of mobile lag:
+   1. backdrop-filter blur (forces compositing on every paint)
+   2. Continuous CSS animations (eat GPU cycles during scroll)
+   3. Missing hardware acceleration hints (forces CPU layout)
+   ========================================================================== */
+
+@media (max-width: 768px), (hover: none) {
+
+  /* --- 1. Reduce/eliminate backdrop-filter on mobile --- */
+  /* Replace expensive real-time blur with cheaper semi-opaque backgrounds */
+  .nav-glass-capsule,
+  .hero-top-badge,
+  .hero-badge,
+  .enrol-btn-sky,
+  .stat-card,
+  .ancillary-card,
+  .pathway-card,
+  .center-tab-btn,
+  .centers-info-panel,
+  .reel-card-item,
+  .parallax-card,
+  .search-modal-inner,
+  .discover-tab,
+  .facility-item,
+  .testimonial-card,
+  .instagram-btn,
+  .whatsapp-float-widget,
+  .victories-3d-wrapper {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* --- 2. Hardware acceleration for scrolled elements --- */
+  .app-container,
+  .hero-section,
+  .pathway-wrapper,
+  .centers-showcase-section,
+  .reels-carousel-track {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  /* --- 3. Reduce canvas overdraw on mobile --- */
+  canvas#neuro {
+    opacity: 0.6 !important;
+  }
+
+  /* --- 4. Reduce heavy box-shadow on mobile --- */
+  .parallax-card,
+  .stat-card,
+  .ancillary-card,
+  .centers-info-panel,
+  .victories-3d-wrapper {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  /* --- 5. Use content-visibility for off-screen sections --- */
+  /* This tells the browser to skip rendering for far-off sections */
+  .facilities-section,
+  .centers-showcase-section,
+  .reels-section-wrapper,
+  .testimonials-section,
+  .footer-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 800px;
+  }
+
+  /* --- 6. Disable CSS animations that burn GPU while scrolling --- */
+  .bg-animated-orb {
+    animation: none !important;
+    opacity: 0.2 !important;
+  }
+
+  .pulse-dot {
+    animation-duration: 3s !important;
+  }
+
+  /* --- 7. Eliminate transition: all on mobile (causes reflow) --- */
+  .nav-link,
+  .ancillary-card,
+  .stat-card,
+  .facility-item,
+  .discover-tab,
+  .center-tab-btn,
+  .reel-card-item {
+    transition: opacity 0.2s ease, transform 0.2s ease !important;
+  }
+
+  /* --- 8. Ensure touch targets have correct touch-action --- */
+  .nav-link,
+  .enrol-btn-sky,
+  .instagram-btn,
+  .center-tab-btn,
+  .reel-nav-btn,
+  .carousel-dots .dot,
+  .book-slot-btn,
+  .whatsapp-float-widget,
+  button {
+    touch-action: manipulation;
+  }
+
+  /* --- 9. Remove spotlight/grid overlays on mobile --- */
+  .light-spotlight,
+  .grid-overlay {
+    display: none !important;
+  }
+}
+
+/* Smooth scroll for all browsers including iOS Safari */
+@supports (scroll-behavior: smooth) {
+  html {
+    scroll-behavior: smooth;
   }
 }

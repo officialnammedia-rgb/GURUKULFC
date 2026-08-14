@@ -1,14 +1,6 @@
-// Main Application JavaScript for GAmOn Hero Section
+// Mobile detection helper
+const isMobileDevice = () => window.innerWidth <= 768 || 'ontouchstart' in window;
 
-document.addEventListener('DOMContentLoaded', () => {
-  initMobileMenu();
-  initGridSpotlight();
-  initFacilitiesCarousel();
-  initSearchModal();
-  initAudioAmbience();
-  initSmoothInteractions();
-  initScrollDrivenBlur();
-});
 
 /* --------------------------------------------------------------------------
    Scroll Driven Holographic Blur Reveal for Division A 2nd Card
@@ -202,6 +194,9 @@ function initFacilitiesCarousel() {
    1. Interactive Grid Spotlight (Mouse Follower Effect)
    -------------------------------------------------------------------------- */
 function initGridSpotlight() {
+  // Skip mouse-follower spotlight on mobile — no mouse to follow
+  if (isMobileDevice()) return;
+
   const hero = document.getElementById('hero');
   const spotlight = document.getElementById('spotlight');
 
@@ -215,7 +210,7 @@ function initGridSpotlight() {
     spotlight.style.left = `${x}px`;
     spotlight.style.top = `${y}px`;
     spotlight.style.opacity = '1';
-  });
+  }, { passive: true });
 
   hero.addEventListener('mouseleave', () => {
     spotlight.style.opacity = '0';
@@ -451,6 +446,18 @@ function initSmoothInteractions() {
 
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+
+      // Handle anchor smooth scroll
+      if (href && href.startsWith('#')) {
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      // Update active state
       navLinks.forEach(l => {
         l.classList.remove('active');
         const dot = l.querySelector('.active-dot');
@@ -469,6 +476,9 @@ function initSmoothInteractions() {
    6. Ultra-Smooth Inertia Parallax Motion & Scrollable Depth Effect
    -------------------------------------------------------------------------- */
 function initParallaxMotion() {
+  // Skip the entire parallax rAF loop on mobile — huge perf win
+  if (isMobileDevice()) return;
+
   const section = document.getElementById('milestone');
   const backCard = document.getElementById('parallaxBack');
   const frontCard = document.getElementById('parallaxFront');
@@ -520,7 +530,7 @@ function initParallaxMotion() {
 
     targetTiltX = mouseY * -14;
     targetTiltY = mouseX * 14;
-  });
+  }, { passive: true });
 
   section.addEventListener('mouseleave', () => {
     isHovered = false;
@@ -561,6 +571,9 @@ function initScrollReveals() {
    8. Interactive Football Mouse Cursor System
    -------------------------------------------------------------------------- */
 function initFootballCursor() {
+  // Skip custom cursor entirely on mobile/touch — no mouse, pointless rAF loop
+  if (isMobileDevice()) return;
+
   const ball = document.getElementById('footballCursorBall');
   const ring = document.getElementById('footballCursorRing');
 
@@ -577,7 +590,7 @@ function initFootballCursor() {
   window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-  });
+  }, { passive: true });
 
   const hoverSelectors = 'a, button, .nav-link, .ancillary-card, .stat-card, .parallax-card, input, .dot, .nav-arrow, .book-slot-btn';
 
@@ -1125,6 +1138,8 @@ import { initNeuralNoise } from './neural-noise.js';
 /* Initialize all modules when DOM is ready */
 document.addEventListener('DOMContentLoaded', () => {
   initNeuralNoise();
+  initScrollDrivenBlur();
+  initMobileMenu();
   initGridSpotlight();
   initFacilitiesCarousel();
   initSearchModal();

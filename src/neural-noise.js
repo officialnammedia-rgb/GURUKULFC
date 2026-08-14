@@ -32,7 +32,7 @@ float neuro_shape(vec2 uv, float t, float p) {
     vec2 res = vec2(0.);
     float scale = 8.;
 
-    for (int j = 0; j < 15; j++) {
+    for (int j = 0; j < ITERATIONS; j++) {
         uv = rotate(uv, 1.);
         sine_acc = rotate(sine_acc, 1.);
         vec2 layer = uv * scale + float(j) + sine_acc - t;
@@ -76,7 +76,9 @@ export function initNeuralNoise() {
   const canvasEl = document.querySelector("canvas#neuro");
   if (!canvasEl) return;
 
-  const devicePixelRatio = Math.min(window.devicePixelRatio, 2);
+  const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
+  // Cap DPR at 1 on mobile for massive GPU savings
+  const devicePixelRatio = isMobile ? 1 : Math.min(window.devicePixelRatio, 2);
   const pointer = {
     x: window.innerWidth * 0.5,
     y: window.innerHeight * 0.5,
@@ -86,6 +88,11 @@ export function initNeuralNoise() {
 
   let uniforms = {};
   let gl = null;
+  let animFrameId = null;
+  let isVisible = true;
+  // Throttle to ~30fps on mobile
+  const frameBudget = isMobile ? 33.3 : 0;
+  let lastFrameTime = 0;
 
   try {
     gl = initShader();
@@ -98,12 +105,32 @@ export function initNeuralNoise() {
 
   setupEvents();
   resizeCanvas();
-  window.addEventListener("resize", resizeCanvas);
-  render();
+
+  // Debounce resize for perf
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resizeCanvas, 150);
+  });
+
+  // Pause rendering when tab is hidden
+  document.addEventListener('visibilitychange', () => {
+    isVisible = !document.hidden;
+    if (isVisible && !animFrameId) {
+      lastFrameTime = 0;
+      animFrameId = requestAnimationFrame(render);
+    }
+  });
+
+  animFrameId = requestAnimationFrame(render);
 
   function initShader() {
-    const webgl = canvasEl.getContext("webgl") || canvasEl.getContext("experimental-webgl");
+    const webgl = canvasEl.getContext("webgl", { alpha: true, antialias: false, powerPreference: 'low-power' }) || canvasEl.getContext("experimental-webgl", { alpha: true, antialias: false, powerPreference: 'low-power' });
     if (!webgl) return null;
+
+    // Inject iteration count based on device capability
+    const iterations = isMobile ? 8 : 15;
+    const fragSource = fragShaderSource.replace('ITERATIONS', String(iterations));
 
     function createShader(glCtx, sourceCode, type) {
       const shader = glCtx.createShader(type);
@@ -119,7 +146,7 @@ export function initNeuralNoise() {
     }
 
     const vertexShader = createShader(webgl, vertShaderSource, webgl.VERTEX_SHADER);
-    const fragmentShader = createShader(webgl, fragShaderSource, webgl.FRAGMENT_SHADER);
+    const fragmentShader = createShader(webgl, fragSource, webgl.FRAGMENT_SHADER);
 
     if (!vertexShader || !fragmentShader) return null;
 
@@ -155,21 +182,30 @@ export function initNeuralNoise() {
     return webgl;
   }
 
-  function render() {
-    if (!gl) return;
-    const currentTime = performance.now();
+  function render(timestamp) {
+    if (!gl || !isVisible) {
+      animFrameId = null;
+      return;
+    }
+
+    // Throttle on mobile
+    if (frameBudget > 0 && timestamp - lastFrameTime < frameBudget) {
+      animFrameId = requestAnimationFrame(render);
+      return;
+    }
+    lastFrameTime = timestamp;
 
     pointer.x += (pointer.tX - pointer.x) * 0.2;
     pointer.y += (pointer.tY - pointer.y) * 0.2;
 
     const scrollProgress = window.pageYOffset / (2 * window.innerHeight);
 
-    gl.uniform1f(uniforms.u_time, currentTime);
+    gl.uniform1f(uniforms.u_time, timestamp);
     gl.uniform2f(uniforms.u_pointer_position, pointer.x / window.innerWidth, 1 - pointer.y / window.innerHeight);
     gl.uniform1f(uniforms.u_scroll_progress, scrollProgress);
 
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    requestAnimationFrame(render);
+    animFrameId = requestAnimationFrame(render);
   }
 
   function resizeCanvas() {
@@ -183,12 +219,12 @@ export function initNeuralNoise() {
   function setupEvents() {
     window.addEventListener("pointermove", e => {
       updateMousePosition(e.clientX, e.clientY);
-    });
+    }, { passive: true });
     window.addEventListener("touchmove", e => {
       if (e.targetTouches && e.targetTouches[0]) {
         updateMousePosition(e.targetTouches[0].clientX, e.targetTouches[0].clientY);
       }
-    });
+    }, { passive: true });
     window.addEventListener("click", e => {
       updateMousePosition(e.clientX, e.clientY);
     });

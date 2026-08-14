@@ -294,13 +294,9 @@ function GalleryScene({
 		}));
 	}, [depthRange, spatialPositions, totalImages, visibleCount]);
 
-	// Handle wheel input
+	// Handle wheel input (do NOT hijack page scrolling)
 	const handleWheel = useCallback(
 		(event: WheelEvent) => {
-			if (event.cancelable) {
-				event.preventDefault();
-			}
-			event.stopPropagation();
 			const delta = event.deltaY || event.deltaX;
 			setScrollVelocity((prev) => prev + delta * 0.008 * speed);
 			setAutoPlay(false);
