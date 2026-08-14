@@ -1,12 +1,90 @@
 // Main Application JavaScript for GAmOn Hero Section
 
 document.addEventListener('DOMContentLoaded', () => {
+  initMobileMenu();
   initGridSpotlight();
   initFacilitiesCarousel();
   initSearchModal();
   initAudioAmbience();
   initSmoothInteractions();
+  initScrollDrivenBlur();
 });
+
+/* --------------------------------------------------------------------------
+   Scroll Driven Holographic Blur Reveal for Division A 2nd Card
+   -------------------------------------------------------------------------- */
+function initScrollDrivenBlur() {
+  const frontCard = document.getElementById('parallaxFront');
+  if (!frontCard) return;
+
+  let hasRevealedPermanently = false;
+
+  function checkBlur() {
+    if (hasRevealedPermanently) return;
+
+    const rect = frontCard.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const cardCenter = rect.top + rect.height / 2;
+    const viewportCenter = windowHeight / 2;
+    const distanceFromCenter = Math.abs(viewportCenter - cardCenter);
+
+    // Lock unblurred permanently once scrolled into viewport center
+    if (distanceFromCenter < 140) {
+      frontCard.style.filter = 'blur(0px)';
+      frontCard.style.opacity = '1';
+      hasRevealedPermanently = true;
+      window.removeEventListener('scroll', checkBlur);
+      window.removeEventListener('resize', checkBlur);
+      return;
+    }
+
+    const maxDistance = windowHeight * 0.45;
+    let progress = Math.min(distanceFromCenter / maxDistance, 1);
+    let blurVal = progress * 10;
+    let opacityVal = 1 - (progress * 0.35);
+
+    frontCard.style.filter = `blur(${blurVal.toFixed(1)}px)`;
+    frontCard.style.opacity = opacityVal.toFixed(2);
+  }
+
+  window.addEventListener('scroll', checkBlur, { passive: true });
+  window.addEventListener('resize', checkBlur);
+  checkBlur();
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Menu Toggle Implementation
+   -------------------------------------------------------------------------- */
+function initMobileMenu() {
+  const toggleBtn = document.getElementById('mobileMenuToggle');
+  const navCenter = document.querySelector('.nav-center');
+  const navLinks = document.querySelectorAll('.nav-glass-capsule .nav-link');
+
+  if (!toggleBtn || !navCenter) return;
+
+  function toggleMenu(e) {
+    if (e) e.stopPropagation();
+    const isActive = navCenter.classList.toggle('active');
+    toggleBtn.classList.toggle('active', isActive);
+  }
+
+  function closeMenu() {
+    navCenter.classList.remove('active');
+    toggleBtn.classList.remove('active');
+  }
+
+  toggleBtn.addEventListener('click', toggleMenu);
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!navCenter.contains(e.target) && !toggleBtn.contains(e.target)) {
+      closeMenu();
+    }
+  });
+}
 
 /* --------------------------------------------------------------------------
    Auto-Scroll & Manual Slider for 5 Facilities Carousel
@@ -255,8 +333,8 @@ function initSearchModal() {
 
   function renderSearchResults(query) {
     if (!resultsContainer) return;
-    const filtered = allPitches.filter(p => 
-      p.name.toLowerCase().includes(query.toLowerCase()) || 
+    const filtered = allPitches.filter(p =>
+      p.name.toLowerCase().includes(query.toLowerCase()) ||
       p.type.toLowerCase().includes(query.toLowerCase()) ||
       p.loc.toLowerCase().includes(query.toLowerCase())
     );
@@ -370,7 +448,7 @@ function initAudioAmbience() {
    -------------------------------------------------------------------------- */
 function initSmoothInteractions() {
   const navLinks = document.querySelectorAll('.nav-link');
-  
+
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       navLinks.forEach(l => {
@@ -424,7 +502,7 @@ function initParallaxMotion() {
 
     const backY = currentProgress * -50 + (isHovered ? mouseTiltX * 0.5 : 0);
     const frontY = currentProgress * 60 + (isHovered ? mouseTiltX : 0);
-    
+
     const rotX = isHovered ? mouseTiltX : 0;
     const rotY = isHovered ? mouseTiltY : 0;
 
@@ -671,6 +749,16 @@ function initPathwayScrollAnimation() {
 
     if (maxScroll <= 0) return;
 
+    const usePinnedJourney = window.innerWidth > 900;
+    if (usePinnedJourney) {
+      const isBefore = stickyRect.top > 0;
+      const isAfter = stickyRect.bottom <= windowHeight;
+      section.classList.toggle('is-js-pinned', !isBefore && !isAfter);
+      section.classList.toggle('is-js-released', isAfter);
+    } else {
+      section.classList.remove('is-js-pinned', 'is-js-released');
+    }
+
     // Calculate progress: 0 when sticky wrapper reaches top of viewport, 1 when pinned scroll region completes
     let progress = -stickyRect.top / maxScroll;
     progress = Math.max(0, Math.min(1, progress));
@@ -758,21 +846,12 @@ function initCentersHub() {
       title: 'NK Bagrodia Public School (Sec-4)',
       ratingNum: '5.0 ★',
       ratingCount: '(65+ Reviews)',
-      timings: 'Mon - Sun: 4:30 PM - 7:30 PM (Evening) | Sat - Sun: 6:30 AM - 9:30 AM (Morning)',
-      desc: 'Our high-performance training ground at NK Bagrodia Public School featuring FIFA Quality Pro synthetic turf, 1200-lux LED floodlighting, specialized 1v1 tactical cages, and UEFA/AFC licensed head coaches.',
+      desc: 'Official training ground at NK Bagrodia Public School featuring FIFA Quality Pro synthetic turf and licensed UEFA & AFC coaches.',
       turf: 'FIFA Quality Pro Turf',
-      lighting: '1200-Lux Broadcast LEDs',
-      analytics: '4K AI Video Cameras',
       physio: 'Licensed UEFA & AFC Coaches',
       location: 'NK Bagrodia School, Sec-4, Dwarka, Delhi - 110078',
       directionsUrl: 'https://share.google/TklWcLGjkioVBcITb',
-      waMessage: 'Hi Gurukul FC! I would like to book a Free Trial at NK Bagrodia Public School (Sec-4). Please confirm the schedule.',
-      gallery: [
-        { label: 'Pitch', img: '/assets/centers/nk-bagrodia-sec4.png' },
-        { label: 'Lights', img: '/assets/futsal-center.png' },
-        { label: 'Training', img: '/assets/elite-complex.png' },
-        { label: 'Video', img: '/assets/gurukul-hero-bg.jpg', isVideo: true }
-      ]
+      waMessage: 'Hi Gurukul FC! I would like to book a Free Trial at NK Bagrodia Public School (Sec-4).'
     },
     {
       img: '/assets/centers/play-yard-sec7.png',
@@ -781,21 +860,12 @@ function initCentersHub() {
       title: 'Play Yard Sports (Sec-7)',
       ratingNum: '4.9 ★',
       ratingCount: '(48+ Reviews)',
-      timings: 'Tue - Sun: 4:30 PM - 8:00 PM (Evening) | Sat - Sun: 6:00 AM - 9:00 AM (Weekend Pro)',
-      desc: 'State-of-the-art synthetic turf and multi-sport cage at Play Yard Sports. Built for high-speed technical footwork, futsal drills, tactical agility, and evening match play under anti-glare floodlights.',
-      turf: 'High-Damping Synthetic Turf',
-      lighting: '1000-Lux Anti-Glare LEDs',
-      analytics: 'Biometric Tracker Cages',
-      physio: 'Technical Futsal Suite',
+      desc: 'State-of-the-art synthetic turf and multi-sport facility at Play Yard Sports for technical footwork and agility training.',
+      turf: 'FIFA Quality Pro Turf',
+      physio: 'Licensed UEFA & AFC Coaches',
       location: 'Play Yard Sports, Sec-7, Dwarka, Delhi - 110075',
       directionsUrl: 'https://share.google/2BrTTanRrMGYj74rI',
-      waMessage: 'Hi Gurukul FC! I would like to book a Free Trial at Play Yard Sports (Sec-7). Please confirm the schedule.',
-      gallery: [
-        { label: 'Pitch', img: '/assets/centers/play-yard-sec7.png' },
-        { label: 'Cages', img: '/assets/futsal-center.png' },
-        { label: 'Drills', img: '/assets/stadium-grass.png' },
-        { label: 'Video', img: '/assets/gurukul-hero-bg.jpg', isVideo: true }
-      ]
+      waMessage: 'Hi Gurukul FC! I would like to book a Free Trial at Play Yard Sports (Sec-7).'
     },
     {
       img: '/assets/centers/rd-rajpal-sec9.png',
@@ -804,21 +874,12 @@ function initCentersHub() {
       title: 'R.D Rajpal School (Sec-9)',
       ratingNum: '5.0 ★',
       ratingCount: '(82+ Reviews)',
-      timings: 'Mon - Sat: 4:30 PM - 7:30 PM (Training) | Sun: 7:00 AM - 10:00 AM (Division Matches)',
-      desc: 'Full-size match ground and grass arena at R.D Rajpal Public School. Serving as a primary training complex for our Division A & Division B senior squads, video analytics classroom, and youth elite academies.',
-      turf: 'Full Natural & Pro Turf',
-      lighting: 'Stadium Array Floodlights',
-      analytics: 'Tactical Video Room & GPS',
-      physio: 'Pro Athlete Physio Clinic',
+      desc: 'Full-size match ground at R.D Rajpal Public School for Division A & Division B senior squad training and youth elite development.',
+      turf: 'FIFA Quality Pro Turf',
+      physio: 'Licensed UEFA & AFC Coaches',
       location: 'R.D Rajpal Public School, Sec-9, Dwarka, Delhi - 110077',
       directionsUrl: 'https://share.google/M06v4ZgV8XU8ve8n1',
-      waMessage: 'Hi Gurukul FC! I would like to book a Free Trial at R.D Rajpal School (Sec-9). Please confirm the schedule.',
-      gallery: [
-        { label: 'Pitch', img: '/assets/centers/rd-rajpal-sec9.png' },
-        { label: 'Stadium', img: '/assets/stadium-grass.png' },
-        { label: 'Squad', img: '/assets/adivision1.png' },
-        { label: 'Video', img: '/assets/gurukul-hero-bg.jpg', isVideo: true }
-      ]
+      waMessage: 'Hi Gurukul FC! I would like to book a Free Trial at R.D Rajpal School (Sec-9).'
     },
     {
       img: '/assets/centers/bal-bharati-sec12.png',
@@ -827,21 +888,12 @@ function initCentersHub() {
       title: 'Bal Bharati School (Sec-12)',
       ratingNum: '4.9 ★',
       ratingCount: '(95+ Reviews)',
-      timings: 'Daily: 4:00 PM - 7:30 PM | Sat - Sun: 6:30 AM - 9:30 AM (Grassroots & Youth)',
-      desc: 'Premier sports infrastructure at Bal Bharati Public School. Features full 11-a-side match field, athletic fitness track, biometrics lab, and dedicated grassroots development batches.',
-      turf: 'Full 11v11 Match Pitch',
-      lighting: 'Broadcast Quality LEDs',
-      analytics: 'Biometrics & Fitness Tracking',
-      physio: 'Strength & Conditioning Gym',
+      desc: 'Premier sports infrastructure at Bal Bharati Public School with 11-a-side match field and dedicated grassroots development batches.',
+      turf: 'FIFA Quality Pro Turf',
+      physio: 'Licensed UEFA & AFC Coaches',
       location: 'Bal Bharati Public School, Sec-12, Dwarka, Delhi - 110078',
       directionsUrl: 'https://share.google/KDeK4fIKtfuAtPKHF',
-      waMessage: 'Hi Gurukul FC! I would like to book a Free Trial at Bal Bharati School (Sec-12). Please confirm the schedule.',
-      gallery: [
-        { label: 'Arena', img: '/assets/centers/bal-bharati-sec12.png' },
-        { label: 'Grass', img: '/assets/stadium-grass.png' },
-        { label: 'Complex', img: '/assets/futsal-center.png' },
-        { label: 'Video', img: '/assets/elite-complex.png', isVideo: true }
-      ]
+      waMessage: 'Hi Gurukul FC! I would like to book a Free Trial at Bal Bharati School (Sec-12).'
     },
     {
       img: '/assets/centers/opg-world-sec19b.png',
@@ -850,21 +902,12 @@ function initCentersHub() {
       title: 'OPG World School (Sec-19B)',
       ratingNum: '5.0 ★',
       ratingCount: '(74+ Reviews)',
-      timings: 'Mon - Sat: 4:30 PM - 7:30 PM (Youth Batches) | Sun: 7:00 AM - 10:00 AM (Division A Matches)',
-      desc: 'Premier competition facility at OPG World School located on Radha Krishna Mandir Marg. Host ground for official youth tournaments, scout showcases, and Division A match preparations.',
-      turf: 'FIFA Standard Pitch',
-      lighting: 'Floodlit Match Arrays',
-      analytics: 'AI Camera Match Recording',
-      physio: 'Pro Lounge & Recovery',
+      desc: 'Premier competition facility at OPG World School, host ground for official youth tournaments and Division A match preparations.',
+      turf: 'FIFA Quality Pro Turf',
+      physio: 'Licensed UEFA & AFC Coaches',
       location: 'OPG World School, Sec-19B, Dwarka, Delhi - 110075',
       directionsUrl: 'https://share.google/VYYSSotR1WA58elck',
-      waMessage: 'Hi Gurukul FC! I would like to book a Free Trial at OPG World School (Sec-19B). Please confirm the schedule.',
-      gallery: [
-        { label: 'Ground', img: '/assets/centers/opg-world-sec19b.png' },
-        { label: 'Team', img: '/assets/adivision2.png' },
-        { label: 'Field', img: '/assets/stadium-grass.png' },
-        { label: 'Video', img: '/assets/gurukul-hero-bg.jpg', isVideo: true }
-      ]
+      waMessage: 'Hi Gurukul FC! I would like to book a Free Trial at OPG World School (Sec-19B).'
     }
   ];
 
@@ -986,12 +1029,12 @@ function initInstagramReelsCarousel() {
 
         container.innerHTML = `
           <div class="reel-close-bar" title="Close Reel Player">✕ CLOSE REEL</div>
-          <iframe src="https://www.instagram.com/reel/${reelId}/embed/" 
-                  width="100%" 
-                  height="100%" 
-                  frameborder="0" 
-                  scrolling="no" 
-                  allowtransparency="true" 
+          <iframe src="https://www.instagram.com/reel/${reelId}/embed/"
+                  width="100%"
+                  height="100%"
+                  frameborder="0"
+                  scrolling="no"
+                  allowtransparency="true"
                   allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
           </iframe>
         `;
@@ -1095,4 +1138,3 @@ document.addEventListener('DOMContentLoaded', () => {
   initCentersHub();
   initInstagramReelsCarousel();
 });
-
