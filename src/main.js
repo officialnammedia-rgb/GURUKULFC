@@ -1,6 +1,29 @@
+import Lenis from 'lenis';
+
 // Mobile detection helper
 const isMobileDevice = () => window.innerWidth <= 768 || 'ontouchstart' in window;
 
+function initLenisScroll() {
+  const lenis = new Lenis({
+    duration: 1.15,
+    smoothWheel: true,
+    smoothTouch: false,
+    syncTouch: false,
+    touchMultiplier: 1.1,
+    wheelMultiplier: 1,
+    lerp: 0.08,
+    infinite: false
+  });
+
+  window.__gurukulLenis = lenis;
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+}
 
 /* --------------------------------------------------------------------------
    Scroll Driven Holographic Blur Reveal for Division A 2nd Card
@@ -446,6 +469,7 @@ function initAudioAmbience() {
    -------------------------------------------------------------------------- */
 function initSmoothInteractions() {
   const navLinks = document.querySelectorAll('.nav-link');
+  const lenis = window.__gurukulLenis;
 
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
@@ -456,7 +480,11 @@ function initSmoothInteractions() {
         const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (lenis) {
+            lenis.scrollTo(target, { offset: 0, duration: 1.2 });
+          } else {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         }
       }
 
@@ -1140,6 +1168,7 @@ import { initNeuralNoise } from './neural-noise.js';
 
 /* Initialize all modules when DOM is ready */
 document.addEventListener('DOMContentLoaded', () => {
+  initLenisScroll();
   initNeuralNoise();
   initScrollDrivenBlur();
   initMobileMenu();
