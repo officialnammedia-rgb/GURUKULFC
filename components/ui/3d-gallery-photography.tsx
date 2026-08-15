@@ -39,6 +39,8 @@ interface InfiniteGalleryProps {
 	images: ImageItem[];
 	/** Speed multiplier applied to scroll delta (default: 1) */
 	speed?: number;
+	/** Base scale multiplier for image plane size (default: 2.8) */
+	planeScale?: number;
 	/** Spacing between images along Z in world units (default: 2.5) */
 	zSpacing?: number;
 	/** Number of visible planes (default: clamp to images.length, min 8) */
@@ -207,6 +209,7 @@ function GalleryScene({
 	images,
 	speed = 1,
 	visibleCount = 8,
+	planeScale = 2.8,
 	fadeSettings = {
 		fadeIn: { start: 0.05, end: 0.15 },
 		fadeOut: { start: 0.85, end: 0.95 },
@@ -535,12 +538,13 @@ function GalleryScene({
 
 				const worldZ = plane.z - depthRange / 2;
 
-				// Calculate scale to maintain aspect ratio
+				// Calculate scale to maintain aspect ratio with enlarged base scale
 				const aspect = texture.image
 					? texture.image.width / texture.image.height
 					: 1;
+				const base = planeScale || 2.8;
 				const scale: [number, number, number] =
-					aspect > 1 ? [2 * aspect, 2, 1] : [2, 2 / aspect, 1];
+					aspect > 1 ? [base * aspect, base, 1] : [base, base / aspect, 1];
 
 				return (
 					<ImagePlane
@@ -589,6 +593,9 @@ export default function InfiniteGallery({
 	images,
 	className = 'h-96 w-full',
 	style,
+	speed = 1,
+	visibleCount = 8,
+	planeScale = 2.8,
 	fadeSettings = {
 		fadeIn: { start: 0.05, end: 0.25 },
 		fadeOut: { start: 0.4, end: 0.43 },
@@ -631,6 +638,9 @@ export default function InfiniteGallery({
 			>
 				<GalleryScene
 					images={images}
+					speed={speed}
+					visibleCount={visibleCount}
+					planeScale={planeScale}
 					fadeSettings={fadeSettings}
 					blurSettings={blurSettings}
 				/>

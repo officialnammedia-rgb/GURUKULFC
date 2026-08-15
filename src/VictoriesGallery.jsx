@@ -4,36 +4,68 @@ import InfiniteGallery from '../components/ui/3d-gallery-photography.tsx';
 export default function VictoriesGallery() {
   const victoryImages = [
     {
-      src: '/assets/adivision1.png',
-      alt: 'Delhi Division A League Champions Victory Ceremony',
+      src: '/assets/memories/WhatsApp Image 2026-08-15 at 10.43.34 AM.jpeg',
+      alt: 'Gurukul FC Academy Squad & Coaches Matchday',
     },
     {
-      src: '/assets/centers/opg-world-sec19b.png',
-      alt: 'Youth Championship Winners Celebrating with Trophy',
+      src: '/assets/memories/WhatsApp Image 2026-08-15 at 10.37.07 AM.jpeg',
+      alt: 'Academy Training Drill & Match Preparation',
+    },
+    {
+      src: '/assets/memories/WhatsApp Image 2026-08-15 at 10.37.07 AM (1).jpeg',
+      alt: 'Tactical Coaching & Player Development Session',
+    },
+    {
+      src: '/assets/memories/WhatsApp Image 2026-08-15 at 10.37.08 AM.jpeg',
+      alt: 'Youth Football Match Action & Teamwork',
+    },
+    {
+      src: '/assets/memories/WhatsApp Image 2026-08-15 at 10.39.10 AM.jpeg',
+      alt: 'Intensive Pitch Drills & Ball Mastery',
+    },
+    {
+      src: '/assets/memories/WhatsApp Image 2026-08-15 at 10.39.11 AM.jpeg',
+      alt: 'Young Champions in Action on the Field',
+    },
+    {
+      src: '/assets/memories/WhatsApp Image 2026-08-15 at 10.39.11 AM (1).jpeg',
+      alt: 'Technical Passing & Positioning Session',
+    },
+    {
+      src: '/assets/memories/WhatsApp Image 2026-08-15 at 10.39.12 AM.jpeg',
+      alt: 'Academy Matchday Squad Lineup',
+    },
+    {
+      src: '/assets/memories/WhatsApp Image 2026-08-15 at 10.39.12 AM (1).jpeg',
+      alt: 'Matchday Action & Academy Team Spirit',
+    },
+    {
+      src: '/assets/memories/WhatsApp Image 2026-08-15 at 10.39.13 AM.jpeg',
+      alt: 'Player Focus & Skills Conditioning',
+    },
+    {
+      src: '/assets/memories/WhatsApp Image 2026-08-15 at 10.39.18 AM.jpeg',
+      alt: 'Gurukul FC Team Celebration & Academy Bonding',
+    },
+    {
+      src: '/assets/memories/WhatsApp Image 2026-08-15 at 10.39.20 AM.jpeg',
+      alt: 'High Energy Academy Football Matchday',
+    },
+    {
+      src: '/assets/memories/WhatsApp Image 2026-08-15 at 10.39.37 AM.jpeg',
+      alt: 'Gurukul FC Young Stars & Victory Moments',
+    },
+    {
+      src: '/assets/adivision1.png',
+      alt: 'Delhi Division A League Champions Victory Ceremony',
     },
     {
       src: '/assets/adivision2.png',
       alt: 'Senior Squad Gold Cup Victory',
     },
     {
-      src: '/assets/centers/rd-rajpal-sec9.png',
-      alt: 'High Performance Tactical Training Session',
-    },
-    {
-      src: '/assets/centers/bal-bharati-sec12.png',
-      alt: 'Official League Match 11v11 Action',
-    },
-    {
-      src: '/assets/stadium-grass.png',
-      alt: 'FIFA Quality Pro Arena Night Floodlights',
-    },
-    {
-      src: '/assets/centers/nk-bagrodia-sec4.png',
-      alt: 'Under-15 Academy Development Squad',
-    },
-    {
-      src: '/assets/centers/play-yard-sec7.png',
-      alt: 'Evening Futsal & Technical Speed Drills',
+      src: '/assets/trophy-victory.png',
+      alt: 'Championship Trophy Celebration',
     },
   ];
 
@@ -60,6 +92,7 @@ export default function VictoriesGallery() {
           <InfiniteGallery
             images={victoryImages}
             speed={1.2}
+            planeScale={3.0}
             zSpacing={3}
             visibleCount={10}
             falloff={{ near: 0.8, far: 14 }}
