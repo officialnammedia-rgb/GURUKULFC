@@ -352,7 +352,7 @@ function closeReaderModal() {
 
 function handleShare() {
   if (!activePost) return;
-  const shareUrl = `${window.location.origin}/blog.html?post=${encodeURIComponent(activePost.slug)}`;
+  const shareUrl = `${window.location.origin}/blog?post=${encodeURIComponent(activePost.slug)}`;
 
   if (navigator.clipboard) {
     navigator.clipboard.writeText(shareUrl).then(() => {

@@ -1,0 +1,25 @@
+# Hostinger / Apache Clean URLs Configuration
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Redirect /admin.html to /admin
+  RewriteCond %{THE_REQUEST} /admin\.html [NC]
+  RewriteRule ^admin\.html$ /admin [R=301,L]
+
+  # Redirect /blog.html to /blog
+  RewriteCond %{THE_REQUEST} /blog\.html [NC]
+  RewriteRule ^blog\.html$ /blog [R=301,L]
+
+  # Serve admin.html for /admin or /admin/
+  RewriteRule ^admin/?$ admin.html [L]
+
+  # Serve blog.html for /blog or /blog/
+  RewriteRule ^blog/?$ blog.html [L]
+
+  # General clean HTML fallback
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.*)$ $1.html [L,QSA]
+</IfModule>

@@ -1304,7 +1304,7 @@ function initHomeBlogCarousel() {
     if (!modal || !contentContainer) return;
 
     if (fullPageLink) {
-      fullPageLink.href = `/blog.html?post=${post.slug}`;
+      fullPageLink.href = `/blog?post=${post.slug}`;
     }
 
     contentContainer.innerHTML = `

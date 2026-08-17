@@ -11,6 +11,20 @@ export default defineConfig({
     react({
       jsxRuntime: 'automatic',
     }),
+    {
+      name: 'clean-urls-middleware',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          const url = req.url.split('?')[0];
+          if (url === '/admin' || url === '/admin/') {
+            req.url = req.url.replace(/^\/admin\/?/, '/admin.html');
+          } else if (url === '/blog' || url === '/blog/') {
+            req.url = req.url.replace(/^\/blog\/?/, '/blog.html');
+          }
+          next();
+        });
+      },
+    },
   ],
   resolve: {
     alias: {
