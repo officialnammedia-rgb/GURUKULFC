@@ -7591,6 +7591,143 @@ html {
   color: #ffffff;
 }
 
+/* Admin DB Indicator */
+.admin-db-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem;
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  border-radius: 9999px;
+  font-family: var(--font-tech);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #4ade80;
+}
+
+/* Cover Upload Dropzone */
+.cover-upload-dropzone {
+  position: relative;
+  width: 100%;
+  min-height: 140px;
+  background: rgba(6, 9, 14, 0.85);
+  border: 2px dashed rgba(56, 189, 248, 0.35);
+  border-radius: 16px;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  margin-bottom: 1.25rem;
+}
+
+.cover-upload-dropzone:hover,
+.cover-upload-dropzone.drag-active {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+}
+
+.dropzone-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.dropzone-icon {
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropzone-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dropzone-primary-text {
+  font-size: 0.92rem;
+  color: #ffffff;
+}
+
+.dropzone-primary-text strong {
+  color: #38bdf8;
+}
+
+.dropzone-sub-text {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-tech);
+}
+
+.dropzone-preview-state {
+  position: relative;
+  width: 100%;
+  height: 220px;
+}
+
+.dropzone-preview-state img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.dropzone-preview-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+.cover-upload-dropzone:hover .dropzone-preview-overlay {
+  opacity: 1;
+}
+
+.btn-change-image {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.2rem;
+  background: rgba(11, 18, 30, 0.9);
+  border: 1px solid #38bdf8;
+  border-radius: 9999px;
+  color: #ffffff;
+  font-family: var(--font-tech);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-change-image:hover {
+  background: #38bdf8;
+  color: #04070b;
+}
+
+.cover-presets-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.presets-label {
+  font-size: 0.78rem;
+  font-family: var(--font-tech);
+  color: rgba(255, 255, 255, 0.6);
+}
+
 /* Image Preset Picker */
 .image-preset-picker {
   display: grid;
@@ -7633,19 +7770,6 @@ html {
 .preset-option.active span {
   color: #38bdf8;
   font-weight: 700;
-}
-
-.custom-img-url-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.custom-url-label {
-  font-size: 0.8rem;
-  font-family: var(--font-tech);
-  color: rgba(255, 255, 255, 0.6);
-  white-space: nowrap;
 }
 
 /* Markdown Toolbar */

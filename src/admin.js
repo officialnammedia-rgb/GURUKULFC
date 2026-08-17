@@ -4,7 +4,6 @@ import {
   savePost,
   deletePost,
   togglePublishStatus,
-  resetToDefaults,
   onBlogUpdate,
   renderMarkdown,
   calculateReadTime,
@@ -15,11 +14,7 @@ import {
   loginWithEmail,
   logoutUser,
   getCurrentUser,
-  checkBruteForceLockout,
-  getSupabaseConfig,
-  saveSupabaseConfig,
-  clearSupabaseConfig,
-  isCloudDatabaseConfigured
+  checkBruteForceLockout
 } from './db.js';
 
 let currentTabFilter = 'all';
@@ -30,7 +25,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   await initAuth();
   initDashboard();
   initEditor();
-  initDbSettings();
 
   // Listen to cross-tab & cloud updates to keep dashboard in sync
   onBlogUpdate(() => {
@@ -87,8 +81,7 @@ async function initAuth() {
         if (errorMsg) errorMsg.textContent = '';
         renderPostsList();
         updateStats();
-        updateDbBadge();
-        showToast('Welcome back, Content Creator!', `Authenticated via ${authResult.mode === 'cloud' ? 'Supabase Cloud' : 'Master Editorial key'}.`);
+        showToast('Welcome back, Content Creator!', `Authenticated via ${authResult.mode === 'cloud' ? 'Supabase Cloud' : 'Master Editorial session'}.`);
       } catch (err) {
         if (errorMsg) {
           errorMsg.textContent = `❌ ${err.message || 'Authentication failed.'}`;
@@ -120,90 +113,12 @@ async function initAuth() {
 }
 
 /* --------------------------------------------------------------------------
-   2. Database Settings & Cloud Connection
-   -------------------------------------------------------------------------- */
-function initDbSettings() {
-  const openBtn = document.getElementById('openDbSettingsBtn');
-  const modal = document.getElementById('dbSettingsModal');
-  const backdrop = document.getElementById('dbModalBackdrop');
-  const closeBtn = document.getElementById('closeDbModalBtn');
-  const form = document.getElementById('dbConfigForm');
-  const clearBtn = document.getElementById('btnClearDbConfig');
-  const urlInput = document.getElementById('dbSupabaseUrl');
-  const keyInput = document.getElementById('dbSupabaseAnonKey');
-
-  updateDbBadge();
-
-  if (openBtn) {
-    openBtn.addEventListener('click', () => {
-      const config = getSupabaseConfig();
-      if (urlInput) urlInput.value = config.url || '';
-      if (keyInput) keyInput.value = config.anonKey || '';
-      if (modal) {
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-    });
-  }
-
-  function closeDbModal() {
-    if (modal) {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  }
-
-  if (backdrop) backdrop.addEventListener('click', closeDbModal);
-  if (closeBtn) closeBtn.addEventListener('click', closeDbModal);
-
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const url = urlInput?.value?.trim() || '';
-      const anonKey = keyInput?.value?.trim() || '';
-      if (!url || !anonKey) {
-        alert('Please enter both Supabase Project URL and Anon API key.');
-        return;
-      }
-      saveSupabaseConfig(url, anonKey);
-      updateDbBadge();
-      closeDbModal();
-      showToast('Database Connected', 'Supabase Cloud Database credentials configured!');
-      syncFromCloud();
-    });
-  }
-
-  if (clearBtn) {
-    clearBtn.addEventListener('click', () => {
-      clearSupabaseConfig();
-      if (urlInput) urlInput.value = '';
-      if (keyInput) keyInput.value = '';
-      updateDbBadge();
-      closeDbModal();
-      showToast('Local Mode', 'Switched back to local database mode.');
-    });
-  }
-}
-
-function updateDbBadge() {
-  const dot = document.getElementById('dbDotStatus');
-  const label = document.getElementById('dbStatusLabel');
-  const syncBadge = document.getElementById('syncStatusBadge');
-  const isCloud = isCloudDatabaseConfigured();
-
-  if (dot) dot.className = isCloud ? 'db-dot-live cloud' : 'db-dot-live local';
-  if (label) label.textContent = isCloud ? 'Supabase Connected' : 'Local DB (Click to Connect)';
-  if (syncBadge) syncBadge.textContent = isCloud ? 'CLOUD WEBSOCKET' : 'LOCAL REALTIME';
-}
-
-/* --------------------------------------------------------------------------
-   3. Dashboard, Stats, and Post Management
+   2. Dashboard, Stats, and Post Management
    -------------------------------------------------------------------------- */
 function initDashboard() {
   const searchInput = document.getElementById('adminSearchInput');
   const tabs = document.querySelectorAll('.admin-tab');
   const openNewBtn = document.getElementById('openNewPostBtn');
-  const resetBtn = document.getElementById('resetDataBtn');
 
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
@@ -359,7 +274,7 @@ function renderPostsList() {
 }
 
 /* --------------------------------------------------------------------------
-   4. Post Composer & Editor
+   3. Post Composer & Editor with HD Drag-and-Drop Image Uploader
    -------------------------------------------------------------------------- */
 function initEditor() {
   const form = document.getElementById('postForm');
@@ -377,22 +292,119 @@ function initEditor() {
   const imgUrlInput = document.getElementById('postImageUrl');
   const presets = document.querySelectorAll('.preset-option');
 
+  // Drag & Drop / File Input Elements
+  const dropzone = document.getElementById('coverDropzone');
+  const fileInput = document.getElementById('coverFileInput');
+  const dropzoneEmpty = document.getElementById('dropzoneEmpty');
+  const dropzonePreview = document.getElementById('dropzonePreview');
+  const coverPreviewImg = document.getElementById('coverPreviewImg');
+  const btnChangeCover = document.getElementById('btnChangeCover');
+
+  // Open file picker
+  if (dropzone) {
+    dropzone.addEventListener('click', (e) => {
+      if (e.target.closest('#btnChangeCover') || dropzoneEmpty.style.display !== 'none') {
+        fileInput?.click();
+      }
+    });
+
+    // Drag & drop listeners
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.classList.add('drag-active');
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.classList.remove('drag-active');
+      });
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      const files = dt?.files;
+      if (files && files.length > 0) {
+        handleCoverFile(files[0]);
+      }
+    });
+  }
+
+  if (fileInput) {
+    fileInput.addEventListener('change', (e) => {
+      const files = e.target.files;
+      if (files && files.length > 0) {
+        handleCoverFile(files[0]);
+      }
+    });
+  }
+
+  if (btnChangeCover) {
+    btnChangeCover.addEventListener('click', (e) => {
+      e.stopPropagation();
+      fileInput?.click();
+    });
+  }
+
+  // Handle image upload & high-quality compression
+  function handleCoverFile(file) {
+    if (!file.type.startsWith('image/')) {
+      alert('Please upload an image file (PNG, JPG, WEBP).');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const rawDataUrl = event.target.result;
+      
+      // Optimize & resize image with canvas for HD quality and fast loading
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+
+        // Max HD dimension: 1600px width
+        const MAX_WIDTH = 1600;
+        if (width > MAX_WIDTH) {
+          height = Math.round((height * MAX_WIDTH) / width);
+          width = MAX_WIDTH;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        const optimizedDataUrl = canvas.toDataURL('image/jpeg', 0.88);
+
+        // Update state
+        setCoverImageState(optimizedDataUrl);
+        presets.forEach(p => p.classList.remove('active'));
+      };
+      img.src = rawDataUrl;
+    };
+    reader.readAsDataURL(file);
+  }
+
   // Preset selector
   presets.forEach(p => {
     p.addEventListener('click', () => {
       presets.forEach(opt => opt.classList.remove('active'));
       p.classList.add('active');
-      if (imgUrlInput) imgUrlInput.value = p.dataset.img;
+      setCoverImageState(p.dataset.img);
     });
   });
 
-  if (imgUrlInput) {
-    imgUrlInput.addEventListener('input', () => {
-      const val = imgUrlInput.value.trim();
-      presets.forEach(p => {
-        p.classList.toggle('active', p.dataset.img === val);
-      });
-    });
+  function setCoverImageState(imgSrc) {
+    if (imgUrlInput) imgUrlInput.value = imgSrc;
+    if (coverPreviewImg) coverPreviewImg.src = imgSrc;
+    if (dropzoneEmpty) dropzoneEmpty.style.display = 'none';
+    if (dropzonePreview) dropzonePreview.style.display = 'block';
   }
 
   // Markdown tool buttons
@@ -509,6 +521,12 @@ function openEditorModal(postId) {
   const tabEditor = document.getElementById('tabEditorContent');
   const tabPreview = document.getElementById('tabPreviewContent');
 
+  const dropzoneEmpty = document.getElementById('dropzoneEmpty');
+  const dropzonePreview = document.getElementById('dropzonePreview');
+  const coverPreviewImg = document.getElementById('coverPreviewImg');
+  const imgUrlInput = document.getElementById('postImageUrl');
+  const presets = document.querySelectorAll('.preset-option');
+
   // Reset tab to editor
   if (btnEditTab && btnPreviewTab) {
     btnEditTab.classList.add('active');
@@ -516,8 +534,6 @@ function openEditorModal(postId) {
     if (tabEditor) tabEditor.style.display = 'block';
     if (tabPreview) tabPreview.style.display = 'none';
   }
-
-  const presets = document.querySelectorAll('.preset-option');
 
   if (postId) {
     const post = getPostById(postId);
@@ -533,10 +549,15 @@ function openEditorModal(postId) {
     document.getElementById('postTag').value = post.tag || '';
     document.getElementById('postAuthorName').value = post.author?.name || '';
     document.getElementById('postAuthorRole').value = post.author?.role || '';
-    document.getElementById('postImageUrl').value = post.image || '';
     document.getElementById('postExcerpt').value = post.excerpt || '';
     document.getElementById('postContent').value = post.content || '';
     document.getElementById('postFeatured').checked = Boolean(post.featured);
+
+    const postImg = post.image || '/assets/adivision1.png';
+    if (imgUrlInput) imgUrlInput.value = postImg;
+    if (coverPreviewImg) coverPreviewImg.src = postImg;
+    if (dropzoneEmpty) dropzoneEmpty.style.display = 'none';
+    if (dropzonePreview) dropzonePreview.style.display = 'block';
 
     const statusRadio = document.querySelector(`input[name="postStatus"][value="${post.status}"]`);
     if (statusRadio) statusRadio.checked = true;
@@ -557,16 +578,21 @@ function openEditorModal(postId) {
     document.getElementById('postTag').value = '';
     document.getElementById('postAuthorName').value = 'Coach Aryan Sharma';
     document.getElementById('postAuthorRole').value = 'UEFA B Head Coach';
-    document.getElementById('postImageUrl').value = '/assets/adivision1.png';
     document.getElementById('postExcerpt').value = '';
     document.getElementById('postContent').value = '';
     document.getElementById('postFeatured').checked = false;
+
+    const defaultImg = '/assets/adivision1.png';
+    if (imgUrlInput) imgUrlInput.value = defaultImg;
+    if (coverPreviewImg) coverPreviewImg.src = defaultImg;
+    if (dropzoneEmpty) dropzoneEmpty.style.display = 'none';
+    if (dropzonePreview) dropzonePreview.style.display = 'block';
 
     const statusRadio = document.querySelector('input[name="postStatus"][value="published"]');
     if (statusRadio) statusRadio.checked = true;
 
     presets.forEach(p => {
-      p.classList.toggle('active', p.dataset.img === '/assets/adivision1.png');
+      p.classList.toggle('active', p.dataset.img === defaultImg);
     });
   }
 
