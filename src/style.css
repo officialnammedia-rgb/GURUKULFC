@@ -6074,11 +6074,13 @@ html {
 }
 
 /* Article Grid */
-.blog-grid-section {
+.blog-grid-section,
+.blog-feed-section {
   margin-bottom: 4.5rem;
 }
 
-.blog-section-header {
+.blog-section-header,
+.feed-header-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -6087,14 +6089,16 @@ html {
   padding-bottom: 1rem;
 }
 
-.blog-grid-title {
+.blog-grid-title,
+.feed-section-heading {
   font-family: var(--font-sports);
   font-size: 2rem;
   letter-spacing: 0.04em;
   color: #ffffff;
 }
 
-.blog-count-badge {
+.blog-count-badge,
+.feed-count-badge {
   font-size: 0.84rem;
   font-family: var(--font-tech);
   color: #38bdf8;
@@ -6104,10 +6108,47 @@ html {
   border: 1px solid rgba(56, 189, 248, 0.25);
 }
 
+.articles-grid,
 .blog-articles-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 2rem;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)) !important;
+  gap: 2rem !important;
+  width: 100% !important;
+}
+
+@media (max-width: 768px) {
+  .articles-grid,
+  .blog-articles-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+}
+
+.no-articles-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(14, 23, 38, 0.5);
+  border: 1px dashed rgba(56, 189, 248, 0.25);
+  border-radius: 20px;
+  margin: 2rem 0;
+}
+
+.no-articles-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.no-articles-state h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.no-articles-state p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
 }
 
 /* Grid Card */

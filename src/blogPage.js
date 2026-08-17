@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function initBlogPage() {
   const searchInput = document.getElementById('blogSearchInput');
   const clearBtn = document.getElementById('clearSearchBtn');
-  const pills = document.querySelectorAll('.category-pill');
+  const pills = document.querySelectorAll('.cat-pill');
   const resetBtn = document.getElementById('resetFiltersBtn');
 
   // Search input handler
@@ -67,7 +67,7 @@ function initBlogPage() {
       if (searchInput) searchInput.value = '';
       if (clearBtn) clearBtn.style.display = 'none';
       pills.forEach(p => {
-        p.classList.toggle('active', p.dataset.category === 'ALL');
+        p.classList.toggle('active', (p.dataset.category || '').toUpperCase() === 'ALL');
       });
       renderBlog();
     });
@@ -99,10 +99,11 @@ function renderBlog() {
 
   // Filter posts
   const filtered = allPosts.filter(post => {
-    const matchCategory = currentCategory === 'ALL' || post.category === currentCategory;
+    const isAll = currentCategory.toUpperCase() === 'ALL';
+    const matchCategory = isAll || (post.category && post.category.toLowerCase() === currentCategory.toLowerCase());
     const matchSearch = !searchQuery ||
-      post.title.toLowerCase().includes(searchQuery) ||
-      post.excerpt.toLowerCase().includes(searchQuery) ||
+      (post.title && post.title.toLowerCase().includes(searchQuery)) ||
+      (post.excerpt && post.excerpt.toLowerCase().includes(searchQuery)) ||
       (post.author?.name && post.author.name.toLowerCase().includes(searchQuery)) ||
       (post.tag && post.tag.toLowerCase().includes(searchQuery));
     return matchCategory && matchSearch;
@@ -111,7 +112,8 @@ function renderBlog() {
   // Spotlight post (Featured post or first post when looking at ALL without search)
   const spotlightSection = document.getElementById('spotlightSection');
   if (spotlightSection) {
-    if (currentCategory === 'ALL' && !searchQuery && filtered.length > 0) {
+    const isAll = currentCategory.toUpperCase() === 'ALL';
+    if (isAll && !searchQuery && filtered.length > 0) {
       const spotlightPost = filtered.find(p => p.featured) || filtered[0];
       spotlightSection.innerHTML = createSpotlightHTML(spotlightPost);
       spotlightSection.style.display = 'block';
@@ -129,16 +131,17 @@ function renderBlog() {
 
   // Render Grid
   const grid = document.getElementById('articlesGrid');
-  const emptyState = document.getElementById('emptyState');
-  const postCountBadge = document.getElementById('postCountBadge');
-  const gridTitle = document.getElementById('gridTitle');
+  const emptyState = document.getElementById('noArticlesState');
+  const postCountBadge = document.getElementById('articleCountBadge');
+  const gridHeading = document.getElementById('feedHeading');
 
-  if (gridTitle) {
-    gridTitle.textContent = currentCategory === 'ALL' ? (searchQuery ? 'SEARCH RESULTS' : 'LATEST DISPATCHES') : currentCategory.toUpperCase();
+  if (gridHeading) {
+    const isAll = currentCategory.toUpperCase() === 'ALL';
+    gridHeading.textContent = isAll ? (searchQuery ? 'SEARCH RESULTS' : 'LATEST ACADEMY ARTICLES') : `${currentCategory.toUpperCase()} ARTICLES`;
   }
 
   if (postCountBadge) {
-    postCountBadge.textContent = `${filtered.length} ${filtered.length === 1 ? 'Article' : 'Articles'}`;
+    postCountBadge.textContent = `Showing ${filtered.length} ${filtered.length === 1 ? 'Story' : 'Stories'}`;
   }
 
   if (!grid) return;
@@ -153,7 +156,8 @@ function renderBlog() {
 
   // If showing spotlight on ALL view, exclude it from main grid to avoid visual redundancy
   let gridPosts = filtered;
-  if (currentCategory === 'ALL' && !searchQuery && filtered.length > 1) {
+  const isAll = currentCategory.toUpperCase() === 'ALL';
+  if (isAll && !searchQuery && filtered.length > 1) {
     const spotlightPost = filtered.find(p => p.featured) || filtered[0];
     gridPosts = filtered.filter(p => p.id !== spotlightPost.id);
   }
@@ -174,7 +178,7 @@ function createSpotlightHTML(post) {
   return `
     <div class="spotlight-card" data-id="${post.id}">
       <div class="spotlight-image-container">
-        <img src="${post.image}" alt="${escapeHTML(post.title)}" class="spotlight-img" loading="lazy" />
+        <img src="${post.image}" alt="${escapeHTML(post.title)}" class="spotlight-img" loading="lazy" onerror="this.src='/assets/adivision1.png'" />
         <div class="spotlight-overlay"></div>
         <div class="spotlight-badge-row">
           <span class="spotlight-pill">⭐ FEATURED STORY</span>
@@ -212,7 +216,7 @@ function createGridCardHTML(post) {
   return `
     <article class="blog-article-card" data-id="${post.id}">
       <div class="card-image-box">
-        <img src="${post.image}" alt="${escapeHTML(post.title)}" class="card-post-img" loading="lazy" />
+        <img src="${post.image}" alt="${escapeHTML(post.title)}" class="card-post-img" loading="lazy" onerror="this.src='/assets/adivision1.png'" />
         <div class="card-img-gradient"></div>
         <div class="card-badges">
           <span class="card-category-badge">${escapeHTML(post.category)}</span>
@@ -278,7 +282,7 @@ function openReaderModal(post, updateHistory = true) {
       </div>
 
       <div class="reader-featured-media">
-        <img src="${post.image}" alt="${escapeHTML(post.title)}" class="reader-main-img" />
+        <img src="${post.image}" alt="${escapeHTML(post.title)}" class="reader-main-img" onerror="this.src='/assets/adivision1.png'" />
       </div>
 
       <div class="reader-body-content">
@@ -298,8 +302,8 @@ function openReaderModal(post, updateHistory = true) {
           <h3 class="related-heading">MORE TACTICAL STORIES</h3>
           <div class="related-grid">
             ${relatedPosts.map(p => `
-              <div class="related-card" data-slug="${p.slug}">
-                <img src="${p.image}" alt="${escapeHTML(p.title)}" class="related-thumb" />
+              <div class="related-card" data-id="${p.id}">
+                <img src="${p.image}" alt="${escapeHTML(p.title)}" class="related-thumb" onerror="this.src='/assets/adivision1.png'" />
                 <div class="related-info">
                   <span class="related-cat">${escapeHTML(p.category)}</span>
                   <h4 class="related-title">${escapeHTML(p.title)}</h4>
@@ -312,14 +316,13 @@ function openReaderModal(post, updateHistory = true) {
     </article>
   `;
 
-  // Attach related post clicks
+  // Attach click listeners to related cards
   container.querySelectorAll('.related-card').forEach(card => {
     card.addEventListener('click', () => {
-      const slug = card.dataset.slug;
-      const targetPost = getPostBySlug(slug);
-      if (targetPost) {
-        openReaderModal(targetPost);
-        container.scrollTo({ top: 0, behavior: 'smooth' });
+      const p = getPostById(card.dataset.id);
+      if (p) {
+        container.scrollTop = 0;
+        openReaderModal(p);
       }
     });
   });
@@ -328,10 +331,9 @@ function openReaderModal(post, updateHistory = true) {
   modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
 
-  if (updateHistory && window.history) {
-    const url = new URL(window.location);
-    url.searchParams.set('post', post.slug);
-    window.history.pushState({ postId: post.id }, '', url);
+  if (updateHistory && post.slug) {
+    const newUrl = `${window.location.pathname}?post=${encodeURIComponent(post.slug)}`;
+    window.history.pushState({ postSlug: post.slug }, '', newUrl);
   }
 }
 
@@ -343,30 +345,30 @@ function closeReaderModal() {
   document.body.style.overflow = '';
   activePost = null;
 
-  if (window.history) {
-    const url = new URL(window.location);
-    url.searchParams.delete('post');
-    window.history.pushState({}, '', url);
-  }
+  // Clean URL query param
+  const cleanUrl = window.location.pathname;
+  window.history.pushState({}, '', cleanUrl);
 }
 
 function handleShare() {
   if (!activePost) return;
-  const shareUrl = window.location.origin + window.location.pathname + '?post=' + activePost.slug;
-  
+  const shareUrl = `${window.location.origin}/blog.html?post=${encodeURIComponent(activePost.slug)}`;
+
   if (navigator.clipboard) {
     navigator.clipboard.writeText(shareUrl).then(() => {
-      showShareToast('Article link copied to clipboard! 📋');
+      showShareToast('Article link copied to clipboard!');
+    }).catch(() => {
+      showShareToast(shareUrl);
     });
   } else {
-    showShareToast('Link: ' + shareUrl);
+    showShareToast(shareUrl);
   }
 }
 
-function showShareToast(message) {
+function showShareToast(msg) {
   const toast = document.getElementById('shareToast');
   if (!toast) return;
-  toast.textContent = message;
+  toast.textContent = msg;
   toast.classList.add('show');
   setTimeout(() => {
     toast.classList.remove('show');
@@ -374,23 +376,34 @@ function showShareToast(message) {
 }
 
 function setupDeepLinking() {
-  const params = new URLSearchParams(window.location.search);
-  const postSlug = params.get('post');
+  const urlParams = new URLSearchParams(window.location.search);
+  const postSlug = urlParams.get('post');
   if (postSlug) {
-    const post = getPostBySlug(postSlug) || getPostById(postSlug);
+    const post = getPostBySlug(postSlug);
     if (post && post.status === 'published') {
-      openReaderModal(post, false);
+      setTimeout(() => openReaderModal(post, false), 150);
     }
   }
+
+  window.addEventListener('popstate', (e) => {
+    if (e.state && e.state.postSlug) {
+      const p = getPostBySlug(e.state.postSlug);
+      if (p && p.status === 'published') {
+        openReaderModal(p, false);
+      }
+    } else {
+      closeReaderModal();
+    }
+  });
 }
 
 function initMobileMenu() {
-  const toggleBtn = document.getElementById('mobileMenuToggle');
+  const toggle = document.getElementById('mobileMenuToggle');
   const navCapsule = document.querySelector('.nav-glass-capsule');
-  if (toggleBtn && navCapsule) {
-    toggleBtn.addEventListener('click', () => {
+  if (toggle && navCapsule) {
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('active');
       navCapsule.classList.toggle('mobile-open');
-      toggleBtn.classList.toggle('active');
     });
   }
 }
@@ -398,26 +411,33 @@ function initMobileMenu() {
 function initCustomCursor() {
   const ball = document.getElementById('footballCursorBall');
   const ring = document.getElementById('footballCursorRing');
-  if (!ball || !ring || window.innerWidth <= 768) return;
+  if (!ball || !ring) return;
 
   let mouseX = window.innerWidth / 2;
   let mouseY = window.innerHeight / 2;
+  let ballX = mouseX;
+  let ballY = mouseY;
   let ringX = mouseX;
   let ringY = mouseY;
 
   window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    ball.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
   });
 
   function renderCursor() {
-    ringX += (mouseX - ringX) * 0.18;
-    ringY += (mouseY - ringY) * 0.18;
-    ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+    ballX += (mouseX - ballX) * 0.25;
+    ballY += (mouseY - ballY) * 0.25;
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+
+    ball.style.transform = `translate3d(${ballX - 12}px, ${ballY - 12}px, 0)`;
+    ring.style.transform = `translate3d(${ringX - 22}px, ${ringY - 22}px, 0)`;
+
     requestAnimationFrame(renderCursor);
   }
-  requestAnimationFrame(renderCursor);
+
+  renderCursor();
 }
 
 function escapeHTML(str) {

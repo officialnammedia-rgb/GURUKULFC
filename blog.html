@@ -23,12 +23,11 @@
   <!-- App Wrapper for Lenis Smooth Scroll -->
   <div class="app-container">
 
-    <!-- Global Top Navigation Header -->
-    <header class="site-header">
+    <!-- Global Top Navigation Header (Consistent with Homepage) -->
+    <header class="navbar">
       <div class="nav-left">
-        <a href="/" class="brand-logo-link" title="Gurukul Football Academy">
-          <img src="/assets/gurukul-logo.png" alt="Gurukul Football Academy Logo" class="brand-logo-img" />
-          <span class="brand-title">GURUKUL FC</span>
+        <a href="/" class="logo-link-img" title="Gurukul Football Academy">
+          <img src="/assets/gurukul-logo.png" alt="Gurukul Football Academy Logo" class="header-logo-img" />
         </a>
       </div>
 
@@ -85,13 +84,13 @@
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
               <input type="text" id="blogSearchInput" placeholder="Search by tactical topic, coach name, or keywords (e.g. High-Press, Nutrition, Division A)..." />
-              <button class="search-clear-btn" id="searchClearBtn" style="display: none;">&times;</button>
+              <button class="clear-search-btn" id="clearSearchBtn" style="display: none;">&times;</button>
             </div>
           </div>
 
           <!-- Dynamic Category Filter Pills -->
           <div class="category-filters-container" id="categoryFilters">
-            <button class="cat-pill active" data-category="all">All Stories</button>
+            <button class="cat-pill active" data-category="ALL">All Stories</button>
             <button class="cat-pill" data-category="Academy News">Academy News</button>
             <button class="cat-pill" data-category="Tactics & Drills">Tactics &amp; Drills</button>
             <button class="cat-pill" data-category="Fitness & Health">Fitness &amp; Health</button>
@@ -106,7 +105,7 @@
         <!-- Rendered dynamically by blogPage.js -->
       </section>
 
-      <!-- Articles Grid -->
+      <!-- Articles Grid Section -->
       <section class="blog-feed-section">
         <div class="feed-header-row">
           <h2 class="feed-section-heading" id="feedHeading">Latest Academy Articles</h2>
