@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academy Blog & Tactical Insights | Gurukul Football Academy</title>
+  <meta name="description"
+    content="Read the latest football coaching methodologies, tactical breakdowns, match reports, athlete nutrition, and player development pathways from UEFA/AFC licensed coaches at Gurukul FC." />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=Syne:wght@700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body class="blog-body">
+  <!-- Neural Noise WebGL Canvas Background -->
+  <canvas id="neuro"></canvas>
+
+  <div class="app-container">
+
+    <!-- Header / Navbar -->
+    <header class="navbar navbar-scrolled">
+      <div class="nav-left">
+        <a href="/" class="logo-link-img" title="Gurukul Football Academy">
+          <img src="/assets/gurukul-logo.png" alt="Gurukul Football Academy Logo" class="header-logo-img" />
+        </a>
+      </div>
+
+      <div class="nav-center">
+        <nav class="nav-glass-capsule">
+          <a href="/#home" class="nav-link">Home</a>
+          <a href="/#services" class="nav-link">Programs</a>
+          <a href="/#discover" class="nav-link">Facilities</a>
+          <a href="/#milestone" class="nav-link">Milestones</a>
+          <a href="/blog.html" class="nav-link active">Blog</a>
+          <a href="https://wa.me/919625573511" class="nav-link">Contact</a>
+        </nav>
+      </div>
+
+      <div class="nav-right">
+        <a href="/admin.html" class="admin-portal-pill-btn" title="Content Writer Admin Panel">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <span>Writer Portal</span>
+        </a>
+
+        <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I%20want%20to%20enroll%20in%20the%20football%20academy." target="_blank" rel="noopener noreferrer" class="enrol-btn-sky">
+          <span>Enrol Now</span>
+          <svg class="tilted-arrow-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </a>
+
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Blog Content Area -->
+    <main class="blog-main-page">
+
+      <!-- Blog Hero Section -->
+      <section class="blog-hero-section">
+        <div class="blog-hero-container">
+          <div class="blog-top-badge">
+            <span class="pulse-dot"></span>
+            <span>GURUKUL FC ACADEMY DIARIES & TACTICAL LAB</span>
+          </div>
+
+          <h1 class="blog-main-title">
+            THE INSIDE PITCH <span class="gradient-text-sky">&amp; TACTICAL STORIES</span>
+          </h1>
+
+          <p class="blog-main-subtitle">
+            Coaching wisdom, Division A tactical breakdowns, player development pathways, and sports science directly from our UEFA &amp; AFC certified staff.
+          </p>
+
+          <!-- Search & Filter Bar -->
+          <div class="blog-search-wrapper">
+            <div class="blog-search-bar">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="blogSearchInput" placeholder="Search by topic, tactic, coach, or keyword (e.g. Pressing, Division A, Nutrition)..." autocomplete="off" />
+              <button class="clear-search-btn" id="clearSearchBtn" aria-label="Clear Search">&times;</button>
+            </div>
+          </div>
+
+          <!-- Category Filter Pills -->
+          <div class="blog-category-filter-pills" id="categoryFilterContainer">
+            <button class="category-pill active" data-category="ALL">All Posts</button>
+            <button class="category-pill" data-category="Academy News">Academy News</button>
+            <button class="category-pill" data-category="Tactics & Drills">Tactics &amp; Drills</button>
+            <button class="category-pill" data-category="Fitness & Health">Fitness &amp; Health</button>
+            <button class="category-pill" data-category="Match Reports">Match Reports</button>
+            <button class="category-pill" data-category="Youth Development">Youth Development</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Spotlight Article Banner -->
+      <section class="blog-spotlight-section" id="spotlightSection">
+        <!-- Rendered by blogPage.js -->
+      </section>
+
+      <!-- Article Grid Section -->
+      <section class="blog-grid-section">
+        <div class="blog-section-header">
+          <h2 class="blog-grid-title" id="gridTitle">ALL ARTICLES</h2>
+          <span class="blog-count-badge" id="postCountBadge">Showing 0 articles</span>
+        </div>
+
+        <div class="blog-articles-grid" id="articlesGrid">
+          <!-- Rendered dynamically by blogPage.js -->
+        </div>
+
+        <div class="blog-empty-state" id="emptyState" style="display: none;">
+          <div class="empty-state-icon">⚽</div>
+          <h3>No articles found</h3>
+          <p>Try searching with different keywords or switch the category filter.</p>
+          <button class="btn-primary btn-primary-red-dent" id="resetFiltersBtn">Reset Filters</button>
+        </div>
+      </section>
+
+      <!-- Writers & Academy Contribution Banner -->
+      <section class="blog-author-cta-section">
+        <div class="author-cta-card">
+          <div class="author-cta-text">
+            <span class="cta-mini-tag">GURUKUL PRESS CORPS</span>
+            <h3>Are you a Gurukul Coach or Content Writer?</h3>
+            <p>Publish match reviews, scouting reports, and training drills instantly to the live home page and blog archive.</p>
+          </div>
+          <div class="author-cta-action">
+            <a href="/admin.html" class="btn-primary btn-primary-red-dent">
+              <span>OPEN WRITER ADMIN</span>
+              <svg class="tilted-arrow-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Reading View Full Article Modal -->
+    <div class="article-reader-modal" id="articleReaderModal" aria-hidden="true">
+      <div class="reader-modal-overlay" id="readerOverlay"></div>
+      <div class="reader-modal-dialog">
+        <div class="reader-header-bar">
+          <button class="reader-back-btn" id="readerBackBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>Back to Articles</span>
+          </button>
+          <div class="reader-actions">
+            <button class="reader-action-btn" id="readerShareBtn" title="Share Article">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+              <span>Share</span>
+            </button>
+            <button class="reader-close-btn" id="readerCloseBtn" aria-label="Close reader">&times;</button>
+          </div>
+        </div>
+
+        <div class="reader-article-scroll" id="readerContentContainer">
+          <!-- Article Rendered Here by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Share Toast Notification -->
+    <div class="share-toast" id="shareToast">Link copied to clipboard!</div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-glass-container">
+        <div class="footer-sec-middle footer-brand-box">
+          <a href="/" class="footer-logo-link" title="Gurukul Football Academy">
+            <img src="/assets/gurukul-logo.png" alt="Gurukul Football Academy Logo" class="footer-logo-img" />
+          </a>
+          <p class="footer-about-text">
+            India's premier football academy nurturing grassroots talent to elite professional players through licensed UEFA &amp; AFC coaching and competitive Division A pathways.
+          </p>
+        </div>
+
+        <div class="footer-sec-bottom footer-contact-box">
+          <div class="footer-contact-info-row">
+            <a href="https://wa.me/919625573511" target="_blank" rel="noopener noreferrer" class="contact-pill-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>+91 96255 73511</span>
+            </a>
+            <a href="/admin.html" class="contact-pill-item admin-link-pill">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <span>Content Admin</span>
+            </a>
+          </div>
+
+          <div class="footer-bottom">
+            <p class="footer-copyright">
+              &copy; 2026 Gurukul Football Academy. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Custom Cursor -->
+    <div class="football-cursor-ball" id="footballCursorBall">⚽</div>
+    <div class="football-cursor-ring" id="footballCursorRing"></div>
+
+  </div>
+
+  <script type="module" src="/src/blogPage.js"></script>
+</body>
+
+</html>

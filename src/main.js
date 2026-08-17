@@ -1165,6 +1165,227 @@ function initInstagramReelsCarousel() {
 
 // Main Application JavaScript for GAmOn Hero Section
 import { initNeuralNoise } from './neural-noise.js';
+import { getPublishedPosts, getPostById, onBlogUpdate, renderMarkdown } from './blogService.js';
+
+/* --------------------------------------------------------------------------
+   Academy Blog Section (Home Page Scrollable Carousel & Quick-View Reader)
+   -------------------------------------------------------------------------- */
+function initHomeBlogCarousel() {
+  const track = document.getElementById('homeBlogTrack');
+  const prevBtn = document.getElementById('homeBlogPrevBtn');
+  const nextBtn = document.getElementById('homeBlogNextBtn');
+  const progressBar = document.getElementById('blogScrollProgress');
+
+  const modal = document.getElementById('homeArticleModal');
+  const overlay = document.getElementById('homeReaderOverlay');
+  const closeBtn = document.getElementById('homeReaderCloseBtn');
+  const backBtn = document.getElementById('homeReaderBackBtn');
+  const contentContainer = document.getElementById('homeReaderContentContainer');
+  const fullPageLink = document.getElementById('homeReaderFullPageLink');
+
+  if (!track) return;
+
+  function renderHomeCards() {
+    const posts = getPublishedPosts();
+    if (posts.length === 0) {
+      track.innerHTML = `
+        <div class="blog-carousel-empty">
+          <p>No academy articles published yet. Check back soon!</p>
+        </div>
+      `;
+      return;
+    }
+
+    track.innerHTML = posts.map(post => `
+      <div class="home-blog-card" data-id="${post.id}">
+        <div class="home-blog-card-img-wrap">
+          <img src="${post.image}" alt="${escapeHTML(post.title)}" class="home-blog-img" loading="lazy" />
+          <div class="home-blog-card-gradient"></div>
+          <div class="home-blog-badges">
+            <span class="home-blog-cat-pill">${escapeHTML(post.category)}</span>
+            ${post.featured ? '<span class="home-blog-featured-pill">⭐ Featured</span>' : ''}
+          </div>
+        </div>
+        <div class="home-blog-card-body">
+          <div class="home-blog-meta">
+            <span class="meta-date">${escapeHTML(post.date)}</span>
+            <span class="meta-dot">•</span>
+            <span class="meta-read">${escapeHTML(post.readTime)}</span>
+          </div>
+          <h3 class="home-blog-title">${escapeHTML(post.title)}</h3>
+          <p class="home-blog-excerpt">${escapeHTML(post.excerpt)}</p>
+          <div class="home-blog-bottom">
+            <div class="home-blog-author">
+              <img src="${post.author?.avatar || '/assets/gurukul-logo.png'}" alt="${escapeHTML(post.author?.name || 'Author')}" class="home-blog-author-img" />
+              <span class="home-blog-author-name">${escapeHTML(post.author?.name || 'Gurukul Staff')}</span>
+            </div>
+            <span class="home-blog-read-cta">
+              Read Story
+              <svg class="tilted-arrow-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    // Attach click listeners to cards
+    track.querySelectorAll('.home-blog-card').forEach(card => {
+      const id = card.dataset.id;
+      card.addEventListener('click', () => {
+        const post = getPostById(id);
+        if (post) openHomeArticleModal(post);
+      });
+    });
+
+    updateProgress();
+  }
+
+  function updateProgress() {
+    if (!progressBar) return;
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    if (maxScroll <= 0) {
+      progressBar.style.width = '100%';
+      return;
+    }
+    const current = track.scrollLeft;
+    const pct = Math.min(100, Math.max(8, (current / maxScroll) * 100));
+    progressBar.style.width = `${pct}%`;
+  }
+
+  // Scroll buttons
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      const scrollAmount = track.clientWidth > 768 ? 400 : 310;
+      track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      const scrollAmount = track.clientWidth > 768 ? 400 : 310;
+      track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+  }
+
+  track.addEventListener('scroll', updateProgress, { passive: true });
+
+  // Drag-to-scroll support
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  track.addEventListener('mousedown', (e) => {
+    isDown = true;
+    track.classList.add('dragging');
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+
+  track.addEventListener('mouseleave', () => {
+    isDown = false;
+    track.classList.remove('dragging');
+  });
+
+  track.addEventListener('mouseup', () => {
+    isDown = false;
+    track.classList.remove('dragging');
+  });
+
+  track.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    track.scrollLeft = scrollLeft - walk;
+  });
+
+  // Modal logic
+  function openHomeArticleModal(post) {
+    if (!modal || !contentContainer) return;
+
+    if (fullPageLink) {
+      fullPageLink.href = `/blog.html?post=${post.slug}`;
+    }
+
+    contentContainer.innerHTML = `
+      <article class="reader-article">
+        <div class="reader-hero-header">
+          <div class="reader-badge-row">
+            <span class="reader-category-pill">${escapeHTML(post.category)}</span>
+            ${post.tag ? `<span class="reader-tag-pill">${escapeHTML(post.tag)}</span>` : ''}
+            <span class="reader-read-time-pill">⏱️ ${escapeHTML(post.readTime)}</span>
+          </div>
+          <h1 class="reader-title">${escapeHTML(post.title)}</h1>
+          <div class="reader-meta-author-row">
+            <div class="reader-author-box">
+              <img src="${post.author?.avatar || '/assets/gurukul-logo.png'}" alt="${escapeHTML(post.author?.name || 'Author')}" class="reader-author-avatar" />
+              <div>
+                <div class="reader-author-name">${escapeHTML(post.author?.name || 'Gurukul Staff')}</div>
+                <div class="reader-author-role">${escapeHTML(post.author?.role || 'Academy Coach')}</div>
+              </div>
+            </div>
+            <div class="reader-publish-date">Published on ${escapeHTML(post.date)}</div>
+          </div>
+        </div>
+
+        <div class="reader-featured-media">
+          <img src="${post.image}" alt="${escapeHTML(post.title)}" class="reader-main-img" />
+        </div>
+
+        <div class="reader-body-content">
+          ${renderMarkdown(post.content)}
+        </div>
+
+        <div class="reader-author-bio-card">
+          <img src="${post.author?.avatar || '/assets/gurukul-logo.png'}" alt="${escapeHTML(post.author?.name || 'Author')}" class="bio-avatar" />
+          <div class="bio-text">
+            <h4>Written by ${escapeHTML(post.author?.name || 'Gurukul Staff')}</h4>
+            <p>${escapeHTML(post.author?.role || 'Elite Youth Development Staff at Gurukul Football Academy.')}</p>
+          </div>
+        </div>
+      </article>
+    `;
+
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeHomeArticleModal() {
+    if (!modal) return;
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (overlay) overlay.addEventListener('click', closeHomeArticleModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeHomeArticleModal);
+  if (backBtn) backBtn.addEventListener('click', closeHomeArticleModal);
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+      closeHomeArticleModal();
+    }
+  });
+
+  // Initial render
+  renderHomeCards();
+
+  // Real-time synchronization whenever Content Writer modifies or publishes a post!
+  onBlogUpdate(() => {
+    renderHomeCards();
+  });
+}
+
+function escapeHTML(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
 
 /* Initialize all modules when DOM is ready */
 document.addEventListener('DOMContentLoaded', () => {
@@ -1184,4 +1405,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initPathwayScrollAnimation();
   initCentersHub();
   initInstagramReelsCarousel();
+  initHomeBlogCarousel();
 });
+

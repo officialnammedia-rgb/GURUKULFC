@@ -49,6 +49,7 @@
             <a href="#discover" class="nav-link">Facilities</a>
             <a href="#milestone" class="nav-link">Milestones</a>
             <a href="#testimonials" class="nav-link">Reviews</a>
+            <a href="#blog" class="nav-link">Blog</a>
             <a href="https://wa.me/919625573511" class="nav-link">Contact</a>
             <a href="https://www.instagram.com/gurukulfootball?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==&igsi=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="nav-link nav-link-instagram-mobile">Instagram</a>
           </nav>
@@ -1487,6 +1488,91 @@
       </div>
     </section>
 
+    <!-- ACADEMY BLOG & TACTICAL LAB SECTION (HORIZONTAL SCROLL CAROUSEL) -->
+    <section class="academy-blog-section" id="blog">
+      <div class="blog-section-container">
+
+        <!-- Section Header Row -->
+        <div class="blog-section-header-row">
+          <div class="blog-section-header-left">
+            <div class="blog-badge-wrapper reveal-on-scroll">
+              <span class="blog-badge">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                GURUKUL DIARIES &amp; TACTICAL LAB
+              </span>
+            </div>
+            <h2 class="blog-section-title reveal-on-scroll reveal-delay-1">
+              LATEST FROM THE ACADEMY PITCH
+            </h2>
+            <p class="blog-section-subtitle reveal-on-scroll reveal-delay-2">
+              Tactical breakdowns, coaching tips, nutrition insights, and Division A match reports updated live from our UEFA &amp; AFC licensed coaching staff.
+            </p>
+          </div>
+
+          <!-- Carousel Navigation Controls & View All Link -->
+          <div class="blog-nav-controls-group reveal-on-scroll reveal-delay-2">
+            <a href="/blog.html" class="btn-all-articles-link" title="View Full Blog Archive">
+              <span>View All Stories</span>
+              <svg class="tilted-arrow-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+            <div class="carousel-nav-arrows">
+              <button class="carousel-nav-btn prev-btn" id="homeBlogPrevBtn" aria-label="Previous Stories">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button class="carousel-nav-btn next-btn" id="homeBlogNextBtn" aria-label="Next Stories">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Horizontal Scrollable Blog Track -->
+        <div class="blog-carousel-wrapper reveal-on-scroll reveal-delay-3">
+          <div class="blog-carousel-track" id="homeBlogTrack">
+            <!-- Dynamically Rendered by main.js -->
+          </div>
+        </div>
+
+        <!-- Bottom Link / Progress Bar -->
+        <div class="blog-section-bottom-row reveal-on-scroll reveal-delay-3">
+          <div class="blog-track-progress">
+            <div class="progress-bar-fill" id="blogScrollProgress"></div>
+          </div>
+          <div class="blog-bottom-ctas">
+            <a href="/blog.html" class="explore-blog-pill">
+              <span>Browse All Tactical Articles</span>
+              <svg class="tilted-arrow-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Reading Modal for Homepage Quick-View -->
+    <div class="article-reader-modal" id="homeArticleModal" aria-hidden="true">
+      <div class="reader-modal-overlay" id="homeReaderOverlay"></div>
+      <div class="reader-modal-dialog">
+        <div class="reader-header-bar">
+          <button class="reader-back-btn" id="homeReaderBackBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>Close Article</span>
+          </button>
+          <div class="reader-actions">
+            <a href="/blog.html" id="homeReaderFullPageLink" class="reader-action-btn" title="Open in Full Blog Page">
+              <span>Open in Blog</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+            <button class="reader-close-btn" id="homeReaderCloseBtn" aria-label="Close reader">&times;</button>
+          </div>
+        </div>
+
+        <div class="reader-article-scroll" id="homeReaderContentContainer">
+          <!-- Article Rendered Here by JS -->
+        </div>
+      </div>
+    </div>
+
     <!-- CREATIVE FEATURE: Interactive Academy Program & Trial Finder Modal -->
     <div class="search-modal-overlay" id="searchModal">
       <div class="search-modal-content">
@@ -1556,6 +1642,14 @@
             <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I%20want%20to%20know%20the%20location%20of%20your%20training%20centers." target="_blank" rel="noopener noreferrer" class="contact-pill-item">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               <span>Dwarka, New Delhi</span>
+            </a>
+            <a href="/blog.html" class="contact-pill-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              <span>Academy Blog</span>
+            </a>
+            <a href="/admin.html" class="contact-pill-item admin-link-pill">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <span>Writer Admin</span>
             </a>
           </div>
 
