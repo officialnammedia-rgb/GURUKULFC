@@ -5954,6 +5954,7 @@ html {
   position: absolute;
   inset: 0;
   background: linear-gradient(90deg, rgba(6, 9, 14, 0.1) 0%, rgba(6, 9, 14, 0.7) 100%);
+  pointer-events: none !important;
 }
 
 .spotlight-badge-row {
@@ -5963,6 +5964,7 @@ html {
   display: flex;
   gap: 0.6rem;
   z-index: 2;
+  pointer-events: none !important;
 }
 
 .spotlight-pill {
@@ -6022,20 +6024,23 @@ html {
 }
 
 .spotlight-excerpt {
-  font-size: 1rem;
+  font-size: 0.96rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.78);
-  margin-bottom: 1.75rem;
+  margin-bottom: 2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .spotlight-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1.5rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  flex-wrap: wrap;
-  gap: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .spotlight-author {
@@ -6048,7 +6053,7 @@ html {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 1px solid rgba(56, 189, 248, 0.4);
+  border: 2px solid #38bdf8;
   object-fit: cover;
 }
 
@@ -6058,32 +6063,35 @@ html {
 }
 
 .author-name {
-  font-size: 0.92rem;
+  font-family: var(--font-tech);
+  font-size: 0.9rem;
   font-weight: 700;
   color: #ffffff;
-  font-family: var(--font-tech);
 }
 
 .author-role {
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: var(--font-tech);
 }
 
 .btn-read-spotlight {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.4rem;
-  background: linear-gradient(135deg, #e63946, #c1121f);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1.6rem;
+  background: #e63946;
+  border: 1px solid #ff4d5a;
   border-radius: 9999px;
   color: #ffffff;
   font-family: var(--font-tech);
   font-size: 0.88rem;
   font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   cursor: pointer;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 16px rgba(230, 57, 70, 0.35);
+  box-shadow: 0 4px 16px rgba(230, 57, 70, 0.4);
 }
 
 .btn-read-spotlight:hover {
@@ -6212,6 +6220,7 @@ html {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(6, 9, 14, 0.1) 0%, rgba(6, 9, 14, 0.8) 100%);
+  pointer-events: none !important;
 }
 
 .card-badges {
@@ -6221,6 +6230,7 @@ html {
   display: flex;
   gap: 0.5rem;
   z-index: 2;
+  pointer-events: none !important;
 }
 
 .card-category-badge {
@@ -6366,17 +6376,17 @@ html {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
-  padding: 2.5rem 3rem;
-  background: linear-gradient(135deg, rgba(14, 23, 38, 0.9) 0%, rgba(20, 38, 64, 0.85) 100%);
+  padding: 2.75rem 3rem;
+  background: rgba(14, 23, 38, 0.85);
   border: 1px solid rgba(56, 189, 248, 0.3);
   border-radius: 28px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
-  flex-wrap: wrap;
+  gap: 2rem;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
 }
 
 .author-cta-text {
-  max-width: 650px;
+  max-width: 680px;
 }
 
 .cta-mini-tag {
@@ -6384,7 +6394,7 @@ html {
   font-family: var(--font-tech);
   font-size: 0.76rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   color: #38bdf8;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
@@ -6436,7 +6446,8 @@ html {
   right: 0 !important;
   bottom: 0 !important;
   width: 100vw !important;
-  height: 100vh !important;
+  height: 100% !important;
+  height: 100dvh !important;
   z-index: 999999 !important;
   display: none;
   align-items: center;
