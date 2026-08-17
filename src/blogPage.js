@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function initBlogPage() {
   const searchInput = document.getElementById('blogSearchInput');
   const clearBtn = document.getElementById('clearSearchBtn');
-  const pills = document.querySelectorAll('.cat-pill');
+  const pills = document.querySelectorAll('.cat-pill, .category-pill');
   const resetBtn = document.getElementById('resetFiltersBtn');
 
   // Search input handler
@@ -52,7 +52,8 @@ function initBlogPage() {
 
   // Category pill handlers
   pills.forEach(pill => {
-    pill.addEventListener('click', () => {
+    pill.addEventListener('click', (e) => {
+      e.preventDefault();
       pills.forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
       currentCategory = pill.dataset.category || 'ALL';
@@ -91,6 +92,18 @@ function initBlogPage() {
     }
   });
 
+  // Global click & tap delegation for guaranteed responsiveness on mobile
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.blog-article-card, .spotlight-card, .related-card');
+    if (card && card.dataset.id) {
+      const post = getPostById(card.dataset.id);
+      if (post) {
+        e.preventDefault();
+        openReaderModal(post);
+      }
+    }
+  });
+
   renderBlog();
 }
 
@@ -117,12 +130,6 @@ function renderBlog() {
       const spotlightPost = filtered.find(p => p.featured) || filtered[0];
       spotlightSection.innerHTML = createSpotlightHTML(spotlightPost);
       spotlightSection.style.display = 'block';
-
-      // Attach click to spotlight card
-      const spotlightCard = spotlightSection.querySelector('.spotlight-card');
-      if (spotlightCard) {
-        spotlightCard.addEventListener('click', () => openReaderModal(spotlightPost));
-      }
     } else {
       spotlightSection.style.display = 'none';
       spotlightSection.innerHTML = '';
@@ -163,20 +170,11 @@ function renderBlog() {
   }
 
   grid.innerHTML = gridPosts.map(post => createGridCardHTML(post)).join('');
-
-  // Attach click listeners to cards
-  grid.querySelectorAll('.blog-article-card').forEach(card => {
-    const postId = card.dataset.id;
-    card.addEventListener('click', () => {
-      const post = getPostById(postId);
-      if (post) openReaderModal(post);
-    });
-  });
 }
 
 function createSpotlightHTML(post) {
   return `
-    <div class="spotlight-card" data-id="${post.id}">
+    <div class="spotlight-card" data-id="${post.id}" style="cursor: pointer;">
       <div class="spotlight-image-container">
         <img src="${post.image}" alt="${escapeHTML(post.title)}" class="spotlight-img" loading="lazy" onerror="this.src='/assets/adivision1.png'" />
         <div class="spotlight-overlay"></div>
@@ -202,7 +200,7 @@ function createSpotlightHTML(post) {
               <span class="author-role">${escapeHTML(post.author?.role || 'Academy Coach')}</span>
             </div>
           </div>
-          <button class="btn-read-spotlight" type="button">
+          <button class="btn-read-spotlight" type="button" aria-label="Read featured story">
             <span>Read Article</span>
             <svg class="tilted-arrow-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
           </button>
@@ -214,7 +212,7 @@ function createSpotlightHTML(post) {
 
 function createGridCardHTML(post) {
   return `
-    <article class="blog-article-card" data-id="${post.id}">
+    <article class="blog-article-card" data-id="${post.id}" style="cursor: pointer;">
       <div class="card-image-box">
         <img src="${post.image}" alt="${escapeHTML(post.title)}" class="card-post-img" loading="lazy" onerror="this.src='/assets/adivision1.png'" />
         <div class="card-img-gradient"></div>
@@ -302,7 +300,7 @@ function openReaderModal(post, updateHistory = true) {
           <h3 class="related-heading">MORE TACTICAL STORIES</h3>
           <div class="related-grid">
             ${relatedPosts.map(p => `
-              <div class="related-card" data-id="${p.id}">
+              <div class="related-card" data-id="${p.id}" style="cursor: pointer;">
                 <img src="${p.image}" alt="${escapeHTML(p.title)}" class="related-thumb" onerror="this.src='/assets/adivision1.png'" />
                 <div class="related-info">
                   <span class="related-cat">${escapeHTML(p.category)}</span>
@@ -316,20 +314,11 @@ function openReaderModal(post, updateHistory = true) {
     </article>
   `;
 
-  // Attach click listeners to related cards
-  container.querySelectorAll('.related-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const p = getPostById(card.dataset.id);
-      if (p) {
-        container.scrollTop = 0;
-        openReaderModal(p);
-      }
-    });
-  });
-
+  modal.style.display = 'flex';
   modal.classList.add('active');
   modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+  container.scrollTop = 0;
 
   if (updateHistory && post.slug) {
     const newUrl = `${window.location.pathname}?post=${encodeURIComponent(post.slug)}`;
@@ -340,6 +329,7 @@ function openReaderModal(post, updateHistory = true) {
 function closeReaderModal() {
   const modal = document.getElementById('articleReaderModal');
   if (!modal) return;
+  modal.style.display = 'none';
   modal.classList.remove('active');
   modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
