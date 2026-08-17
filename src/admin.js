@@ -6,8 +6,7 @@ import {
   togglePublishStatus,
   onBlogUpdate,
   renderMarkdown,
-  calculateReadTime,
-  syncFromCloud
+  calculateReadTime
 } from './blogService.js';
 
 import {
@@ -20,11 +19,13 @@ import {
 let currentTabFilter = 'all';
 let currentAdminSearch = '';
 let editingPostId = null;
+let postPendingDeleteId = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
   await initAuth();
   initDashboard();
   initEditor();
+  initDeleteModal();
 
   // Listen to cross-tab & cloud updates to keep dashboard in sync
   onBlogUpdate(() => {
@@ -260,21 +261,81 @@ function renderPostsList() {
     }
 
     if (deleteBtn) {
-      deleteBtn.addEventListener('click', async (e) => {
+      deleteBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (confirm('Are you sure you want to delete this article? This will remove it from the live site and database.')) {
-          await deletePost(postId);
-          renderPostsList();
-          updateStats();
-          showToast('Article Deleted', 'Article was removed from the live website.');
-        }
+        openDeleteConfirmModal(postId);
       });
     }
   });
 }
 
 /* --------------------------------------------------------------------------
-   3. Post Composer & Editor with HD Drag-and-Drop Image Uploader
+   3. In-App Delete Confirmation Modal (Reliable & Permanent)
+   -------------------------------------------------------------------------- */
+function initDeleteModal() {
+  const modal = document.getElementById('deleteConfirmModal');
+  const backdrop = document.getElementById('deleteModalBackdrop');
+  const cancelBtn = document.getElementById('cancelDeleteBtn');
+  const confirmBtn = document.getElementById('confirmDeleteBtn');
+
+  function closeDeleteModal() {
+    if (modal) {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    postPendingDeleteId = null;
+  }
+
+  if (backdrop) backdrop.addEventListener('click', closeDeleteModal);
+  if (cancelBtn) cancelBtn.addEventListener('click', closeDeleteModal);
+
+  if (confirmBtn) {
+    confirmBtn.addEventListener('click', async () => {
+      if (!postPendingDeleteId) return;
+      const targetId = postPendingDeleteId;
+      confirmBtn.disabled = true;
+      confirmBtn.textContent = 'Deleting...';
+
+      try {
+        await deletePost(targetId);
+        closeDeleteModal();
+        renderPostsList();
+        updateStats();
+        showToast('Article Deleted', 'Article was removed from your database and live website.');
+      } catch (err) {
+        alert('Error deleting post: ' + err.message);
+      } finally {
+        confirmBtn.disabled = false;
+        confirmBtn.textContent = 'Yes, Delete Article';
+      }
+    });
+  }
+}
+
+function openDeleteConfirmModal(postId) {
+  postPendingDeleteId = postId;
+  const modal = document.getElementById('deleteConfirmModal');
+  const titleText = document.getElementById('deleteArticleTitleText');
+  const post = getPostById(postId);
+
+  if (titleText) {
+    if (post) {
+      titleText.innerHTML = `Are you sure you want to permanently delete <strong>"${escapeHTML(post.title)}"</strong>? This will remove it from your live website and database.`;
+    } else {
+      titleText.textContent = 'Are you sure you want to permanently delete this article?';
+    }
+  }
+
+  if (modal) {
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Post Composer & Editor with HD Drag-and-Drop Image Uploader
    -------------------------------------------------------------------------- */
 function initEditor() {
   const form = document.getElementById('postForm');
