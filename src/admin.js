@@ -225,17 +225,6 @@ function initDashboard() {
     openNewBtn.addEventListener('click', () => openEditorModal(null));
   }
 
-  if (resetBtn) {
-    resetBtn.addEventListener('click', () => {
-      if (confirm('Are you sure you want to reset all articles to academy default seeds? Any custom posts will be overwritten.')) {
-        resetToDefaults();
-        renderPostsList();
-        updateStats();
-        showToast('Reset Complete', 'Default academy articles restored.');
-      }
-    });
-  }
-
   renderPostsList();
   updateStats();
 }

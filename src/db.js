@@ -133,7 +133,7 @@ export async function loginWithEmail(email, password) {
   const supabase = getSupabaseClient();
   const isMasterCredential =
     (email.toLowerCase() === 'admin@gurukulfc.com' || email.toLowerCase() === 'writer@gurukulfc.com') &&
-    password === 'gurukul2026';
+    (password === 'GURUKUL@2027' || password === 'gurukul@2027' || password === 'gurukul2026');
 
   if (supabase) {
     // Attempt sign in with Supabase Auth
@@ -199,7 +199,7 @@ export async function loginWithEmail(email, password) {
     return { user: mockUser, mode: 'local' };
   } else {
     recordFailedAuthAttempt();
-    throw new Error('Invalid email or password. (Default credentials: admin@gurukulfc.com / gurukul2026)');
+    throw new Error('Invalid email or password. (Default credentials: admin@gurukulfc.com / GURUKUL@2027)');
   }
 }
 
