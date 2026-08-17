@@ -33,22 +33,17 @@ CREATE INDEX IF NOT EXISTS idx_posts_category ON public.posts(category);
 -- 3. Enable Row Level Security (RLS)
 ALTER TABLE public.posts ENABLE ROW LEVEL SECURITY;
 
--- 4. Policy: Public Visitors Can Only View Published Posts
+-- 4. Unified Access Policy: Allow Read and Write from website app key (anon & authenticated)
 DROP POLICY IF EXISTS "Public can view published posts" ON public.posts;
-CREATE POLICY "Public can view published posts"
-ON public.posts
-FOR SELECT
-TO anon, authenticated
-USING (status = 'published');
-
--- 5. Policy: Authenticated Admins / Writers have full CRUD access
 DROP POLICY IF EXISTS "Authenticated writers full access" ON public.posts;
-CREATE POLICY "Authenticated writers full access"
+DROP POLICY IF EXISTS "Allow all for anon and authenticated" ON public.posts;
+
+CREATE POLICY "Allow all for anon and authenticated"
 ON public.posts
 FOR ALL
-TO authenticated
+TO anon, authenticated
 USING (true)
 WITH CHECK (true);
 
--- 6. Realtime Replication Enablement
+-- 5. Realtime Replication Enablement
 ALTER PUBLICATION supabase_realtime ADD TABLE public.posts;

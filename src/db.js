@@ -1,11 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Configuration keys (from env or stored settings)
+// Configuration keys
 const SUPABASE_CONFIG_KEY = 'gurukul_supabase_config_v1';
+const DEFAULT_SUPABASE_URL = 'https://wsfwppszgsaqpgnejbmb.supabase.co';
+const DEFAULT_SUPABASE_ANON_KEY = 'sb_publishable_jRYBLFEWBYmU37NOL7Vo8g_WI_TUVbc';
 
 export function getSupabaseConfig() {
-  const envUrl = import.meta.env?.VITE_SUPABASE_URL;
-  const envKey = import.meta.env?.VITE_SUPABASE_ANON_KEY;
+  const envUrl = import.meta.env?.VITE_SUPABASE_URL || DEFAULT_SUPABASE_URL;
+  const envKey = import.meta.env?.VITE_SUPABASE_ANON_KEY || DEFAULT_SUPABASE_ANON_KEY;
 
   if (envUrl && envKey) {
     return { url: envUrl, anonKey: envKey, source: 'env' };
@@ -25,7 +27,7 @@ export function getSupabaseConfig() {
     }
   }
 
-  return { url: '', anonKey: '', source: 'none' };
+  return { url: DEFAULT_SUPABASE_URL, anonKey: DEFAULT_SUPABASE_ANON_KEY, source: 'default' };
 }
 
 export function saveSupabaseConfig(url, anonKey) {

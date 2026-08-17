@@ -194,7 +194,7 @@ if (typeof window !== 'undefined' && 'BroadcastChannel' in window) {
   try {
     broadcastChannel = new BroadcastChannel(SYNC_CHANNEL_NAME);
   } catch (e) {
-    console.warn('BroadcastChannel not supported, falling back to storage events', e);
+    console.warn('BroadcastChannel not supported', e);
   }
 }
 
@@ -211,8 +211,11 @@ function initCloudRealtime() {
       .on('postgres_changes', { event: '*', schema: 'public', table: 'posts' }, async () => {
         await syncFromCloud();
       })
-      .subscribe();
-    isCloudRealtimeAttached = true;
+      .subscribe((status) => {
+        if (status === 'SUBSCRIBED') {
+          isCloudRealtimeAttached = true;
+        }
+      });
   } catch (e) {
     console.warn('Could not attach Supabase realtime listener:', e);
   }
@@ -231,7 +234,13 @@ export async function syncFromCloud() {
       .select('*')
       .order('created_at', { ascending: false });
 
-    if (!error && Array.isArray(data) && data.length > 0) {
+    if (!error && Array.isArray(data)) {
+      if (data.length === 0) {
+        // Table exists but is empty -> Seed default articles into Supabase
+        await seedCloudDatabase(supabase);
+        return;
+      }
+
       const mapped = data.map(row => ({
         id: row.id,
         slug: row.slug,
@@ -256,9 +265,41 @@ export async function syncFromCloud() {
 
       localStorage.setItem(STORAGE_KEY, JSON.stringify(mapped));
       notifyBlogUpdated('cloud_sync', null);
+    } else if (error) {
+      console.warn('Supabase fetch error, using local storage:', error.message);
     }
   } catch (e) {
-    console.warn('Cloud sync attempt finished with local fallback', e);
+    console.warn('Cloud sync error:', e);
+  }
+}
+
+async function seedCloudDatabase(supabase) {
+  try {
+    const rows = DEFAULT_POSTS.map(p => ({
+      id: p.id,
+      slug: p.slug,
+      title: p.title,
+      category: p.category,
+      tag: p.tag,
+      read_time: p.readTime,
+      date: p.date,
+      author_name: p.author?.name || 'Coach Aryan Sharma',
+      author_role: p.author?.role || 'Head of Youth Development (UEFA B)',
+      author_avatar: p.author?.avatar || '/assets/gurukul-logo.png',
+      image: p.image,
+      featured: p.featured,
+      status: p.status,
+      excerpt: p.excerpt,
+      content: p.content,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    }));
+
+    await supabase.from('posts').upsert(rows);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_POSTS));
+    notifyBlogUpdated('cloud_seed', null);
+  } catch (e) {
+    console.warn('Seed cloud database error:', e);
   }
 }
 
@@ -387,30 +428,34 @@ export async function savePost(postData) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedPosts));
   notifyBlogUpdated('save', savedPostObj.id);
 
-  // Cloud Database write (if Supabase is connected)
+  // Cloud Database write
   const supabase = getSupabaseClient();
   if (supabase) {
-    try {
-      await supabase.from('posts').upsert({
-        id: savedPostObj.id,
-        slug: savedPostObj.slug,
-        title: savedPostObj.title,
-        category: savedPostObj.category,
-        tag: savedPostObj.tag,
-        read_time: savedPostObj.readTime,
-        date: savedPostObj.date,
-        author_name: savedPostObj.author?.name || 'Coach Aryan Sharma',
-        author_role: savedPostObj.author?.role || 'Academy Coach',
-        author_avatar: savedPostObj.author?.avatar || '/assets/gurukul-logo.png',
-        image: savedPostObj.image,
-        featured: savedPostObj.featured,
-        status: savedPostObj.status,
-        excerpt: savedPostObj.excerpt,
-        content: savedPostObj.content,
-        updated_at: new Date().toISOString()
-      });
-    } catch (e) {
-      console.warn('Cloud DB upsert queued or failed, saved to local cache', e);
+    const payload = {
+      id: savedPostObj.id,
+      slug: savedPostObj.slug,
+      title: savedPostObj.title,
+      category: savedPostObj.category,
+      tag: savedPostObj.tag,
+      read_time: savedPostObj.readTime,
+      date: savedPostObj.date,
+      author_name: savedPostObj.author?.name || 'Coach Aryan Sharma',
+      author_role: savedPostObj.author?.role || 'Academy Coach',
+      author_avatar: savedPostObj.author?.avatar || '/assets/gurukul-logo.png',
+      image: savedPostObj.image,
+      featured: savedPostObj.featured,
+      status: savedPostObj.status,
+      excerpt: savedPostObj.excerpt,
+      content: savedPostObj.content,
+      updated_at: new Date().toISOString()
+    };
+
+    const { error } = await supabase.from('posts').upsert(payload);
+    if (error) {
+      console.error('Supabase DB error during savePost:', error);
+      throw new Error(`Database write error: ${error.message} (Check RLS policy in Supabase SQL editor)`);
+    } else {
+      console.log('Saved to Supabase cloud PostgreSQL:', savedPostObj.id);
     }
   }
 
