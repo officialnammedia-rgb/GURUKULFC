@@ -397,14 +397,38 @@ function setupDeepLinking() {
 }
 
 function initMobileMenu() {
-  const toggle = document.getElementById('mobileMenuToggle');
-  const navCapsule = document.querySelector('.nav-glass-capsule');
-  if (toggle && navCapsule) {
-    toggle.addEventListener('click', () => {
-      toggle.classList.toggle('active');
-      navCapsule.classList.toggle('mobile-open');
-    });
+  const toggleBtn = document.getElementById('mobileMenuToggle');
+  const navCenter = document.querySelector('.nav-center');
+  const navLinks = document.querySelectorAll('.nav-glass-capsule .nav-link');
+
+  if (!toggleBtn || !navCenter) return;
+
+  function toggleMenu(e) {
+    if (e) e.stopPropagation();
+    const isActive = navCenter.classList.toggle('active');
+    toggleBtn.classList.toggle('active', isActive);
   }
+
+  function closeMenu() {
+    navCenter.classList.remove('active');
+    toggleBtn.classList.remove('active');
+  }
+
+  toggleBtn.addEventListener('click', toggleMenu);
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!navCenter.contains(e.target) && !toggleBtn.contains(e.target)) {
+      closeMenu();
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
 }
 
 function initCustomCursor() {

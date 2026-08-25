@@ -210,6 +210,28 @@ function initFacilitiesCarousel() {
   wrapper.addEventListener('mouseenter', stopAutoScroll);
   wrapper.addEventListener('mouseleave', startAutoScroll);
 
+  // Mobile Touch Swipe Gesture Support
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  wrapper.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    stopAutoScroll();
+  }, { passive: true });
+
+  wrapper.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].clientX;
+    const diffX = touchStartX - touchEndX;
+    if (Math.abs(diffX) > 40) {
+      if (diffX > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    }
+    resetAutoScroll();
+  }, { passive: true });
+
   window.addEventListener('resize', updateCarousel);
   setTimeout(updateCarousel, 100);
 
@@ -338,6 +360,7 @@ function initSearchModal() {
   }
 
   if (searchBtn) searchBtn.addEventListener('click', openModal);
+  if (getStartedBtn) getStartedBtn.addEventListener('click', openModal);
   if (exploreBtn) exploreBtn.addEventListener('click', openModal);
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
@@ -366,13 +389,13 @@ function initSearchModal() {
     }
 
     resultsContainer.innerHTML = filtered.map(p => `
-      <div class="facility-item" style="cursor: pointer;" onclick="alert('Viewing pitch details for ${p.name}!')">
+      <a href="https://wa.me/919625573511?text=${encodeURIComponent(`Hi Gurukul FC! I would like to inquire about pitch booking and academy programs at ${p.name} (${p.type}, ${p.loc}).`)}" target="_blank" rel="noopener noreferrer" class="facility-item" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
         <div>
-          <div class="facility-name">${p.name}</div>
-          <div class="facility-sub">${p.type} • ${p.loc}</div>
+          <div class="facility-name" style="color: #ffffff; font-weight: 700;">${p.name}</div>
+          <div class="facility-sub" style="color: #94a3b8; font-size: 0.85rem;">${p.type} • ${p.loc}</div>
         </div>
-        <span class="facility-badge" style="background: #dcfce7; color: #166534;">Reserve Spot</span>
-      </div>
+        <span class="facility-badge" style="background: #0284c7; color: #ffffff; border-radius: 9999px; padding: 0.35rem 0.8rem; font-size: 0.78rem; font-weight: 700;">Inquire ↗</span>
+      </a>
     `).join('');
   }
 
@@ -1158,6 +1181,12 @@ function initInstagramReelsCarousel() {
   track.addEventListener('mouseleave', () => {
     if (!isVideoPlaying) scheduleAutoScrollResume();
   });
+
+  // Mobile Touch Swipe Handlers
+  track.addEventListener('touchstart', stopAutoScroll, { passive: true });
+  track.addEventListener('touchend', () => {
+    if (!isVideoPlaying) scheduleAutoScrollResume();
+  }, { passive: true });
 
   // Start auto-scroll initially
   startAutoScroll();

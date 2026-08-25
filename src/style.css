@@ -4482,13 +4482,14 @@ body {
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 99;
+    z-index: 10000;
   }
 
-  .nav-center.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(8px);
+  .nav-center.active,
+  .nav-center.mobile-open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(8px) !important;
   }
 
   .nav-glass-capsule {
@@ -5270,15 +5271,17 @@ html, body {
     display: none !important;
   }
 
-  /* --- 5. GPU-accelerate the main scroll container --- */
-  /* This promotes the entire scrolling layer to its own compositor layer */
+  /* --- 5. Clean layout container for mobile viewport --- */
   .app-container {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-perspective: 1000px;
-    perspective: 1000px;
+    -webkit-transform: none !important;
+    transform: none !important;
+    -webkit-perspective: none !important;
+    perspective: none !important;
+  }
+
+  /* Prevent iOS automatic zoom on focus by ensuring at least 16px font size */
+  input, select, textarea {
+    font-size: 16px !important;
   }
 
   /* --- 6. Eliminate transition: all on mobile — only transition what matters --- */
