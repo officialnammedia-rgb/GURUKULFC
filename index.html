@@ -1548,60 +1548,6 @@
       </div>
     </section>
 
-    <!-- Reading Modal for Homepage Quick-View -->
-    <div class="article-reader-modal" id="homeArticleModal" aria-hidden="true">
-      <div class="reader-modal-overlay" id="homeReaderOverlay"></div>
-      <div class="reader-modal-dialog">
-        <div class="reader-header-bar">
-          <button class="reader-back-btn" id="homeReaderBackBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            <span>Close Article</span>
-          </button>
-          <div class="reader-actions">
-            <a href="/blog" id="homeReaderFullPageLink" class="reader-action-btn" title="Open in Full Blog Page">
-              <span>Open in Blog</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-            </a>
-            <button class="reader-close-btn" id="homeReaderCloseBtn" aria-label="Close reader">&times;</button>
-          </div>
-        </div>
-
-        <div class="reader-article-scroll" id="homeReaderContentContainer">
-          <!-- Article Rendered Here by JS -->
-        </div>
-      </div>
-    </div>
-
-    <!-- CREATIVE FEATURE: Interactive Academy Program & Trial Finder Modal -->
-    <div class="search-modal-overlay" id="searchModal">
-      <div class="search-modal-content">
-        <div class="search-modal-header">
-          <h3>Find Academy Programs & Trials</h3>
-          <button class="modal-close-btn" id="closeSearchModal">&times;</button>
-        </div>
-        <div class="search-input-wrapper">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input type="text" id="searchInput"
-            placeholder="Search by age group, program, or campus (e.g. U-15 Elite, Grassroots, Summer Camp)..." />
-        </div>
-
-        <div class="quick-tags">
-          <span class="tag">⚡ Trial Registration</span>
-          <span class="tag">🏆 Division A Squad</span>
-          <span class="tag">🌱 Grassroots (U-6 to U-11)</span>
-          <span class="tag">📊 Biometric Lab</span>
-        </div>
-
-        <div class="search-results-list" id="searchResults">
-          <!-- Rendered by JS -->
-        </div>
-      </div>
-    </div>
-
     <!-- CREATIVE FEATURE: Floating WhatsApp Quick Chat Action Widget -->
     <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I%20want%20to%20inquire%20about%20football%20coaching%20and%20trials." target="_blank" rel="noopener noreferrer" class="whatsapp-float-widget" title="Chat with Gurukul FC on WhatsApp">
       <div class="wa-float-icon">
@@ -1684,8 +1630,64 @@
     <div class="football-cursor-ball" id="footballCursorBall">⚽</div>
     <div class="football-cursor-ring" id="footballCursorRing"></div>
 
-    <script type="module" src="/src/main.js"></script>
-    <script type="module" src="/src/mountVictories.jsx"></script>
+  </div>
+
+  <!-- Reading Modal for Homepage Quick-View (Placed outside app-container for true viewport positioning) -->
+  <div class="article-reader-modal" id="homeArticleModal" aria-hidden="true">
+    <div class="reader-modal-overlay" id="homeReaderOverlay"></div>
+    <div class="reader-modal-dialog">
+      <div class="reader-header-bar">
+        <button class="reader-back-btn" id="homeReaderBackBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          <span>Close Article</span>
+        </button>
+        <div class="reader-actions">
+          <a href="/blog" id="homeReaderFullPageLink" class="reader-action-btn" title="Open in Full Blog Page">
+            <span>Open in Blog</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+          <button class="reader-close-btn" id="homeReaderCloseBtn" aria-label="Close reader">&times;</button>
+        </div>
+      </div>
+
+      <div class="reader-article-scroll" id="homeReaderContentContainer">
+        <!-- Article Rendered Here by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- CREATIVE FEATURE: Interactive Academy Program & Trial Finder Modal -->
+  <div class="search-modal-overlay" id="searchModal">
+    <div class="search-modal-content">
+      <div class="search-modal-header">
+        <h3>Find Academy Programs & Trials</h3>
+        <button class="modal-close-btn" id="closeSearchModal">&times;</button>
+      </div>
+      <div class="search-input-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput"
+          placeholder="Search by age group, program, or campus (e.g. U-15 Elite, Grassroots, Summer Camp)..." />
+      </div>
+
+      <div class="quick-tags">
+        <span class="tag">⚡ Trial Registration</span>
+        <span class="tag">🏆 Division A Squad</span>
+        <span class="tag">🌱 Grassroots (U-6 to U-11)</span>
+        <span class="tag">📊 Biometric Lab</span>
+      </div>
+
+      <div class="search-results-list" id="searchResults">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/mountVictories.jsx"></script>
 </body>
 
 </html>

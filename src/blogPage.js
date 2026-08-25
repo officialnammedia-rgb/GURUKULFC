@@ -94,11 +94,17 @@ function initBlogPage() {
 
   // Global click & tap delegation for guaranteed responsiveness on mobile
   document.addEventListener('click', (e) => {
+    // If clicking close, back, share or form controls, let them handle it
+    if (e.target.closest('#readerCloseBtn, #readerBackBtn, #readerShareBtn, #readerOverlay, input, button:not(.btn-read-spotlight)')) {
+      return;
+    }
+
     const card = e.target.closest('.blog-article-card, .spotlight-card, .related-card');
     if (card && card.dataset.id) {
       const post = getPostById(card.dataset.id);
       if (post) {
         e.preventDefault();
+        e.stopPropagation();
         openReaderModal(post);
       }
     }
@@ -318,6 +324,8 @@ function openReaderModal(post, updateHistory = true) {
   modal.classList.add('active');
   modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+  document.documentElement.style.overflow = 'hidden';
+  modal.scrollTop = 0;
   container.scrollTop = 0;
 
   if (updateHistory && post.slug) {
@@ -333,6 +341,7 @@ function closeReaderModal() {
   modal.classList.remove('active');
   modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  document.documentElement.style.overflow = '';
   activePost = null;
 
   // Clean URL query param
