@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Player Achievements &amp; Prodigies | Gurukul Football Academy</title>
+  <meta name="description"
+    content="Discover the achievements of Gurukul Football Academy players, international tournament representations including the Ghana Cup, Division A captains, and youth championship MVP honors." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap"
+    rel="stylesheet" />
+  
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body class="achievements-body">
+  <!-- Neural Noise WebGL Canvas Background -->
+  <canvas id="neuro"></canvas>
+
+  <!-- App Wrapper -->
+  <div class="app-container">
+
+    <!-- Global Top Navigation Header -->
+    <header class="navbar">
+      <div class="nav-left">
+        <a href="/" class="logo-link-img" title="Gurukul Football Academy">
+          <img src="/assets/gurukul-logo.png" alt="Gurukul Football Academy Logo" class="header-logo-img" />
+        </a>
+      </div>
+
+      <div class="nav-center">
+        <nav class="nav-glass-capsule">
+          <a href="/#home" class="nav-link">Home</a>
+          <a href="/#services" class="nav-link">Programs</a>
+          <a href="/#discover" class="nav-link">Facilities</a>
+          <a href="/#milestone" class="nav-link">Milestones</a>
+          <a href="/achievements" class="nav-link active">Achievements</a>
+          <a href="/blog" class="nav-link">Blog</a>
+          <a href="/fees" class="nav-link nav-link-fees-mobile">Pay Fees</a>
+          <a href="https://wa.me/919625573511" class="nav-link">Contact</a>
+        </nav>
+      </div>
+
+      <div class="nav-right">
+        <!-- Enrol Now Button -->
+        <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I%20want%20to%20enroll%20in%20the%20football%20academy."
+          target="_blank" rel="noopener noreferrer" class="enrol-btn-sky">
+          <span>Enrol Now</span>
+          <svg class="tilted-arrow-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </a>
+
+        <!-- Fee Submission Action Button on far right of navbar -->
+        <a href="/fees" class="nav-fee-btn" title="Pay Academy Fees Online">
+          <svg class="nav-fee-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+            <line x1="2" y1="10" x2="22" y2="10"></line>
+          </svg>
+          <span>Pay Fees</span>
+        </a>
+
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="achievements-main-page">
+
+      <!-- Hero Header Section -->
+      <section class="achievements-hero-section">
+        <div class="achievements-hero-container">
+          
+          <div class="achievements-badge-top">
+            <span class="pulse-dot-gold"></span>
+            <span>GURUKUL FC HALL OF PRODIGIES &amp; MILESTONES</span>
+          </div>
+
+          <h1 class="achievements-main-title">
+            PLAYER <span class="gradient-text-gold">ACHIEVEMENTS</span>
+          </h1>
+
+          <p class="achievements-hero-subtitle">
+            Celebrating the grit, tactical prowess, and international milestones of our players. From international tournaments like the Ghana Cup to Senior Division A leadership and youth Golden Boot honors.
+          </p>
+
+          <!-- Performance Metric Stats Strip -->
+          <div class="achievements-stats-strip">
+            <div class="stat-strip-card">
+              <div class="stat-strip-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+              </div>
+              <div class="stat-strip-text">
+                <span class="stat-strip-val">Ghana Cup</span>
+                <span class="stat-strip-lbl">International Selection</span>
+              </div>
+            </div>
+
+            <div class="stat-strip-card">
+              <div class="stat-strip-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1h10c.55 0 1-.45 1-1v-1c0-.55-.45-1-1-1h-2c-.55 0-1-.45-1-1v-2.34"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+              </div>
+              <div class="stat-strip-text">
+                <span class="stat-strip-val">Division A</span>
+                <span class="stat-strip-lbl">Senior Delhi League</span>
+              </div>
+            </div>
+
+            <div class="stat-strip-card">
+              <div class="stat-strip-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <div class="stat-strip-text">
+                <span class="stat-strip-val">Golden Boot</span>
+                <span class="stat-strip-lbl">State Youth Accolades</span>
+              </div>
+            </div>
+
+            <div class="stat-strip-card">
+              <div class="stat-strip-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </div>
+              <div class="stat-strip-text">
+                <span class="stat-strip-val">100%</span>
+                <span class="stat-strip-lbl">Licensed Coach Pathways</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filter Pills -->
+          <div class="achievements-filters-wrapper">
+            <div class="achievement-filter-pill active" data-filter="ALL">All Honors</div>
+            <div class="achievement-filter-pill" data-filter="International">International Cups</div>
+            <div class="achievement-filter-pill" data-filter="Division A & Senior">Division A &amp; Senior</div>
+            <div class="achievement-filter-pill" data-filter="Youth Academy">Youth Academy</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Interactive Slide Section -->
+      <section class="achievements-slider-section">
+        <div class="slider-section-container">
+          
+          <div class="slider-top-header">
+            <div>
+              <span class="slider-section-eyebrow">FEATURED SPOTLIGHT CARDS</span>
+              <h2 class="slider-section-title">PRODIGY SPOTLIGHT SLIDER</h2>
+            </div>
+            
+            <div class="slider-arrows-nav">
+              <button class="slider-nav-btn" id="sliderPrevBtn" aria-label="Previous Achievement">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </button>
+              <button class="slider-nav-btn" id="sliderNextBtn" aria-label="Next Achievement">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Carousel Viewport & Track -->
+          <div class="carousel-viewport" id="carouselViewport">
+            <div class="carousel-track" id="achievementsCarouselTrack">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Pagination Indicator Dots -->
+          <div class="carousel-pagination" id="carouselPagination">
+            <!-- Rendered via JS -->
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Full Showcase Grid Section -->
+      <section class="achievements-grid-section">
+        <div class="grid-section-container">
+          <div class="grid-header-row">
+            <div>
+              <span class="slider-section-eyebrow">ACADEMY DIRECTORY</span>
+              <h2 class="slider-section-title">ALL PLAYER HONORS &amp; STATS</h2>
+            </div>
+            <p class="grid-section-desc">
+              Every milestone represents dedicated hours on the turf under UEFA &amp; AFC certified coaching.
+            </p>
+          </div>
+
+          <div class="achievements-full-grid" id="achievementsFullGrid">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Pathway & Registration CTA -->
+      <section class="achievements-cta-banner">
+        <div class="achievements-cta-card">
+          <div class="cta-banner-content">
+            <span class="cta-pill-gold">JOIN THE ELITE PATHWAY</span>
+            <h3 class="cta-banner-heading">BE THE NEXT GURUKUL FC PRODIGY</h3>
+            <p class="cta-banner-p">
+              Whether you are preparing for international tourneys like the Ghana Cup or aiming for DSA Division A senior leagues, our academy provides the training ecosystem and UEFA licensed coaching.
+            </p>
+            <div class="cta-banner-actions">
+              <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I%20want%20to%20register%20for%20the%20academy%20trials%20and%20play%20in%20leagues." target="_blank" rel="noopener noreferrer" class="btn-gold-action">
+                <span>REGISTER FOR TRIALS</span>
+                <svg class="tilted-arrow-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </a>
+              <a href="/blog" class="btn-glass-action">
+                <span>Read Tactical Insights</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="site-footer">
+      <div class="footer-glass-container">
+        <div class="footer-sec-middle footer-brand-box">
+          <a href="/" class="footer-logo-link" title="Gurukul Football Academy">
+            <img src="/assets/gurukul-logo.png" alt="Gurukul Football Academy Logo" class="footer-logo-img" />
+          </a>
+          <p class="footer-about-text">
+            India's premier football academy nurturing grassroots talent to elite professional players through licensed UEFA &amp; AFC coaching and competitive Division A pathways.
+          </p>
+        </div>
+
+        <div class="footer-sec-bottom footer-contact-box">
+          <div class="footer-contact-info-row">
+            <a href="https://wa.me/919625573511" target="_blank" rel="noopener noreferrer" class="contact-pill-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>+91 96255 73511</span>
+            </a>
+            <a href="https://wa.me/919625573511?text=Hi%20Gurukul%20FC!%20I%20want%20to%20send%20an%20email%20inquiry." target="_blank" rel="noopener noreferrer" class="contact-pill-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span>info@gurukulfootball.com</span>
+            </a>
+          </div>
+
+          <div class="footer-bottom">
+            <p class="footer-copyright">
+              &copy; 2026 Gurukul Football Academy. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Custom Cursor -->
+    <div class="football-cursor-ball" id="footballCursorBall">⚽</div>
+    <div class="football-cursor-ring" id="footballCursorRing"></div>
+
+  </div>
+
+  <!-- Player Detail Modal -->
+  <div class="player-detail-modal" id="playerDetailModal" aria-hidden="true">
+    <div class="player-modal-overlay" id="playerModalOverlay"></div>
+    <div class="player-modal-dialog">
+      <button class="player-modal-close-btn" id="closePlayerModalBtn" aria-label="Close modal">&times;</button>
+      <div class="player-modal-content-scroll" id="playerModalContent">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/achievementsPage.js"></script>
+</body>
+
+</html>

@@ -4,6 +4,14 @@
     { "source": "/admin", "destination": "/admin.html" },
     { "source": "/admin/", "destination": "/admin.html" },
     { "source": "/blog", "destination": "/blog.html" },
-    { "source": "/blog/", "destination": "/blog.html" }
+    { "source": "/blog/", "destination": "/blog.html" },
+    { "source": "/achievements", "destination": "/achievements.html" },
+    { "source": "/achievements/", "destination": "/achievements.html" },
+    { "source": "/player-achievements", "destination": "/achievements.html" },
+    { "source": "/player-achievements/", "destination": "/achievements.html" },
+    { "source": "/pay-fee", "destination": "/fees.html" },
+    { "source": "/pay-fee/", "destination": "/fees.html" },
+    { "source": "/fees", "destination": "/fees.html" },
+    { "source": "/fees/", "destination": "/fees.html" }
   ]
 }
