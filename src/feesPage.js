@@ -327,6 +327,12 @@ function initRazorpayPayment() {
         body: JSON.stringify(orderPayload),
       });
 
+      // Check if response is JSON before parsing
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Server returned invalid response. API endpoint may not be configured correctly. Please contact support.');
+      }
+
       const orderData = await response.json();
 
       if (!response.ok || !orderData.order_id) {
@@ -399,6 +405,12 @@ function initRazorpayPayment() {
                 razorpay_signature: razorpayResponse.razorpay_signature,
               }),
             });
+
+            // Check if response is JSON before parsing
+            const verifyContentType = verifyRes.headers.get('content-type');
+            if (!verifyContentType || !verifyContentType.includes('application/json')) {
+              throw new Error('Payment verification endpoint returned invalid response. Please contact support with Payment ID: ' + razorpayResponse.razorpay_payment_id);
+            }
 
             const verifyResult = await verifyRes.json();
 
