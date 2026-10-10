@@ -4165,7 +4165,7 @@ body {
 
 .footer-logo-link {
   display: inline-block;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   padding: 1rem 1.5rem;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -4177,11 +4177,49 @@ body {
     inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
+.footer-logos-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.footer-logo-divider {
+  width: 1px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.footer-ngo-logo-link {
+  display: inline-block;
+  padding: 0.85rem 1.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+.footer-ngo-logo-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(34, 197, 94, 0.3);
+  transform: translateY(-2px);
+}
+
 .footer-logo-img {
   height: 64px;
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+.footer-ngo-logo-img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(1.05) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
 }
 
 .footer-about-text {
@@ -11120,12 +11158,131 @@ html {
 @media (max-width: 768px) {
   .fees-hero-section {
     padding-top: 7rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
+  
+  .fees-hero-container {
+    padding: 0;
+  }
+  
+  .fees-hero-title {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    line-height: 1.1;
+  }
+  
+  .fees-hero-subtitle {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  .fees-tabs-container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .fees-tab-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .fees-portal-section {
+    padding: 2rem 1rem;
+  }
+  
+  .fees-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .card-title {
+    font-size: 1.3rem;
+  }
+  
   .form-row-two-col {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
+  
+  .amount-input-wrapper {
+    padding: 0.75rem 1rem;
+  }
+  
+  .amount-currency-symbol {
+    font-size: 1.8rem;
+  }
+  
+  .amount-input {
+    font-size: 2rem;
+  }
+  
+  .summary-glass-box {
+    padding: 1rem;
+  }
+  
+  .summary-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  
+  .pay-now-btn {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  
   .receipt-actions {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .receipt-dialog {
+    max-width: 95%;
+    margin: 1rem;
+    padding: 1.5rem 1rem;
+  }
+  
+  .receipt-body {
+    padding: 1rem 0.75rem;
+  }
+}
+
+/* Extra small mobile (< 480px) */
+@media (max-width: 480px) {
+  .fees-hero-section {
+    padding-top: 6rem;
+  }
+  
+  .fees-badge-top {
+    font-size: 0.65rem;
+    padding: 0.4rem 0.85rem;
+  }
+  
+  .fees-hero-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .fees-hero-subtitle {
+    font-size: 0.88rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .fees-card {
+    padding: 1.25rem 0.85rem;
+  }
+  
+  .form-control {
+    padding: 0.75rem 0.9rem;
+    font-size: 0.92rem;
+  }
+  
+  .amount-input {
+    font-size: 1.6rem;
+  }
+  
+  .pay-now-btn {
+    padding: 0.9rem;
+    font-size: 0.95rem;
   }
 }
 
@@ -11192,3 +11349,34 @@ html {
   }
 }
 
+
+/* Footer Logo Row Mobile Responsiveness */
+@media (max-width: 640px) {
+  .footer-logos-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+  }
+  
+  .footer-logo-divider {
+    display: none;
+  }
+  
+  .footer-logo-link,
+  .footer-ngo-logo-link {
+    padding: 0.75rem 1.1rem;
+  }
+  
+  .footer-logo-img {
+    height: 52px;
+  }
+  
+  .footer-ngo-logo-img {
+    height: 42px;
+  }
+  
+  .footer-ngo-badge {
+    font-size: 0.72rem;
+    padding: 0.45rem 0.75rem;
+  }
+}

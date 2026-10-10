@@ -309,13 +309,13 @@ function initRazorpayPayment() {
         currency: 'INR',
         receipt: `gfc_fee_${Date.now()}`,
         notes: {
-          student_name: studentName,
-          phone: studentPhone,
-          email: studentEmail,
-          fee_type: feeType,
-          batch: playerBatch,
-          roll_no: playerRollNo,
-          notes: paymentNotes,
+          student_name: String(studentName || ''),
+          phone: String(studentPhone || ''),
+          email: String(studentEmail || ''),
+          fee_type: String(feeType || 'Academy Fee'),
+          batch: String(playerBatch || ''),
+          roll_no: String(playerRollNo || ''),
+          notes: String(paymentNotes || ''),
         },
       };
 
@@ -355,9 +355,9 @@ function initRazorpayPayment() {
           method: 'upi',
         },
         notes: {
-          student_name: studentName,
-          fee_type: feeType,
-          batch: playerBatch,
+          student_name: String(studentName || ''),
+          fee_type: String(feeType || 'Academy Fee'),
+          batch: String(playerBatch || ''),
         },
         theme: {
           color: '#0ea5e9', // Gurukul Sky Blue brand color
