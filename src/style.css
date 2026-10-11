@@ -10022,34 +10022,39 @@ html {
   pointer-events: none;
 }
 
-/* Amount Highlight Box */
+/* Amount Highlight Box - Single Unified Outline */
 .amount-highlight-group {
-  background: rgba(14, 25, 40, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: 1.4rem;
+  background: rgba(6, 12, 20, 0.75);
+  border: 2px solid rgba(56, 189, 248, 0.45);
+  border-radius: 18px;
+  padding: 1.25rem 1.4rem;
   position: relative;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.amount-highlight-group:focus-within {
+  border-color: #38bdf8;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.35);
 }
 
 .amount-input-wrapper {
   display: flex;
   align-items: center;
-  background: rgba(6, 12, 20, 0.95);
-  border: 2px solid #0ea5e9;
-  border-radius: 16px;
-  padding: 0.85rem 1.35rem;
-  min-height: 68px;
-  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.18), inset 0 1px 2px rgba(255, 255, 255, 0.05);
-  transition: all 0.25s ease;
+  background: transparent;
+  border: none !important;
+  border-radius: 0;
+  padding: 0.35rem 0;
+  box-shadow: none !important;
   cursor: text;
   width: 100%;
   box-sizing: border-box;
 }
 
 .amount-input-wrapper:focus-within {
-  border-color: #38bdf8;
-  box-shadow: 0 0 25px rgba(56, 189, 248, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.1);
-  transform: translateY(-1px);
+  border: none !important;
+  box-shadow: none !important;
+  transform: none;
 }
 
 .currency-symbol {
@@ -11300,31 +11305,36 @@ html {
     gap: 1.15rem !important;
   }
 
-  /* Amount Highlight Box */
+  /* Amount Highlight Box - Single Unified Outline */
   .amount-highlight-group {
-    padding: 1.15rem 1rem !important;
-    border-radius: 18px !important;
-    background: rgba(14, 25, 40, 0.4) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 1.15rem 1.15rem !important;
+    border-radius: 16px !important;
+    background: rgba(6, 12, 20, 0.8) !important;
+    border: 2px solid rgba(56, 189, 248, 0.45) !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .amount-highlight-group:focus-within {
+    border-color: #38bdf8 !important;
+    box-shadow: 0 0 22px rgba(56, 189, 248, 0.35) !important;
   }
 
   .amount-input-wrapper {
-    padding: 0.75rem 1.15rem !important;
-    min-height: 64px !important;
-    border-radius: 14px !important;
-    border: 2px solid #0ea5e9 !important;
-    background: rgba(6, 12, 20, 0.95) !important;
-    box-shadow: 0 4px 18px rgba(14, 165, 233, 0.22) !important;
+    padding: 0.25rem 0 !important;
+    min-height: auto !important;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
     box-sizing: border-box !important;
   }
 
   .currency-symbol {
-    font-size: 1.95rem !important;
-    margin-right: 0.65rem !important;
+    font-size: 2.1rem !important;
+    margin-right: 0.75rem !important;
   }
 
   .amount-input-control {
-    font-size: 1.95rem !important;
+    font-size: 2.1rem !important;
     padding: 0 !important;
     line-height: 1 !important;
   }
@@ -11623,26 +11633,29 @@ html {
   }
 
   .amount-highlight-group {
-    padding: 1rem 0.85rem !important;
+    padding: 1rem 0.9rem !important;
+    border-radius: 14px !important;
+    border: 2px solid rgba(56, 189, 248, 0.45) !important;
   }
 
   .amount-input-wrapper {
-    min-height: 60px !important;
-    padding: 0.7rem 1rem !important;
-    border-width: 2px !important;
-    border-color: #0ea5e9 !important;
+    min-height: auto !important;
+    padding: 0.2rem 0 !important;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
     box-sizing: border-box !important;
   }
 
   .amount-input-control {
-    font-size: 1.85rem !important;
+    font-size: 1.95rem !important;
     padding: 0 !important;
     line-height: 1 !important;
   }
 
   .currency-symbol {
-    font-size: 1.85rem !important;
-    margin-right: 0.55rem !important;
+    font-size: 1.95rem !important;
+    margin-right: 0.65rem !important;
   }
 
   .submit-checkout-btn {
