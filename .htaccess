@@ -1,0 +1,20 @@
+# Hostinger Rewrite Rules for API endpoints
+RewriteEngine On
+
+# API Routes - PHP Backend
+RewriteRule ^api/create-order$ api/create-order.php [L]
+RewriteRule ^api/verify-payment$ api/verify-payment.php [L]
+
+# Clean URLs for HTML pages
+RewriteRule ^admin$ admin.html [L]
+RewriteRule ^blog$ blog.html [L]
+RewriteRule ^achievements$ achievements.html [L]
+RewriteRule ^player-achievements$ achievements.html [L]
+RewriteRule ^pay-fee$ fees.html [L]
+RewriteRule ^fees$ fees.html [L]
+
+# Security: Prevent access to sensitive files
+<FilesMatch "\.(env|json|log)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
