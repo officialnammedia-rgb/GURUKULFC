@@ -4,6 +4,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export default async function handler(req, res) {
+  // Set proper content-type header first
+  res.setHeader('Content-Type', 'application/json');
+  
   // Ensure helper methods exist in case running in raw Connect/Vite middleware
   if (!res.status) {
     res.status = (statusCode) => {
@@ -13,7 +16,6 @@ export default async function handler(req, res) {
   }
   if (!res.json) {
     res.json = (data) => {
-      res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify(data));
       return res;
     };
