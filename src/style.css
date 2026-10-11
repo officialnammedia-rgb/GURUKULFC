@@ -4154,10 +4154,13 @@ body {
   padding-right: 1.5rem;
 }
 
-.footer-logo-link {
-  display: inline-block;
+.footer-logo-link,
+.footer-ngo-logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 0;
-  padding: 1rem 1.5rem;
+  padding: 0.85rem 1.25rem;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 16px;
@@ -4166,11 +4169,24 @@ body {
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.3),
     inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.footer-logo-link:hover,
+.footer-ngo-logo-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(34, 197, 94, 0.35);
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(34, 197, 94, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
 .footer-logos-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1.25rem;
   margin-bottom: 1.25rem;
   flex-wrap: wrap;
@@ -4178,39 +4194,26 @@ body {
 
 .footer-logo-divider {
   width: 1px;
-  height: 45px;
+  height: 48px;
   background: rgba(255, 255, 255, 0.15);
 }
 
-.footer-ngo-logo-link {
-  display: inline-block;
-  padding: 0.85rem 1.25rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 14px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: all 0.3s ease;
-}
-
-.footer-ngo-logo-link:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(34, 197, 94, 0.3);
-  transform: translateY(-2px);
-}
-
-.footer-logo-img {
-  height: 64px;
-  width: auto;
+.footer-logo-img,
+.footer-ngo-logo-img {
+  height: 56px;
+  width: 56px;
   object-fit: contain;
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+  transition: transform 0.3s ease;
 }
 
 .footer-ngo-logo-img {
-  height: 50px;
-  width: auto;
-  object-fit: contain;
-  filter: brightness(1.05) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  filter: brightness(1.05) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+.footer-logo-link:hover .footer-logo-img,
+.footer-ngo-logo-link:hover .footer-ngo-logo-img {
+  transform: scale(1.04);
 }
 
 .footer-about-text {
@@ -4441,8 +4444,10 @@ body {
     grid-column: span 1;
   }
 
-  .footer-logo-img {
-    height: 44px;
+  .footer-logo-img,
+  .footer-ngo-logo-img {
+    height: 46px;
+    width: 46px;
   }
 
   .footer-bottom-content {
@@ -5206,9 +5211,10 @@ body {
   margin: 0 auto;
 }
 
-.footer-sec-middle .footer-logo-img {
-  height: 60px;
-  width: auto;
+.footer-sec-middle .footer-logo-img,
+.footer-sec-middle .footer-ngo-logo-img {
+  height: 56px;
+  width: 56px;
   object-fit: contain;
 }
 
@@ -11731,26 +11737,30 @@ html {
 /* Footer Logo Row Mobile Responsiveness */
 @media (max-width: 640px) {
   .footer-logos-row {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     gap: 0.85rem;
   }
   
   .footer-logo-divider {
-    display: none;
+    display: block;
+    width: 1px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.15);
   }
   
   .footer-logo-link,
   .footer-ngo-logo-link {
-    padding: 0.75rem 1.1rem;
+    padding: 0.65rem 0.95rem;
   }
   
-  .footer-logo-img {
-    height: 52px;
-  }
-  
-  .footer-ngo-logo-img {
-    height: 42px;
+  .footer-logo-img,
+  .footer-ngo-logo-img,
+  .footer-sec-middle .footer-logo-img,
+  .footer-sec-middle .footer-ngo-logo-img {
+    height: 46px;
+    width: 46px;
   }
   
   .footer-ngo-badge {
