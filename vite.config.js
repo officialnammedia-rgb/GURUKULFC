@@ -8,6 +8,57 @@ import verifyPaymentHandler from './api/verify-payment.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+function setupServerMiddlewares(server) {
+  server.middlewares.use((req, res, next) => {
+    const url = req.url.split('?')[0];
+
+    // Handle Razorpay backend API endpoints in local Vite dev & preview server
+    if (url === '/api/create-order' || url === '/api/create-order.php') {
+      let bodyStr = '';
+      req.on('data', (chunk) => {
+        bodyStr += chunk;
+      });
+      req.on('end', async () => {
+        try {
+          req.body = bodyStr ? JSON.parse(bodyStr) : {};
+        } catch (e) {
+          req.body = {};
+        }
+        await createOrderHandler(req, res);
+      });
+      return;
+    }
+
+    if (url === '/api/verify-payment' || url === '/api/verify-payment.php') {
+      let bodyStr = '';
+      req.on('data', (chunk) => {
+        bodyStr += chunk;
+      });
+      req.on('end', async () => {
+        try {
+          req.body = bodyStr ? JSON.parse(bodyStr) : {};
+        } catch (e) {
+          req.body = {};
+        }
+        await verifyPaymentHandler(req, res);
+      });
+      return;
+    }
+
+    // Clean URLs routing
+    if (url === '/admin' || url === '/admin/') {
+      req.url = req.url.replace(/^\/admin\/?/, '/admin.html');
+    } else if (url === '/blog' || url === '/blog/') {
+      req.url = req.url.replace(/^\/blog\/?/, '/blog.html');
+    } else if (url === '/achievements' || url === '/achievements/' || url === '/player-achievements' || url === '/player-achievements/') {
+      req.url = req.url.replace(/^\/(?:achievements|player-achievements)\/?/, '/achievements.html');
+    } else if (url === '/fees' || url === '/fees/' || url === '/pay-fee' || url === '/pay-fee/') {
+      req.url = req.url.replace(/^\/(?:fees|pay-fee)\/?/, '/fees.html');
+    }
+    next();
+  });
+}
+
 export default defineConfig({
   plugins: [
     react({
@@ -16,54 +67,10 @@ export default defineConfig({
     {
       name: 'razorpay-and-clean-urls-middleware',
       configureServer(server) {
-        server.middlewares.use((req, res, next) => {
-          const url = req.url.split('?')[0];
-
-          // Handle Razorpay backend API endpoints in local Vite dev server
-          if (url === '/api/create-order') {
-            let bodyStr = '';
-            req.on('data', (chunk) => {
-              bodyStr += chunk;
-            });
-            req.on('end', async () => {
-              try {
-                req.body = bodyStr ? JSON.parse(bodyStr) : {};
-              } catch (e) {
-                req.body = {};
-              }
-              await createOrderHandler(req, res);
-            });
-            return;
-          }
-
-          if (url === '/api/verify-payment') {
-            let bodyStr = '';
-            req.on('data', (chunk) => {
-              bodyStr += chunk;
-            });
-            req.on('end', async () => {
-              try {
-                req.body = bodyStr ? JSON.parse(bodyStr) : {};
-              } catch (e) {
-                req.body = {};
-              }
-              await verifyPaymentHandler(req, res);
-            });
-            return;
-          }
-
-          // Clean URLs routing
-          if (url === '/admin' || url === '/admin/') {
-            req.url = req.url.replace(/^\/admin\/?/, '/admin.html');
-          } else if (url === '/blog' || url === '/blog/') {
-            req.url = req.url.replace(/^\/blog\/?/, '/blog.html');
-          } else if (url === '/achievements' || url === '/achievements/' || url === '/player-achievements' || url === '/player-achievements/') {
-            req.url = req.url.replace(/^\/(?:achievements|player-achievements)\/?/, '/achievements.html');
-          } else if (url === '/fees' || url === '/fees/' || url === '/pay-fee' || url === '/pay-fee/') {
-            req.url = req.url.replace(/^\/(?:fees|pay-fee)\/?/, '/fees.html');
-          }
-          next();
-        });
+        setupServerMiddlewares(server);
+      },
+      configurePreviewServer(server) {
+        setupServerMiddlewares(server);
       },
     },
   ],
@@ -88,5 +95,3 @@ export default defineConfig({
     },
   },
 });
-
-

@@ -319,24 +319,47 @@ function initRazorpayPayment() {
         },
       };
 
-      const response = await fetch('/api/create-order', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(orderPayload),
-      });
+      // 1. BACKEND STEP 1: Call /api/create-order (with fallback to /api/create-order.php)
+      let orderData = null;
+      const orderEndpoints = ['/api/create-order', '/api/create-order.php'];
+      let lastOrderError = null;
 
-      // Check if response is JSON before parsing
-      const contentType = response.headers.get('content-type');
-      if (!contentType || !contentType.includes('application/json')) {
-        throw new Error('Server returned invalid response. API endpoint may not be configured correctly. Please contact support.');
+      for (const endpoint of orderEndpoints) {
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: JSON.stringify(orderPayload),
+          });
+
+          const contentType = response.headers.get('content-type') || '';
+          if (!contentType.includes('application/json')) {
+            const rawBody = await response.text();
+            console.warn(`[Payment] Endpoint ${endpoint} returned non-JSON (${response.status}):`, rawBody.slice(0, 150));
+            lastOrderError = new Error(`Payment gateway returned HTTP ${response.status}. Please check server API endpoint.`);
+            continue; // Try next endpoint
+          }
+
+          const parsed = await response.json();
+          if (!response.ok || !parsed.order_id) {
+            throw new Error(parsed.error || parsed.details || parsed.message || 'Failed to initialize payment order on server.');
+          }
+
+          orderData = parsed;
+          break;
+        } catch (fetchErr) {
+          if (fetchErr.message && !fetchErr.message.includes('non-JSON') && !fetchErr.message.includes('HTTP')) {
+            throw fetchErr;
+          }
+          lastOrderError = fetchErr;
+        }
       }
 
-      const orderData = await response.json();
-
-      if (!response.ok || !orderData.order_id) {
-        throw new Error(orderData.error || orderData.details || 'Failed to initialize payment order on server.');
+      if (!orderData) {
+        throw lastOrderError || new Error('Server returned invalid response. API endpoint may not be configured correctly. Please contact support.');
       }
 
       setButtonLoading(true, 'Opening Payment Gateway...');
@@ -382,39 +405,59 @@ function initRazorpayPayment() {
                 ],
               },
             },
-            sequence: ['block.upi'],
-            preferences: {
-              show_default_blocks: true,
-            },
+          },
+          sequence: ['block.upi'],
+          preferences: {
+            show_default_blocks: true,
           },
         },
         // Success Handler
         handler: async function (razorpayResponse) {
-          setButtonLoading(true, 'Verifying Payment...');
+        setButtonLoading(true, 'Verifying Payment...');
 
-          try {
-            // 3. BACKEND STEP 3: Verify Payment Signature
-            const verifyRes = await fetch('/api/verify-payment', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                razorpay_order_id: razorpayResponse.razorpay_order_id,
-                razorpay_payment_id: razorpayResponse.razorpay_payment_id,
-                razorpay_signature: razorpayResponse.razorpay_signature,
-              }),
-            });
+        try {
+          // 3. BACKEND STEP 3: Verify Payment Signature (with fallback to /api/verify-payment.php)
+          let verifyResult = null;
+          let verifyOk = false;
+          const verifyEndpoints = ['/api/verify-payment', '/api/verify-payment.php'];
+          let lastVerifyError = null;
 
-            // Check if response is JSON before parsing
-            const verifyContentType = verifyRes.headers.get('content-type');
-            if (!verifyContentType || !verifyContentType.includes('application/json')) {
-              throw new Error('Payment verification endpoint returned invalid response. Please contact support with Payment ID: ' + razorpayResponse.razorpay_payment_id);
+          for (const endpoint of verifyEndpoints) {
+            try {
+              const verifyRes = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                  razorpay_order_id: razorpayResponse.razorpay_order_id,
+                  razorpay_payment_id: razorpayResponse.razorpay_payment_id,
+                  razorpay_signature: razorpayResponse.razorpay_signature,
+                }),
+              });
+
+              const verifyContentType = verifyRes.headers.get('content-type') || '';
+              if (!verifyContentType.includes('application/json')) {
+                const rawBody = await verifyRes.text();
+                console.warn(`[Payment] Verification ${endpoint} returned non-JSON (${verifyRes.status}):`, rawBody.slice(0, 150));
+                lastVerifyError = new Error(`Verification endpoint returned HTTP ${verifyRes.status}.`);
+                continue;
+              }
+
+              verifyResult = await verifyRes.json();
+              verifyOk = verifyRes.ok;
+              break;
+            } catch (vErr) {
+              lastVerifyError = vErr;
             }
+          }
 
-            const verifyResult = await verifyRes.json();
+          if (!verifyResult) {
+            throw lastVerifyError || new Error('Payment verification endpoint returned invalid response. Please contact support with Payment ID: ' + razorpayResponse.razorpay_payment_id);
+          }
 
-            if (verifyRes.ok && verifyResult.success) {
+          if (verifyOk && verifyResult.success) {
               // Signature authentic! Show official receipt
               window.displayPaymentReceipt({
                 paymentId: razorpayResponse.razorpay_payment_id,
