@@ -389,7 +389,7 @@ function initSearchModal() {
     }
 
     resultsContainer.innerHTML = filtered.map(p => `
-      <a href="https://wa.me/919625573511?text=${encodeURIComponent(`Hi Gurukul FC! I would like to inquire about pitch booking and academy programs at ${p.name} (${p.type}, ${p.loc}).`)}" target="_blank" rel="noopener noreferrer" class="facility-item" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+      <a href="https://wa.me/919205473246?text=${encodeURIComponent(`Hi Gurukul FC! I would like to inquire about pitch booking and academy programs at ${p.name} (${p.type}, ${p.loc}).`)}" target="_blank" rel="noopener noreferrer" class="facility-item" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
         <div>
           <div class="facility-name" style="color: #ffffff; font-weight: 700;">${p.name}</div>
           <div class="facility-sub" style="color: #94a3b8; font-size: 0.85rem;">${p.type} • ${p.loc}</div>
@@ -1024,7 +1024,7 @@ function initCentersHub() {
     // Update Small "Book Free Trial" WhatsApp button link
     if (bookTrialBtn) {
       const encodedMsg = encodeURIComponent(data.waMessage);
-      bookTrialBtn.href = `https://wa.me/919625573511?text=${encodedMsg}`;
+      bookTrialBtn.href = `https://wa.me/919205473246?text=${encodedMsg}`;
     }
   }
 
