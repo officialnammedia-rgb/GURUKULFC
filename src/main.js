@@ -370,6 +370,7 @@ function initSearchModal() {
 
   const allPitches = [
     { name: 'Apex Sports Arena', type: '11-a-side Turf', loc: 'Downtown Center' },
+    { name: 'Gurukul Gurugram 7s', type: '7-a-side Turf', loc: 'Sector 103, Gurugram' },
     { name: 'Starlight Pitch 7s', type: '7-a-side Synthetic', loc: 'East District' },
     { name: 'Urban Cage Football', type: '5-a-side Indoor', loc: 'Harbor Quarter' },
     { name: 'Champion Stadium Pitch', type: 'FIFA Hybrid Grass', loc: 'Olympic Park' }
@@ -975,6 +976,20 @@ function initCentersHub() {
       location: 'OPG World School, Sec-19B, Dwarka, Delhi - 110075',
       directionsUrl: 'https://share.google/VYYSSotR1WA58elck',
       waMessage: 'Hi Gurukul FC! I would like to book a Free Trial at OPG World School (Sec-19B).'
+    },
+    {
+      img: '/assets/centers/gurukul-gurugram-sec103.png',
+      badge: 'GURUGRAM SEC-103 • 7VS7 PRO TURF',
+      tag: 'SECTOR 103 7VS7 MATCH & TRAINING HUB',
+      title: 'Gurukul Gurugram (Sector 103)',
+      ratingNum: '5.0 ★',
+      ratingCount: '(50+ Reviews)',
+      desc: 'Official 7vs7 artificial turf arena in Sector 103, Gurugram. Designed for high-intensity 7-a-side matches, tactical drills, and professional academy training.',
+      turf: '7v7 Pro Artificial Turf',
+      physio: 'Licensed UEFA & AFC Coaches',
+      location: 'Gurukul FC Ground, Sector 103, Gurugram, Haryana',
+      directionsUrl: 'https://maps.google.com/?q=Sector+103+Gurugram',
+      waMessage: 'Hi Gurukul FC! I would like to book a Free Trial at Gurukul Gurugram (Sector 103).'
     }
   ];
 
