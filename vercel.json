@@ -1,5 +1,12 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/coach",
+      "destination": "https://script.google.com/macros/s/AKfycbxX5BUYfTEyxT1Q6u_oNhCihi3YNL2BTxiI7FGnhozZwRKlgVOYEI1zgUmVNp_Ike2GeA/exec",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     { "source": "/admin", "destination": "/admin.html" },
     { "source": "/blog", "destination": "/blog.html" },

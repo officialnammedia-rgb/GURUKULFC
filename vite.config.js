@@ -55,7 +55,9 @@ function setupServerMiddlewares(server) {
     } else if (url === '/fees' || url === '/fees/' || url === '/pay-fee' || url === '/pay-fee/') {
       req.url = req.url.replace(/^\/(?:fees|pay-fee)\/?/, '/fees.html');
     } else if (url === '/coach' || url === '/coach/') {
-      req.url = req.url.replace(/^\/coach\/?/, '/coach.html');
+      res.writeHead(302, { Location: 'https://script.google.com/macros/s/AKfycbxX5BUYfTEyxT1Q6u_oNhCihi3YNL2BTxiI7FGnhozZwRKlgVOYEI1zgUmVNp_Ike2GeA/exec' });
+      res.end();
+      return;
     }
     next();
   });
