@@ -54,6 +54,8 @@ function setupServerMiddlewares(server) {
       req.url = req.url.replace(/^\/(?:achievements|player-achievements)\/?/, '/achievements.html');
     } else if (url === '/fees' || url === '/fees/' || url === '/pay-fee' || url === '/pay-fee/') {
       req.url = req.url.replace(/^\/(?:fees|pay-fee)\/?/, '/fees.html');
+    } else if (url === '/coach' || url === '/coach/') {
+      req.url = req.url.replace(/^\/coach\/?/, '/coach.html');
     }
     next();
   });
@@ -91,6 +93,7 @@ export default defineConfig({
         admin: path.resolve(__dirname, 'admin.html'),
         achievements: path.resolve(__dirname, 'achievements.html'),
         fees: path.resolve(__dirname, 'fees.html'),
+        coach: path.resolve(__dirname, 'coach.html'),
       },
     },
   },

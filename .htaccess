@@ -28,6 +28,8 @@
   RewriteRule ^fees\.html$ /fees [R=301,L]
   RewriteCond %{THE_REQUEST} /achievements\.html [NC]
   RewriteRule ^achievements\.html$ /achievements [R=301,L]
+  RewriteCond %{THE_REQUEST} /coach\.html [NC]
+  RewriteRule ^coach\.html$ /coach [R=301,L]
 
   # 3. Explicit page rewrites
   RewriteRule ^admin/?$ admin.html [L]
@@ -36,6 +38,7 @@
   RewriteRule ^player-achievements/?$ achievements.html [L]
   RewriteRule ^pay-fee/?$ fees.html [L]
   RewriteRule ^fees/?$ fees.html [L]
+  RewriteRule ^coach/?$ coach.html [L]
 
   # 4. General clean HTML fallback
   RewriteCond %{REQUEST_FILENAME} !-f

@@ -6,6 +6,7 @@
     { "source": "/achievements", "destination": "/achievements.html" },
     { "source": "/player-achievements", "destination": "/achievements.html" },
     { "source": "/pay-fee", "destination": "/fees.html" },
-    { "source": "/fees", "destination": "/fees.html" }
+    { "source": "/fees", "destination": "/fees.html" },
+    { "source": "/coach", "destination": "/coach.html" }
   ]
 }
